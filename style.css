@@ -794,6 +794,67 @@ body {
   transform: translateY(0);
 }
 
+.lang-toggle-btn {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: var(--transition-smooth);
+}
+
+.lang-toggle-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--border-accent);
+  color: var(--accent-red);
+}
+
+/* ---------------------------------------------------
+   RTL & HEBREW ADAPTATIONS
+--------------------------------------------------- */
+[dir="rtl"] {
+  font-family: 'Heebo', var(--font-main);
+}
+
+[dir="rtl"] .section-title::after {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .intro-quote {
+  border-right: 3px solid var(--accent-red);
+  border-left: none;
+  border-radius: 10px 0 0 10px;
+}
+
+[dir="rtl"] .timeline {
+  padding-right: 2rem;
+  padding-left: 0;
+}
+
+[dir="rtl"] .timeline::before {
+  right: 7px;
+  left: auto;
+}
+
+[dir="rtl"] .timeline-dot {
+  right: -2rem;
+  left: auto;
+}
+
+[dir="rtl"] .service-card::before {
+  right: 0;
+  left: auto;
+  background: linear-gradient(270deg, var(--accent-red), transparent);
+}
+
 /* ---------------------------------------------------
    RESPONSIVE DESIGN (Tablets & Mobile)
 --------------------------------------------------- */

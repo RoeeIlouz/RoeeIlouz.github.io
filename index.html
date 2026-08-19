@@ -18,7 +18,7 @@
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Heebo:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <link rel="stylesheet" href="style.css?v=3.0">
@@ -765,6 +765,65 @@
       transform: translateY(0);
     }
 
+    .lang-toggle-btn {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.45rem 0.9rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: var(--transition-smooth);
+    }
+
+    .lang-toggle-btn:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--border-accent);
+      color: var(--accent-red);
+    }
+
+    /* RTL & Hebrew Adaptations */
+    [dir="rtl"] {
+      font-family: 'Heebo', var(--font-main);
+    }
+
+    [dir="rtl"] .section-title::after {
+      right: 0;
+      left: auto;
+    }
+
+    [dir="rtl"] .intro-quote {
+      border-right: 3px solid var(--accent-red);
+      border-left: none;
+      border-radius: 10px 0 0 10px;
+    }
+
+    [dir="rtl"] .timeline {
+      padding-right: 2rem;
+      padding-left: 0;
+    }
+
+    [dir="rtl"] .timeline::before {
+      right: 7px;
+      left: auto;
+    }
+
+    [dir="rtl"] .timeline-dot {
+      right: -2rem;
+      left: auto;
+    }
+
+    [dir="rtl"] .service-card::before {
+      right: 0;
+      left: auto;
+      background: linear-gradient(270deg, var(--accent-red), transparent);
+    }
+
     @media (max-width: 1024px) {
       .layout-container {
         grid-template-columns: 1fr;
@@ -808,8 +867,8 @@
         <span class="status-dot" title="Active & Building"></span>
       </div>
 
-      <h1 class="profile-name">Roee Ilouz</h1>
-      <span class="profile-tag">⚡ EE Student & Mobile Dev</span>
+      <h1 class="profile-name" id="profile-name">Roee Ilouz</h1>
+      <span class="profile-tag" id="profile-tag">⚡ EE Student & Mobile Dev</span>
 
       <div class="sidebar-divider"></div>
 
@@ -819,8 +878,8 @@
             <i class="fa-solid fa-graduation-cap"></i>
           </div>
           <div class="contact-info">
-            <p class="label">Education</p>
-            <p class="value">Electrical Engineering</p>
+            <p class="label" id="label-education">Education</p>
+            <p class="value" id="val-education">Electrical Engineering</p>
           </div>
         </li>
 
@@ -829,7 +888,7 @@
             <i class="fa-solid fa-globe"></i>
           </div>
           <div class="contact-info">
-            <p class="label">Website</p>
+            <p class="label" id="label-website">Website</p>
             <a href="https://roee.ilouz.xyz" class="value">roee.ilouz.xyz</a>
           </div>
         </li>
@@ -839,8 +898,18 @@
             <i class="fa-solid fa-location-dot"></i>
           </div>
           <div class="contact-info">
-            <p class="label">Location</p>
-            <p class="value">Israel 🇮🇱</p>
+            <p class="label" id="label-location">Location</p>
+            <p class="value" id="val-location">Jerusalem, Israel 🇮🇱</p>
+          </div>
+        </li>
+
+        <li class="contact-item">
+          <div class="contact-icon">
+            <i class="fa-solid fa-language"></i>
+          </div>
+          <div class="contact-info">
+            <p class="label" id="label-languages">Languages</p>
+            <p class="value" id="val-languages">Hebrew & English</p>
           </div>
         </li>
 
@@ -849,11 +918,18 @@
             <i class="fa-solid fa-layer-group"></i>
           </div>
           <div class="contact-info">
-            <p class="label">Apps Ecosystem</p>
+            <p class="label" id="label-ecosystem">Apps Ecosystem</p>
             <a href="https://rocisapps.com" target="_blank" class="value">rocisapps.com</a>
           </div>
         </li>
       </ul>
+
+      <!-- Request CV Action Button -->
+      <div style="margin-top: 1.4rem;">
+        <a id="btn-request-cv" href="mailto:roeeilouz@gmail.com?subject=Request%20for%20Resume%20(Roee%20Ilouz)&body=Hi%20Roee%2C%0A%0AI%20would%20like%20to%20request%20your%20full%20resume%20(PDF).%0A%0ACompany%20%2F%20Organization%3A%0APosition%3A" class="project-link-btn" style="width: 100%; justify-content: center; background: var(--accent-crimson); color: #fff; padding: 0.65rem 0.8rem; border-radius: 10px; font-weight: 700; font-size: 0.82rem;">
+          <i class="fa-solid fa-file-pdf"></i> <span id="text-request-cv">Request Full CV (PDF)</span>
+        </a>
+      </div>
 
       <div class="sidebar-divider"></div>
 
@@ -875,37 +951,42 @@
     ========================================== -->
     <main class="main-content">
       
-      <!-- Top Navigation Bar -->
+      <!-- Top Navigation Bar & Language Switcher -->
       <header class="content-header">
-        <h2 id="section-title" class="section-title">About Me</h2>
+        <div style="display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;">
+          <h2 id="section-title" class="section-title">About Me</h2>
+          <button id="lang-toggle" class="lang-toggle-btn" title="Switch Language / החלף שפה">
+            <i class="fa-solid fa-globe"></i> <span id="lang-label">עברית</span>
+          </button>
+        </div>
         
         <nav class="nav-tabs">
-          <button class="nav-btn active" data-tab="about"><i class="fa-solid fa-user"></i> About</button>
-          <button class="nav-btn" data-tab="skills"><i class="fa-solid fa-graduation-cap"></i> Skills</button>
-          <button class="nav-btn" data-tab="projects"><i class="fa-solid fa-code"></i> Projects</button>
-          <button class="nav-btn" data-tab="homelab"><i class="fa-solid fa-server"></i> Homelab</button>
-          <button class="nav-btn" data-tab="contact"><i class="fa-solid fa-envelope"></i> Contact</button>
+          <button class="nav-btn active" data-tab="about"><i class="fa-solid fa-user"></i> <span id="nav-about">About</span></button>
+          <button class="nav-btn" data-tab="skills"><i class="fa-solid fa-briefcase"></i> <span id="nav-skills">Experience</span></button>
+          <button class="nav-btn" data-tab="projects"><i class="fa-solid fa-code"></i> <span id="nav-projects">Projects</span></button>
+          <button class="nav-btn" data-tab="homelab"><i class="fa-solid fa-server"></i> <span id="nav-homelab">Homelab</span></button>
+          <button class="nav-btn" data-tab="contact"><i class="fa-solid fa-envelope"></i> <span id="nav-contact">Contact</span></button>
         </nav>
       </header>
 
       <!-- ================= TAB 1: ABOUT ME ================= -->
       <section id="about" class="tab-pane active">
-        <p class="intro-text">
+        <p class="intro-text" id="about-intro">
           I am an <b>Electrical Engineering Student & Mobile Developer</b> focused on building cross-platform mobile applications, self-hosted infrastructure, and agentic AI developer workflows.
         </p>
 
-        <div class="intro-quote">
+        <div class="intro-quote" id="about-quote">
           "Passionate about clean system design, practical tooling, and bridging hardware fundamentals with modern software."
         </div>
 
         <!-- Featured App Banner: ROCIs Tasks -->
         <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 19, 26, 0.95)); border: 1px solid var(--border-accent); border-radius: 16px; padding: 1.6rem; margin-bottom: 2.2rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
-            <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">⭐ Featured Project</span>
-            <span style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">ROCIs Apps Ecosystem</span>
+            <span id="feat-tag" style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">⭐ Featured Project</span>
+            <span id="feat-badge" style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">ROCIs Apps Ecosystem</span>
           </div>
-          <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">ROCIs Tasks</h3>
-          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem;">
+          <h3 id="feat-title" style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">ROCIs Tasks</h3>
+          <p id="feat-desc" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem;">
             Smart productivity, task management, checklists, attachments, natural language input, offline synchronization, and seamless Google Calendar integration.
           </p>
           <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -921,42 +1002,42 @@
           </div>
         </div>
 
-        <h3 class="sub-heading">What I'm Doing</h3>
+        <h3 class="sub-heading" id="heading-doing">What I'm Doing</h3>
         <div class="service-grid">
           
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-            <h4 class="service-title">Mobile & App Development</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="svc-mobile-title">Mobile & App Development</h4>
+            <p class="service-desc" id="svc-mobile-desc">
               Building cross-platform apps with Flutter & Dart, crafting fluid responsive UI/UX, state management, and managing monetization lifecycles with RevenueCat SDK.
             </p>
           </div>
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
-            <h4 class="service-title">Engineering & Hardware Fundamentals</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="svc-ee-title">Engineering & Hardware Fundamentals</h4>
+            <p class="service-desc" id="svc-ee-desc">
               Electrical engineering academic foundations including circuit analysis, physics & mechanics, embedded systems exploration, and C programming.
             </p>
           </div>
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-server"></i></div>
-            <h4 class="service-title">Systems & Homelab GitOps</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="svc-sys-title">Systems & Homelab GitOps</h4>
+            <p class="service-desc" id="svc-sys-desc">
               Managing a 24/7 Raspberry Pi 5 (8GB, 1TB NVMe, Debian 13) node orchestrating 30+ Docker Compose services, Zero Trust networking, and GitOps automation.
             </p>
             <div style="margin-top: 0.8rem;">
               <a href="#homelab" onclick="document.querySelector('[data-tab=homelab]').click()" class="project-link-btn" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
-                <i class="fa-solid fa-server"></i> View Architecture
+                <i class="fa-solid fa-server"></i> <span id="svc-sys-btn">View Architecture</span>
               </a>
             </div>
           </div>
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
-            <h4 class="service-title">AI Tooling & Agentic Workflows</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="svc-ai-title">AI Tooling & Agentic Workflows</h4>
+            <p class="service-desc" id="svc-ai-desc">
               Designing custom developer workflows using Model Context Protocol (MCP), autonomous agents, and Google Antigravity IDE toolchains.
             </p>
           </div>
@@ -964,24 +1045,80 @@
         </div>
       </section>
 
-      <!-- ================= TAB 2: SKILLS & ACADEMICS ================= -->
+      <!-- ================= TAB 2: EXPERIENCE & EDUCATION ================= -->
       <section id="skills" class="tab-pane">
-        <h3 class="sub-heading" style="margin-top:0;">Academic Journey</h3>
+        
+        <!-- Leadership & Technical Experience -->
+        <h3 class="sub-heading" style="margin-top:0;" id="heading-exp"><i class="fa-solid fa-briefcase" style="color: var(--accent-red); margin-right: 0.4rem;"></i> Professional & Leadership Experience</h3>
         <div class="timeline">
           <div class="timeline-item">
             <span class="timeline-dot"></span>
-            <h4 class="timeline-title">B.Sc. in Electrical Engineering</h4>
-            <p class="timeline-meta">Undergraduate Student • Academic Coursework</p>
-            <p class="timeline-text">
-              Focusing on circuit theory, electrical signals, electromagnetic physics, classical mechanics, and mathematical modeling for engineering systems.
+            <h4 class="timeline-title" id="exp1-title">IT & Infrastructure Department Lead (Platoon Commander)</h4>
+            <p class="timeline-meta" id="exp1-meta">Israel Defense Forces • 2024 – 2025</p>
+            <p class="timeline-text" id="exp1-desc">
+              Commanded and managed an IT and Computing Department of ~10 technicians addressing mission-critical computing and infrastructure under high-pressure conditions. Accountable for emergency field computing infrastructures, mobile command platforms, and cross-functional technical problem solving.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <h4 class="timeline-title" id="exp2-title">Systems & Network Specialist (Platoon Sergeant)</h4>
+            <p class="timeline-meta" id="exp2-meta">Israel Defense Forces • 2021 – 2024</p>
+            <p class="timeline-text" id="exp2-desc">
+              Managed enterprise computing infrastructure, Active Directory, network routing/switching, field deployment computing kits, and hardware/software readiness for operational platforms.
             </p>
           </div>
         </div>
 
-        <h3 class="sub-heading">Technical Arsenal</h3>
+        <!-- Academic Journey & Education -->
+        <h3 class="sub-heading" id="heading-edu"><i class="fa-solid fa-graduation-cap" style="color: var(--accent-red); margin-right: 0.4rem;"></i> Education & Academic Studies</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <h4 class="timeline-title" id="edu1-title">B.Sc. in Electrical Engineering</h4>
+            <p class="timeline-meta" id="edu1-meta">Undergraduate Student • Academic Studies</p>
+            <p class="timeline-text" id="edu1-desc">
+              Focusing on circuit theory, electrical signals, electromagnetic physics, classical mechanics, and mathematical modeling for engineering systems.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <h4 class="timeline-title" id="edu2-title">Mechatronics & Machine Control</h4>
+            <p class="timeline-meta" id="edu2-meta">'Adam' High School, Jerusalem • 2018 – 2021</p>
+            <p class="timeline-text" id="edu2-desc">
+              Graduated with 5 Units in Computer Science, 5 Units in Mechatronic Systems, 5 Units in Machine Control, 5 Units in Math, and 5 Units in English.
+            </p>
+          </div>
+        </div>
+
+        <!-- Professional Certifications & Training -->
+        <h3 class="sub-heading" id="heading-certs"><i class="fa-solid fa-certificate" style="color: var(--accent-red); margin-right: 0.4rem;"></i> Certifications & Technical Training</h3>
+        <div class="homelab-spec" style="margin-bottom: 2rem;">
+          <div class="spec-card">
+            <div class="spec-icon"><i class="fa-solid fa-network-wired" style="color:#3b82f6;"></i></div>
+            <p class="spec-title">Cisco NetAcademy</p>
+            <p class="spec-value" style="font-size: 0.9rem;" id="cert1-title">CCNA Routing & Switching</p>
+          </div>
+          <div class="spec-card">
+            <div class="spec-icon"><i class="fa-solid fa-desktop" style="color:#10b981;"></i></div>
+            <p class="spec-title">Cisco NetAcademy</p>
+            <p class="spec-value" style="font-size: 0.9rem;" id="cert2-title">IT Essentials Hardware & OS</p>
+          </div>
+          <div class="spec-card">
+            <div class="spec-icon"><i class="fa-brands fa-python" style="color:#f59e0b;"></i></div>
+            <p class="spec-title">Programming</p>
+            <p class="spec-value" style="font-size: 0.9rem;" id="cert3-title">Python Course</p>
+          </div>
+          <div class="spec-card">
+            <div class="spec-icon"><i class="fa-solid fa-microchip" style="color:#ef4444;"></i></div>
+            <p class="spec-title">Technical Training</p>
+            <p class="spec-value" style="font-size: 0.9rem;" id="cert4-title">Systems Technician</p>
+          </div>
+        </div>
+
+        <h3 class="sub-heading" id="heading-skills"><i class="fa-solid fa-screwdriver-wrench" style="color: var(--accent-red); margin-right: 0.4rem;"></i> Technical Skills & Arsenal</h3>
 
         <div class="skill-category">
-          <h4 class="skill-category-title"><i class="fa-solid fa-mobile-screen" style="color:var(--accent-red);"></i> Mobile & Frontend</h4>
+          <h4 class="skill-category-title"><i class="fa-solid fa-mobile-screen" style="color:var(--accent-red);"></i> <span id="skill-cat-mobile">Mobile & App Development</span></h4>
           <div class="skill-pills">
             <span class="skill-pill"><i class="fa-brands fa-flutter" style="color:#02569b;"></i> Flutter</span>
             <span class="skill-pill">🎯 Dart</span>
@@ -994,26 +1131,40 @@
         </div>
 
         <div class="skill-category">
-          <h4 class="skill-category-title"><i class="fa-solid fa-microchip" style="color:var(--accent-cyan);"></i> Hardware, Systems & Languages</h4>
+          <h4 class="skill-category-title"><i class="fa-solid fa-network-wired" style="color:var(--accent-cyan);"></i> <span id="skill-cat-systems">Systems, Networking & Homelab</span></h4>
           <div class="skill-pills">
-            <span class="skill-pill">⚡ Circuit Analysis</span>
-            <span class="skill-pill">⚙️ C Language</span>
-            <span class="skill-pill"><i class="fa-brands fa-python" style="color:#3776ab;"></i> Python</span>
-            <span class="skill-pill"><i class="fa-brands fa-linux" style="color:#fcc624;"></i> Linux (Debian/Ubuntu)</span>
-            <span class="skill-pill"><i class="fa-brands fa-docker" style="color:#2496ed;"></i> Docker</span>
-            <span class="skill-pill">🛡️ Nginx Reverse Proxy</span>
+            <span class="skill-pill">🌐 Cisco CCNA</span>
+            <span class="skill-pill">🖧 Routing & Switching</span>
+            <span class="skill-pill">🏢 Active Directory / IT</span>
+            <span class="skill-pill"><i class="fa-brands fa-linux" style="color:#fcc624;"></i> Linux (Debian 13)</span>
+            <span class="skill-pill"><i class="fa-brands fa-docker" style="color:#2496ed;"></i> Docker & Compose</span>
+            <span class="skill-pill">🛡️ Nginx Proxy Manager</span>
+            <span class="skill-pill">🔒 Zero Trust Tunnels</span>
             <span class="skill-pill">💻 Bash Scripting</span>
           </div>
         </div>
 
         <div class="skill-category">
-          <h4 class="skill-category-title"><i class="fa-solid fa-brain" style="color:var(--accent-green);"></i> AI Tooling & Platforms</h4>
+          <h4 class="skill-category-title"><i class="fa-solid fa-microchip" style="color:var(--accent-ruby);"></i> <span id="skill-cat-hardware">Hardware, Mechatronics & Languages</span></h4>
+          <div class="skill-pills">
+            <span class="skill-pill">⚡ Circuit Analysis</span>
+            <span class="skill-pill">🤖 Mechatronic Systems</span>
+            <span class="skill-pill">⚙️ Machine Control</span>
+            <span class="skill-pill">🔧 C Programming</span>
+            <span class="skill-pill"><i class="fa-brands fa-python" style="color:#3776ab;"></i> Python</span>
+            <span class="skill-pill">📟 Embedded Hardware</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h4 class="skill-category-title"><i class="fa-solid fa-brain" style="color:var(--accent-green);"></i> <span id="skill-cat-ai">AI Tooling & Methodologies</span></h4>
           <div class="skill-pills">
             <span class="skill-pill">🤖 Model Context Protocol (MCP)</span>
             <span class="skill-pill">🚀 Google Antigravity IDE</span>
             <span class="skill-pill"><i class="fa-brands fa-git-alt" style="color:#f05032;"></i> Git & GitHub</span>
-            <span class="skill-pill">🌐 VPS Environments</span>
             <span class="skill-pill">🛠️ VS Code</span>
+            <span class="skill-pill" id="skill-leadership">👥 Team Leadership & Command</span>
+            <span class="skill-pill" id="skill-pressure">⏱️ High-Pressure Execution</span>
           </div>
         </div>
       </section>
