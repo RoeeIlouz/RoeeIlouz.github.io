@@ -6,14 +6,14 @@
 
 :root {
   /* Colors - Matte Black, Charcoal Grey & Crimson Red */
-  --bg-body: #0a0c10;
-  --bg-sidebar: #12151d;
-  --bg-card: rgba(18, 21, 29, 0.75);
-  --bg-card-hover: rgba(28, 33, 46, 0.9);
+  --bg-body: #080a0f;
+  --bg-sidebar: #10131a;
+  --bg-card: rgba(16, 19, 26, 0.85);
+  --bg-card-hover: rgba(24, 29, 40, 0.95);
   --bg-glass: rgba(255, 255, 255, 0.03);
   
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(239, 68, 68, 0.35);
+  --border-accent: rgba(239, 68, 68, 0.4);
   --border-accent-glow: rgba(239, 68, 68, 0.7);
 
   /* Primary Accent: Crimson & Ruby Red */
@@ -36,8 +36,8 @@
 
   /* Transitions & Shadows */
   --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-card: 0 12px 35px -10px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 25px rgba(239, 68, 68, 0.25);
+  --shadow-card: 0 12px 35px -10px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 25px rgba(239, 68, 68, 0.3);
 }
 
 /* Base Reset */
@@ -63,8 +63,8 @@ body {
   align-items: flex-start;
   padding: 2.5rem 1.5rem;
   background-image: 
-    radial-gradient(at 10% 10%, rgba(239, 68, 68, 0.05) 0px, transparent 50%),
-    radial-gradient(at 90% 90%, rgba(220, 38, 38, 0.04) 0px, transparent 50%);
+    radial-gradient(at 15% 15%, rgba(239, 68, 68, 0.08) 0px, transparent 50%),
+    radial-gradient(at 85% 85%, rgba(220, 38, 38, 0.06) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -155,8 +155,8 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--accent-red);
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   padding: 0.3rem 0.85rem;
   border-radius: 20px;
   margin-bottom: 1.8rem;
@@ -295,7 +295,7 @@ body {
 .nav-tabs {
   display: flex;
   gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.45);
   padding: 0.35rem;
   border-radius: 14px;
   border: 1px solid var(--border-subtle);
@@ -321,7 +321,7 @@ body {
 .nav-btn.active {
   background: linear-gradient(135deg, var(--accent-crimson), var(--accent-red));
   color: #fff;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
 }
 
 /* Tab Panes */
@@ -350,7 +350,7 @@ body {
 .intro-quote {
   border-left: 3px solid var(--accent-red);
   padding: 0.75rem 1.2rem;
-  background: rgba(239, 68, 68, 0.05);
+  background: rgba(239, 68, 68, 0.06);
   border-radius: 0 10px 10px 0;
   font-style: italic;
   color: var(--text-primary);
@@ -397,7 +397,7 @@ body {
   background: var(--bg-card-hover);
   border-color: var(--border-accent);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.1);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
 }
 
 .service-card:hover::before {
@@ -471,12 +471,12 @@ body {
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--border-accent);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
 }
 
 .project-banner {
   height: 120px;
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(18, 21, 29, 0.95));
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(16, 19, 26, 0.95));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -590,7 +590,7 @@ body {
   border-radius: 50%;
   background: var(--bg-sidebar);
   border: 3px solid var(--accent-red);
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
 }
 
 .timeline-title {
@@ -652,7 +652,7 @@ body {
 
 .skill-pill:hover {
   border-color: var(--border-accent);
-  background: rgba(239, 68, 68, 0.08);
+  background: rgba(239, 68, 68, 0.1);
   color: var(--accent-red);
 }
 
@@ -723,7 +723,7 @@ body {
 
 .form-input:focus, .form-textarea:focus {
   border-color: var(--accent-red);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
 }
 
 .form-textarea {
@@ -751,7 +751,7 @@ body {
 .submit-btn:hover {
   background: linear-gradient(135deg, var(--accent-ruby), var(--accent-red-hover));
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45);
 }
 
 /* Toast */
