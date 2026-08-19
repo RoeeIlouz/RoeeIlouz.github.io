@@ -919,28 +919,31 @@
           </div>
           <div class="contact-info">
             <p class="label" id="label-ecosystem">Apps Ecosystem</p>
-            <a href="https://rocisapps.com" target="_blank" class="value">rocisapps.com</a>
+            <a href="https://rocisapps.com" target="_blank" rel="noopener noreferrer" class="value">rocisapps.com</a>
           </div>
         </li>
       </ul>
 
-      <!-- Request CV Action Button -->
+      <!-- Direct CV Action Button -->
       <div style="margin-top: 1.4rem;">
-        <a id="btn-request-cv" href="mailto:roeeilouz@gmail.com?subject=Request%20for%20Resume%20(Roee%20Ilouz)&body=Hi%20Roee%2C%0A%0AI%20would%20like%20to%20request%20your%20full%20resume%20(PDF).%0A%0ACompany%20%2F%20Organization%3A%0APosition%3A" class="project-link-btn" style="width: 100%; justify-content: center; background: var(--accent-crimson); color: #fff; padding: 0.65rem 0.8rem; border-radius: 10px; font-weight: 700; font-size: 0.82rem;">
-          <i class="fa-solid fa-file-pdf"></i> <span id="text-request-cv">Request Full CV (PDF)</span>
+        <a id="btn-request-cv" href="resume.pdf" target="_blank" rel="noopener noreferrer" download="Roee_Ilouz_Resume.pdf" aria-label="Download Full CV in PDF format" class="project-link-btn" style="width: 100%; justify-content: center; background: var(--accent-crimson); color: #fff; padding: 0.65rem 0.8rem; border-radius: 10px; font-weight: 700; font-size: 0.82rem;">
+          <i class="fa-solid fa-file-pdf"></i> <span id="text-request-cv">Download CV (PDF)</span>
         </a>
       </div>
 
       <div class="sidebar-divider"></div>
 
       <div class="social-links">
-        <a href="https://x.com/Roee_Ilouz" target="_blank" class="social-btn" title="X (Twitter)">
-          <i class="fa-brands fa-x-twitter"></i>
+        <a href="https://www.linkedin.com/in/roee-ilouz/" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn" aria-label="LinkedIn Profile">
+          <i class="fa-brands fa-linkedin"></i>
         </a>
-        <a href="https://github.com/RoeeIlouz" target="_blank" class="social-btn" title="GitHub">
+        <a href="https://github.com/RoeeIlouz" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub" aria-label="GitHub Profile">
           <i class="fa-brands fa-github"></i>
         </a>
-        <a href="mailto:roeeilouz@gmail.com" class="social-btn" title="Email">
+        <a href="https://x.com/Roee_Ilouz" target="_blank" rel="noopener noreferrer" class="social-btn" title="X (Twitter)" aria-label="X (Twitter) Profile">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="mailto:roeeilouz@gmail.com" class="social-btn" title="Email" aria-label="Send Email">
           <i class="fa-solid fa-envelope"></i>
         </a>
       </div>
@@ -955,17 +958,17 @@
       <header class="content-header">
         <div style="display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;">
           <h2 id="section-title" class="section-title">About Me</h2>
-          <button id="lang-toggle" class="lang-toggle-btn" onclick="window.toggleLanguage()" title="Switch Language / החלף שפה">
+          <button id="lang-toggle" class="lang-toggle-btn" title="Switch Language / החלף שפה" aria-label="Toggle language between English and Hebrew">
             <i class="fa-solid fa-globe"></i> <span id="lang-label">עברית</span>
           </button>
         </div>
         
-        <nav class="nav-tabs">
-          <button class="nav-btn active" data-tab="about"><i class="fa-solid fa-user"></i> <span id="nav-about">About</span></button>
-          <button class="nav-btn" data-tab="skills"><i class="fa-solid fa-briefcase"></i> <span id="nav-skills">Experience</span></button>
-          <button class="nav-btn" data-tab="projects"><i class="fa-solid fa-code"></i> <span id="nav-projects">Projects</span></button>
-          <button class="nav-btn" data-tab="homelab"><i class="fa-solid fa-server"></i> <span id="nav-homelab">Homelab</span></button>
-          <button class="nav-btn" data-tab="contact"><i class="fa-solid fa-envelope"></i> <span id="nav-contact">Contact</span></button>
+        <nav class="nav-tabs" aria-label="Portfolio sections navigation">
+          <button class="nav-btn active" data-tab="about" aria-label="About section"><i class="fa-solid fa-user"></i> <span id="nav-about">About</span></button>
+          <button class="nav-btn" data-tab="skills" aria-label="Experience and education section"><i class="fa-solid fa-briefcase"></i> <span id="nav-skills">Experience</span></button>
+          <button class="nav-btn" data-tab="projects" aria-label="Projects section"><i class="fa-solid fa-code"></i> <span id="nav-projects">Projects</span></button>
+          <button class="nav-btn" data-tab="homelab" aria-label="Homelab infrastructure section"><i class="fa-solid fa-server"></i> <span id="nav-homelab">Homelab</span></button>
+          <button class="nav-btn" data-tab="contact" aria-label="Contact section"><i class="fa-solid fa-envelope"></i> <span id="nav-contact">Contact</span></button>
         </nav>
       </header>
 
@@ -1171,11 +1174,11 @@
 
       <!-- ================= TAB 3: PROJECTS ================= -->
       <section id="projects" class="tab-pane">
-        <div class="filter-list">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
-          <button class="filter-btn" data-filter="systems">Systems & Lab</button>
-          <button class="filter-btn" data-filter="ai">AI & Tools</button>
+        <div class="filter-list" role="tablist" aria-label="Filter projects by category">
+          <button class="filter-btn active" data-filter="all" id="filter-all" aria-label="Show all projects"><span id="text-filter-all">All</span></button>
+          <button class="filter-btn" data-filter="mobile" id="filter-mobile" aria-label="Filter mobile apps"><span id="text-filter-mobile">Mobile Apps</span></button>
+          <button class="filter-btn" data-filter="systems" id="filter-systems" aria-label="Filter systems and homelab"><span id="text-filter-systems">Systems & Lab</span></button>
+          <button class="filter-btn" data-filter="ai" id="filter-ai" aria-label="Filter AI and tools"><span id="text-filter-ai">AI & Tools</span></button>
         </div>
 
         <div class="projects-grid">
@@ -1184,9 +1187,9 @@
           <div class="project-card" data-category="mobile">
             <div class="project-banner">📋</div>
             <div class="project-content">
-              <span class="project-tag">Flagship Mobile App</span>
-              <h4 class="project-name">ROCIs Tasks</h4>
-              <p class="project-desc">
+              <span class="project-tag" id="proj1-tag">Flagship Mobile App</span>
+              <h4 class="project-name" id="proj1-name">ROCIs Tasks</h4>
+              <p class="project-desc" id="proj1-desc">
                 Smart productivity, task management, checklists, attachments, natural language input, offline synchronization, and seamless Google Calendar integration.
               </p>
               <div class="project-tech">
@@ -1196,14 +1199,14 @@
                 <span class="tech-badge">Google Calendar</span>
               </div>
               <div class="project-links" style="flex-wrap: wrap;">
-                <a href="https://play.google.com/store/apps/details?id=com.rocisapps.tasks" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;">
+                <a href="https://play.google.com/store/apps/details?id=com.rocisapps.tasks" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;" aria-label="View ROCIs Tasks on Google Play">
                   <i class="fa-brands fa-google-play"></i> Google Play
                 </a>
-                <a href="https://tasks.rocisapps.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                <a href="https://tasks.rocisapps.com" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="Open tasks.rocisapps.com web app">
                   <i class="fa-solid fa-globe"></i> tasks.rocisapps.com
                 </a>
-                <a href="https://github.com/RoeeIlouz/ROCIsTasks-Public" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                  <i class="fa-brands fa-github"></i> Repo
+                <a href="https://github.com/RoeeIlouz/ROCIsTasks-Public" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="View ROCIs Tasks public repository on GitHub">
+                  <i class="fa-brands fa-github"></i> <span id="proj1-btn-repo">Repo</span>
                 </a>
               </div>
             </div>
@@ -1213,9 +1216,9 @@
           <div class="project-card" data-category="mobile">
             <div class="project-banner">✨</div>
             <div class="project-content">
-              <span class="project-tag">Ecosystem & Web Hub</span>
-              <h4 class="project-name">ROCIs Apps Platform</h4>
-              <p class="project-desc">
+              <span class="project-tag" id="proj2-tag">Ecosystem & Web Hub</span>
+              <h4 class="project-name" id="proj2-name">ROCIs Apps Platform</h4>
+              <p class="project-desc" id="proj2-desc">
                 The official home of the ROCIs Apps brand suite. Showcasing modern mobile apps, design systems, software releases, privacy policies, and web experiences.
               </p>
               <div class="project-tech">
@@ -1225,11 +1228,11 @@
                 <span class="tech-badge">Brand Hub</span>
               </div>
               <div class="project-links" style="flex-wrap: wrap;">
-                <a href="https://rocisapps.com" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;">
+                <a href="https://rocisapps.com" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;" aria-label="Open rocisapps.com brand website">
                   <i class="fa-solid fa-arrow-up-right-from-square"></i> rocisapps.com
                 </a>
-                <a href="https://play.google.com/store/apps/details?id=com.rocisapps.tasks" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                  <i class="fa-brands fa-android"></i> Play Store
+                <a href="https://play.google.com/store/apps/details?id=com.rocisapps.tasks" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="Download from Google Play Store">
+                  <i class="fa-brands fa-android"></i> <span id="proj2-btn-play">Play Store</span>
                 </a>
               </div>
             </div>
@@ -1239,9 +1242,9 @@
           <div class="project-card" data-category="ai">
             <div class="project-banner">🤖</div>
             <div class="project-content">
-              <span class="project-tag">AI Workflows</span>
-              <h4 class="project-name">Agentic Workflows & MCP</h4>
-              <p class="project-desc">
+              <span class="project-tag" id="proj3-tag">AI Workflows</span>
+              <h4 class="project-name" id="proj3-name">Agentic Workflows & MCP</h4>
+              <p class="project-desc" id="proj3-desc">
                 Developing custom agentic frameworks and Model Context Protocol (MCP) integrations for automated developer tooling and IDE accelerators.
               </p>
               <div class="project-tech">
@@ -1250,8 +1253,8 @@
                 <span class="tech-badge">Python</span>
               </div>
               <div class="project-links">
-                <a href="https://github.com/RoeeIlouz" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                  <i class="fa-solid fa-code"></i> Explore
+                <a href="https://github.com/RoeeIlouz" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="Explore AI workflows on GitHub">
+                  <i class="fa-solid fa-code"></i> <span id="proj3-btn-explore">Explore</span>
                 </a>
               </div>
             </div>
@@ -1261,9 +1264,9 @@
           <div class="project-card" data-category="systems">
             <div class="project-banner">🏠</div>
             <div class="project-content">
-              <span class="project-tag">Production Homelab & GitOps</span>
-              <h4 class="project-name">Raspberry Pi 5 Infrastructure</h4>
-              <p class="project-desc">
+              <span class="project-tag" id="proj4-tag">Production Homelab & GitOps</span>
+              <h4 class="project-name" id="proj4-name">Raspberry Pi 5 Infrastructure</h4>
+              <p class="project-desc" id="proj4-desc">
                 High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Debian 13, Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, and 30+ containerized services.
               </p>
               <div class="project-tech">
@@ -1274,11 +1277,11 @@
                 <span class="tech-badge">1TB NVMe</span>
               </div>
               <div class="project-links" style="flex-wrap: wrap;">
-                <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;">
-                  <i class="fa-brands fa-github"></i> Homelab Repo
+                <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;" aria-label="View Homelab repository on GitHub">
+                  <i class="fa-brands fa-github"></i> <span id="proj4-btn-repo">Homelab Repo</span>
                 </a>
-                <a href="#homelab" onclick="document.querySelector('[data-tab=homelab]').click()" class="project-link-btn">
-                  <i class="fa-solid fa-server"></i> Architecture
+                <a href="#homelab" onclick="document.querySelector('[data-tab=homelab]').click()" class="project-link-btn" aria-label="View Homelab architecture tab">
+                  <i class="fa-solid fa-server"></i> <span id="proj4-btn-arch">Architecture</span>
                 </a>
               </div>
             </div>
@@ -1288,9 +1291,9 @@
           <div class="project-card" data-category="mobile">
             <div class="project-banner">🌐</div>
             <div class="project-content">
-              <span class="project-tag">Personal Digital Hub</span>
-              <h4 class="project-name">roee.ilouz.xyz</h4>
-              <p class="project-desc">
+              <span class="project-tag" id="proj5-tag">Personal Digital Hub</span>
+              <h4 class="project-name" id="proj5-name">roee.ilouz.xyz</h4>
+              <p class="project-desc" id="proj5-desc">
                 Personal digital headquarters and interactive web application hub, built for ultra-fast performance and clean glassmorphism UX.
               </p>
               <div class="project-tech">
@@ -1299,11 +1302,11 @@
                 <span class="tech-badge">JavaScript</span>
               </div>
               <div class="project-links">
-                <a href="https://roee.ilouz.xyz" class="project-link-btn">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Site
+                <a href="https://roee.ilouz.xyz" class="project-link-btn" aria-label="Open roee.ilouz.xyz live site">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> <span id="proj5-btn-live">Live Site</span>
                 </a>
-                <a href="https://github.com/RoeeIlouz/RoeeIlouz.github.io" target="_blank" rel="noopener noreferrer" class="project-link-btn">
-                  <i class="fa-brands fa-github"></i> Code
+                <a href="https://github.com/RoeeIlouz/RoeeIlouz.github.io" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="View source code on GitHub">
+                  <i class="fa-brands fa-github"></i> <span id="proj5-btn-code">Code</span>
                 </a>
               </div>
             </div>
@@ -1316,56 +1319,56 @@
       <section id="homelab" class="tab-pane">
         <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 19, 26, 0.95)); border: 1px solid var(--border-accent); border-radius: 16px; padding: 1.6rem; margin-bottom: 2rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.6rem;">
-            <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">🌌 Infrastructure & GitOps</span>
-            <span style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">24/7 Production Node</span>
+            <span id="hl-banner-tag" style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">🌌 Infrastructure & GitOps</span>
+            <span id="hl-banner-badge" style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">24/7 Production Node</span>
           </div>
-          <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Raspberry Pi 5 Homelab Node</h3>
-          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem;">
+          <h3 id="hl-banner-title" style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Raspberry Pi 5 Homelab Node</h3>
+          <p id="hl-banner-desc" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem;">
             High-performance ARM64 node running <b>Debian GNU/Linux 13 (Trixie)</b>, orchestrating 30+ containerized microservices across media, telemetry, AI, and Zero Trust networking.
           </p>
           <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;">
-              <i class="fa-brands fa-github"></i> Explore Homelab GitOps Repo
+            <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;" aria-label="Explore Homelab GitOps repository on GitHub">
+              <i class="fa-brands fa-github"></i> <span id="hl-banner-btn">Explore Homelab GitOps Repo</span>
             </a>
           </div>
         </div>
 
         <!-- Hardware Specs Matrix -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 1.8rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+        <h4 id="hl-hw-heading" style="color: var(--text-primary); font-size: 1.1rem; margin: 1.8rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-microchip" style="color: var(--accent-red);"></i> Hardware Subsystem & Topology
         </h4>
         <div class="homelab-spec">
           <div class="spec-card">
             <div class="spec-icon"><i class="fa-brands fa-raspberry-pi"></i></div>
-            <p class="spec-title">Host SoC Node</p>
-            <p class="spec-value">RPi 5 8GB (4x Cortex-A76 @ 2.4GHz)</p>
+            <p class="spec-title" id="hl-hw-soc-title">Host SoC Node</p>
+            <p class="spec-value" id="hl-hw-soc-val">RPi 5 8GB (4x Cortex-A76 @ 2.4GHz)</p>
           </div>
           <div class="spec-card">
             <div class="spec-icon"><i class="fa-solid fa-hard-drive"></i></div>
-            <p class="spec-title">Primary High-Speed Storage</p>
-            <p class="spec-value">1.0 TB NVMe SSD (PCIe M.2 HAT)</p>
+            <p class="spec-title" id="hl-hw-storage-title">Primary High-Speed Storage</p>
+            <p class="spec-value" id="hl-hw-storage-val">1.0 TB NVMe SSD (PCIe M.2 HAT)</p>
           </div>
           <div class="spec-card">
             <div class="spec-icon"><i class="fa-brands fa-linux"></i></div>
-            <p class="spec-title">Operating System</p>
-            <p class="spec-value">Debian 13 (Trixie ARM64)</p>
+            <p class="spec-title" id="hl-hw-os-title">Operating System</p>
+            <p class="spec-value" id="hl-hw-os-val">Debian 13 (Trixie ARM64)</p>
           </div>
           <div class="spec-card">
             <div class="spec-icon"><i class="fa-solid fa-fan"></i></div>
-            <p class="spec-title">Thermal Management</p>
-            <p class="spec-value">Active PWM Cooler (42°C – 55°C)</p>
+            <p class="spec-title" id="hl-hw-cooling-title">Thermal Management</p>
+            <p class="spec-value" id="hl-hw-cooling-val">Active PWM Cooler (42°C – 55°C)</p>
           </div>
         </div>
 
         <!-- Networking & Zero Trust Ingress -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+        <h4 id="hl-sec-heading" style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-shield-halved" style="color: var(--accent-red);"></i> Zero Trust Ingress & Security
         </h4>
         <div class="service-grid">
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
-            <h4 class="service-title">Cloudflare Tunnels & NPM</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="hl-sec-cf-title">Cloudflare Tunnels & NPM</h4>
+            <p class="service-desc" id="hl-sec-cf-desc">
               Perimeter-less ingress via Cloudflare Tunnels (Zero Trust) paired with Nginx Proxy Manager for internal routing and automated Let's Encrypt SSL.
             </p>
             <div class="project-tech" style="margin-top: 0.8rem;">
@@ -1376,8 +1379,8 @@
           </div>
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-network-wired"></i></div>
-            <h4 class="service-title">Twingate Zero Trust & VPN Gateway</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="hl-sec-twin-title">Twingate Zero Trust & VPN Gateway</h4>
+            <p class="service-desc" id="hl-sec-twin-desc">
               Zero Trust remote mesh access via Twingate Connectors, alongside isolated container network namespaces with strict kernel kill-switch enforcement.
             </p>
             <div class="project-tech" style="margin-top: 0.8rem;">
@@ -1390,14 +1393,14 @@
         </div>
 
         <!-- Core Stacks Matrix -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+        <h4 id="hl-stacks-heading" style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-layer-group" style="color: var(--accent-red);"></i> Modular Stacks & Services (30+ Microservices)
         </h4>
         <div class="service-grid">
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-            <h4 class="service-title">Personal Cloud & Media Pipeline</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="hl-media-title">Personal Cloud & Media Pipeline</h4>
+            <p class="service-desc" id="hl-media-desc">
               Self-hosted personal streaming engine, user request portals, automated data ingestion pipelines, and AI-powered photo archiving with pgvector ML.
             </p>
             <div class="project-tech" style="margin-top: 0.8rem;">
@@ -1413,8 +1416,8 @@
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div>
-            <h4 class="service-title">Management & Observability</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="hl-mgmt-title">Management & Observability</h4>
+            <p class="service-desc" id="hl-mgmt-desc">
               Unified dashboards, container orchestration, metrics collectors, ping monitors, and real-time sensor telemetry.
             </p>
             <div class="project-tech" style="margin-top: 0.8rem;">
@@ -1429,8 +1432,8 @@
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-brain"></i></div>
-            <h4 class="service-title">AI, Knowledge & Home Automation</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="hl-ai-title">AI, Knowledge & Home Automation</h4>
+            <p class="service-desc" id="hl-ai-desc">
               Local LLM model inference, autonomous agent daemons, home automation hubs, vector bookmarking, and instant push notifications.
             </p>
             <div class="project-tech" style="margin-top: 0.8rem;">
@@ -1445,8 +1448,8 @@
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-terminal"></i></div>
-            <h4 class="service-title">Native Systemd & Private Mesh</h4>
-            <p class="service-desc">
+            <h4 class="service-title" id="hl-mesh-title">Native Systemd & Private Mesh</h4>
+            <p class="service-desc" id="hl-mesh-desc">
               Browser-based VS Code environment, encrypted remote desktop relay, private mesh networking, and remote hardware management.
             </p>
             <div class="project-tech" style="margin-top: 0.8rem;">
@@ -1460,33 +1463,38 @@
         </div>
 
         <!-- Maintenance & Automation -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+        <h4 id="hl-ops-heading" style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-gears" style="color: var(--accent-red);"></i> GitOps & Automated Operations
         </h4>
         <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7;">
-          <p style="margin: 0 0 0.5rem 0;"><span style="color: var(--accent-red);"># Automated Daily / Weekly Health & Retention Scripts</span></p>
-          <p style="margin: 0;">• <code style="color: #60a5fa;">backup.sh</code>: Automated encrypted backup archives with scheduled retention pruning</p>
-          <p style="margin: 0;">• <code style="color: #34d399;">check-health.sh</code>: Real-time sensor, thermal range, memory pressure & container diagnostics</p>
-          <p style="margin: 0;">• <code style="color: #fbbf24;">update-stacks.sh</code>: Non-destructive container pull, compose rebuild & dangling image prune</p>
+          <p style="margin: 0 0 0.5rem 0;"><span id="hl-ops-subtitle" style="color: var(--accent-red);"># Automated Daily / Weekly Health & Retention Scripts</span></p>
+          <p style="margin: 0;">• <code style="color: #60a5fa;">backup.sh</code>: <span id="hl-ops-backup">Automated encrypted backup archives with scheduled retention pruning</span></p>
+          <p style="margin: 0;">• <code style="color: #34d399;">check-health.sh</code>: <span id="hl-ops-health">Real-time sensor, thermal range, memory pressure & container diagnostics</span></p>
+          <p style="margin: 0;">• <code style="color: #fbbf24;">update-stacks.sh</code>: <span id="hl-ops-update">Non-destructive container pull, compose rebuild & dangling image prune</span></p>
         </div>
       </section>
 
       <!-- ================= TAB 5: CONTACT ================= -->
       <section id="contact" class="tab-pane">
-        <h3 class="sub-heading" style="margin-top:0;">Let's Connect</h3>
-        <p class="intro-text">
+        <h3 class="sub-heading" style="margin-top:0;" id="contact-heading">Let's Connect</h3>
+        <p class="intro-text" id="contact-intro">
           Whether you want to discuss Flutter / mobile app development, electrical engineering topics, self-hosted systems, or just chat:
         </p>
 
         <form id="contact-form" class="contact-form">
           <div class="form-row">
-            <input type="text" id="name" class="form-input" placeholder="Your Name" required>
-            <input type="email" id="email" class="form-input" placeholder="Your Email" required>
+            <input type="text" id="name" class="form-input" placeholder="Your Name" required aria-label="Your Name">
+            <input type="email" id="email" class="form-input" placeholder="Your Email" required aria-label="Your Email">
           </div>
-          <textarea id="message" class="form-textarea" placeholder="Your Message..." required></textarea>
-          <button type="submit" class="submit-btn">
-            <i class="fa-solid fa-paper-plane"></i> Send Message
-          </button>
+          <textarea id="message" class="form-textarea" placeholder="Your Message..." required aria-label="Your Message"></textarea>
+          <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+            <button type="submit" class="submit-btn" id="form-btn-submit" aria-label="Send message via email">
+              <i class="fa-solid fa-paper-plane"></i> <span id="text-btn-submit">Send Message</span>
+            </button>
+            <button type="button" class="project-link-btn" id="btn-copy-email" aria-label="Copy email address to clipboard" style="padding: 0.85rem 1.4rem; font-weight: 700; font-size: 0.92rem;">
+              <i class="fa-solid fa-copy"></i> <span id="text-copy-email">Copy Email</span>
+            </button>
+          </div>
         </form>
       </section>
 
@@ -1496,6 +1504,6 @@
 
   <div id="toast" class="toast-msg"></div>
 
-  <script src="script.js?v=6.0"></script>
+  <script src="script.js?v=7.0"></script>
 </body>
 </html>

@@ -1,12 +1,13 @@
 /**
- * ROEE ILOUZ (ROCI) - PORTFOLIO INTERACTIVITY & BILINGUAL ENGINE
- * Tab Switching, Language Switcher (EN/HE), Project Filtering & Contact Handling
+ * ROEE ILOUZ (ROCI) - PORTFOLIO INTERACTIVITY & COMPREHENSIVE BILINGUAL ENGINE
+ * Tab Switching, Full Localization (EN/HE), Dynamic Titles, Smooth Filter Animations, Copy Email
  */
 
-// Translation Dictionaries
+// Comprehensive Translation Dictionaries
 const translations = {
   en: {
     lang_label: 'עברית',
+    doc_title_prefix: 'Roee Ilouz (ROCI) — ',
     tab_titles: {
       'about': 'About Me',
       'skills': 'Experience & Education',
@@ -25,7 +26,7 @@ const translations = {
       'label-languages': 'Languages',
       'val-languages': 'Hebrew & English',
       'label-ecosystem': 'Apps Ecosystem',
-      'text-request-cv': 'Request Full CV (PDF)'
+      'text-request-cv': 'Download CV (PDF)'
     },
     nav: {
       'nav-about': 'About',
@@ -80,12 +81,84 @@ const translations = {
       'skill-leadership': '👥 Team Leadership & Command',
       'skill-pressure': '⏱️ High-Pressure Execution'
     },
+    projects: {
+      'text-filter-all': 'All',
+      'text-filter-mobile': 'Mobile Apps',
+      'text-filter-systems': 'Systems & Lab',
+      'text-filter-ai': 'AI & Tools',
+      'proj1-tag': 'Flagship Mobile App',
+      'proj1-name': 'ROCIs Tasks',
+      'proj1-desc': 'Smart productivity, task management, checklists, attachments, natural language input, offline synchronization, and seamless Google Calendar integration.',
+      'proj1-btn-repo': 'Repo',
+      'proj2-tag': 'Ecosystem & Web Hub',
+      'proj2-name': 'ROCIs Apps Platform',
+      'proj2-desc': 'The official home of the ROCIs Apps brand suite. Showcasing modern mobile apps, design systems, software releases, privacy policies, and web experiences.',
+      'proj2-btn-play': 'Play Store',
+      'proj3-tag': 'AI Workflows',
+      'proj3-name': 'Agentic Workflows & MCP',
+      'proj3-desc': 'Developing custom agentic frameworks and Model Context Protocol (MCP) integrations for automated developer tooling and IDE accelerators.',
+      'proj3-btn-explore': 'Explore',
+      'proj4-tag': 'Production Homelab & GitOps',
+      'proj4-name': 'Raspberry Pi 5 Infrastructure',
+      'proj4-desc': 'High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Debian 13, Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, and 30+ containerized services.',
+      'proj4-btn-repo': 'Homelab Repo',
+      'proj4-btn-arch': 'Architecture',
+      'proj5-tag': 'Personal Digital Hub',
+      'proj5-name': 'roee.ilouz.xyz',
+      'proj5-desc': 'Personal digital headquarters and interactive web application hub, built for ultra-fast performance and clean glassmorphism UX.',
+      'proj5-btn-live': 'Live Site',
+      'proj5-btn-code': 'Code'
+    },
+    homelab: {
+      'hl-banner-tag': '🌌 Infrastructure & GitOps',
+      'hl-banner-badge': '24/7 Production Node',
+      'hl-banner-title': 'Raspberry Pi 5 Homelab Node',
+      'hl-banner-desc': 'High-performance ARM64 node running <b>Debian GNU/Linux 13 (Trixie)</b>, orchestrating 30+ containerized microservices across media, telemetry, AI, and Zero Trust networking.',
+      'hl-banner-btn': 'Explore Homelab GitOps Repo',
+      'hl-hw-heading': '<i class="fa-solid fa-microchip" style="color: var(--accent-red);"></i> Hardware Subsystem & Topology',
+      'hl-hw-soc-title': 'Host SoC Node',
+      'hl-hw-soc-val': 'RPi 5 8GB (4x Cortex-A76 @ 2.4GHz)',
+      'hl-hw-storage-title': 'Primary High-Speed Storage',
+      'hl-hw-storage-val': '1.0 TB NVMe SSD (PCIe M.2 HAT)',
+      'hl-hw-os-title': 'Operating System',
+      'hl-hw-os-val': 'Debian 13 (Trixie ARM64)',
+      'hl-hw-cooling-title': 'Thermal Management',
+      'hl-hw-cooling-val': 'Active PWM Cooler (42°C – 55°C)',
+      'hl-sec-heading': '<i class="fa-solid fa-shield-halved" style="color: var(--accent-red);"></i> Zero Trust Ingress & Security',
+      'hl-sec-cf-title': 'Cloudflare Tunnels & NPM',
+      'hl-sec-cf-desc': 'Perimeter-less ingress via Cloudflare Tunnels (Zero Trust) paired with Nginx Proxy Manager for internal routing and automated Let\'s Encrypt SSL.',
+      'hl-sec-twin-title': 'Twingate Zero Trust & VPN Gateway',
+      'hl-sec-twin-desc': 'Zero Trust remote mesh access via Twingate Connectors, alongside isolated container network namespaces with strict kernel kill-switch enforcement.',
+      'hl-stacks-heading': '<i class="fa-solid fa-layer-group" style="color: var(--accent-red);"></i> Modular Stacks & Services (30+ Microservices)',
+      'hl-media-title': 'Personal Cloud & Media Pipeline',
+      'hl-media-desc': 'Self-hosted personal streaming engine, user request portals, automated data ingestion pipelines, and AI-powered photo archiving with pgvector ML.',
+      'hl-mgmt-title': 'Management & Observability',
+      'hl-mgmt-desc': 'Unified dashboards, container orchestration, metrics collectors, ping monitors, and real-time sensor telemetry.',
+      'hl-ai-title': 'AI, Knowledge & Home Automation',
+      'hl-ai-desc': 'Local LLM model inference, autonomous agent daemons, home automation hubs, vector bookmarking, and instant push notifications.',
+      'hl-mesh-title': 'Native Systemd & Private Mesh',
+      'hl-mesh-desc': 'Browser-based VS Code environment, encrypted remote desktop relay, private mesh networking, and remote hardware management.',
+      'hl-ops-heading': '<i class="fa-solid fa-gears" style="color: var(--accent-red);"></i> GitOps & Automated Operations',
+      'hl-ops-subtitle': '# Automated Daily / Weekly Health & Retention Scripts',
+      'hl-ops-backup': 'Automated encrypted backup archives with scheduled retention pruning',
+      'hl-ops-health': 'Real-time sensor, thermal range, memory pressure & container diagnostics',
+      'hl-ops-update': 'Non-destructive container pull, compose rebuild & dangling image prune'
+    },
     contact: {
-      'toast-msg': '🚀 Opening your email client...'
+      'contact-heading': 'Let\'s Connect',
+      'contact-intro': 'Whether you want to discuss Flutter / mobile app development, electrical engineering topics, self-hosted systems, or just chat:',
+      'placeholder-name': 'Your Name',
+      'placeholder-email': 'Your Email',
+      'placeholder-message': 'Your Message...',
+      'text-btn-submit': 'Send Message',
+      'text-copy-email': 'Copy Email',
+      'toast-msg-email': '🚀 Opening your email client...',
+      'toast-msg-copied': '📋 Email copied to clipboard (roeeilouz@gmail.com)!'
     }
   },
   he: {
     lang_label: 'English',
+    doc_title_prefix: 'רועי אילוז — ',
     tab_titles: {
       'about': 'עליי',
       'skills': 'ניסיון והשכלה',
@@ -104,7 +177,7 @@ const translations = {
       'label-languages': 'שפות',
       'val-languages': 'עברית ואנגלית',
       'label-ecosystem': 'סביבת אפליקציות',
-      'text-request-cv': 'בקש קורות חיים מלאים (PDF)'
+      'text-request-cv': 'הורדת קורות חיים (PDF)'
     },
     nav: {
       'nav-about': 'עליי',
@@ -159,15 +232,103 @@ const translations = {
       'skill-leadership': '👥 מנהיגות, פיקוד וניהול צוות',
       'skill-pressure': '⏱️ תפקוד ופתרון תקלות תחת לחץ'
     },
+    projects: {
+      'text-filter-all': 'הכל',
+      'text-filter-mobile': 'אפליקציות מובייל',
+      'text-filter-systems': 'שרתים ומערכות',
+      'text-filter-ai': 'כלי AI',
+      'proj1-tag': 'אפליקציית דגל',
+      'proj1-name': 'ROCIs Tasks',
+      'proj1-desc': 'אפליקציית ניהול משימות ופרודוקטיביות חכמה: צ\'קליסטים, קבצים מצורפים, הזנה בשפה טבעית, סנכרון Offline מלא ואינטגרציה ל-Google Calendar.',
+      'proj1-btn-repo': 'קוד מקור',
+      'proj2-tag': 'סביבת מותג ואתר רשמי',
+      'proj2-name': 'פלטפורמת ROCIs Apps',
+      'proj2-desc': 'הבית הרשמי של סוויטת מוצרי ROCIs Apps. מציג אפליקציות מובייל מודרניות, שפות עיצוב, גרסאות תוכנה, מדיניות פרטיות וחוויות רשת.',
+      'proj2-btn-play': 'חנות Play',
+      'proj3-tag': 'תהליכי AI וסוכנים אוטונומיים',
+      'proj3-name': 'סוכני AI ופרוטוקול MCP',
+      'proj3-desc': 'פיתוח סביבות עבודה מבוססות סוכני AI ואינטגרציות Model Context Protocol (MCP) לאוטומציה של כלי פיתוח והרחבות IDE.',
+      'proj3-btn-explore': 'גלה עוד',
+      'proj4-tag': 'מעבדת ייצור ו-GitOps',
+      'proj4-name': 'תשתית Raspberry Pi 5',
+      'proj4-desc': 'צומת ARM64 בעל ביצועים גבוהים הפועל 24/7 (8GB זיכרון, 1TB NVMe SSD) על גבי Debian 13, עם גישת Zero Trust, שער VPN ומעל 30 שירותי קונטיינרים.',
+      'proj4-btn-repo': 'מאגר Homelab',
+      'proj4-btn-arch': 'ארכיטקטורה',
+      'proj5-tag': 'האתר והפורטפוליו האישי',
+      'proj5-name': 'roee.ilouz.xyz',
+      'proj5-desc': 'מרכז הפעילות הדיגיטלי והאתר האישי, בנוי לביצועים מהירים במיוחד וחוויית Glassmorphism נקייה.',
+      'proj5-btn-live': 'אתר חי',
+      'proj5-btn-code': 'קוד מקור'
+    },
+    homelab: {
+      'hl-banner-tag': '🌌 תשתיות מחשוב ו-GitOps',
+      'hl-banner-badge': 'צומת ייצור 24/7',
+      'hl-banner-title': 'שרת ביתי Raspberry Pi 5',
+      'hl-banner-desc': 'צומת ARM64 בעל ביצועים גבוהים המריץ <b>Debian GNU/Linux 13 (Trixie)</b>, ומנהל מעל 30 שירותי מיקרו-קונטיינרים בתחומי ענן אישי, ניטור, AI ורשתות Zero Trust.',
+      'hl-banner-btn': 'צפה במאגר ה-GitOps ב-GitHub',
+      'hl-hw-heading': '<i class="fa-solid fa-microchip" style="color: var(--accent-red);"></i> מפרט חומרה וטופולוגיה',
+      'hl-hw-soc-title': 'מעבד ומערכת על שבב',
+      'hl-hw-soc-val': 'RPi 5 8GB (4x Cortex-A76 @ 2.4GHz)',
+      'hl-hw-storage-title': 'אחסון NVMe מהיר',
+      'hl-hw-storage-val': '1.0 TB NVMe SSD (PCIe M.2 HAT)',
+      'hl-hw-os-title': 'מערכת הפעלה',
+      'hl-hw-os-val': 'Debian 13 (Trixie ARM64)',
+      'hl-hw-cooling-title': 'ניהול תרמי וקירור',
+      'hl-hw-cooling-val': 'קירור אקטיבי PWM (42°C – 55°C)',
+      'hl-sec-heading': '<i class="fa-solid fa-shield-halved" style="color: var(--accent-red);"></i> אבטחת מידע ורשתות Zero Trust',
+      'hl-sec-cf-title': 'מנהרות Cloudflare ו-NPM',
+      'hl-sec-cf-desc': 'גישה מאובטחת ללא פתיחת פורטים באמצעות Cloudflare Zero Trust Tunnels בשילוב Nginx Proxy Manager לניתוב פנימי ותעודות Let\'s Encrypt SSL אוטומטיות.',
+      'hl-sec-twin-title': 'רשת Twingate ושער VPN',
+      'hl-sec-twin-desc': 'גישה מרחוק באמצעות מחברי Twingate Zero Trust, לצד בידוד רשתי ברמת ה-Kernel ושער VPN עם מנגנון Kill-Switch קפדני.',
+      'hl-stacks-heading': '<i class="fa-solid fa-layer-group" style="color: var(--accent-red);"></i> שירותים ומערכים מודולריים (מעל 30 שירותים)',
+      'hl-media-title': 'ענן אישי והזרמת מדיה',
+      'hl-media-desc': 'מערך הזרמת מדיה עצמאי, פורטלי בקשות, תהליכי איסוף נתונים אוטומטיים וגיבוי תמונות מבוסס בינה מלאכותית (pgvector ML).',
+      'hl-mgmt-title': 'ניהול, ניטור וטלמטריה',
+      'hl-mgmt-desc': 'לוחות בקרה אחודים, ניהול קונטיינרים, איסוף מדדי ביצועים, ניטור זמינות שרתים וטלמטריית חיישנים בזמן אמת.',
+      'hl-ai-title': 'בינה מלאכותית, ידע ואוטומציה',
+      'hl-ai-desc': 'הרצת מודלי שפה (LLM) מקומית, סוכנים אוטונומיים, מרכז בקרת בית חכם, ניהול ידע וסימניות וקבלת התראות Push בזמן אמת.',
+      'hl-mesh-title': 'סביבת פיתוח ורשת פרטית',
+      'hl-mesh-desc': 'סביבת פיתוח VS Code דרך הדפדפן, ממסר שליטה מרחוק מוצפן, רשת Mesh פרטית וניהול חומרה מרוחק.',
+      'hl-ops-heading': '<i class="fa-solid fa-gears" style="color: var(--accent-red);"></i> תפעול אוטומטי ו-GitOps',
+      'hl-ops-subtitle': '# סקריפטים אוטומטיים לתחזוקה, בריאות וגיבויים',
+      'hl-ops-backup': 'ארכיוני גיבוי מוצפנים אוטומטיים עם מחיקת גרסאות ישנות מתוזמנת',
+      'hl-ops-health': 'אבחון חיישנים, טמפרטורה, עומס זיכרון ותקינות קונטיינרים בזמן אמת',
+      'hl-ops-update': 'משיכת גרסאות חדשות, בנייה מחדש ללא השבתה וניקוי תמונות מיותרות'
+    },
     contact: {
-      'toast-msg': '🚀 פותח את תוכנת הדוא״ל שלך...'
+      'contact-heading': 'בואו נדבר',
+      'contact-intro': 'בין אם תרצו לדבר על פיתוח אפליקציות מובייל ב-Flutter, הנדסת חשמל, מערכות מחשוב עצמאיות או סתם להתייעץ:',
+      'placeholder-name': 'שמך מלא',
+      'placeholder-email': 'כתובת הדוא״ל שלך',
+      'placeholder-message': 'הודעתך...',
+      'text-btn-submit': 'שלח הודעה',
+      'text-copy-email': 'העתק אימייל',
+      'toast-msg-email': '🚀 פותח את תוכנת הדוא״ל שלך...',
+      'toast-msg-copied': '📋 כתובת הדוא״ל הועתקה ללוח (roeeilouz@gmail.com)!'
     }
   }
 };
 
 let currentLang = localStorage.getItem('roee_portfolio_lang') || 'en';
 
-// Global applyLanguage function
+// Helper safely updating elements
+function updateGroup(group) {
+  if (!group) return;
+  Object.entries(group).forEach(([id, text]) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = text;
+  });
+}
+
+// Update Document <title>
+function updatePageTitle(tab) {
+  const activeTab = tab || document.querySelector('.nav-btn.active')?.getAttribute('data-tab') || 'about';
+  const prefix = translations[currentLang].doc_title_prefix;
+  const tabName = translations[currentLang].tab_titles[activeTab] || 'Portfolio';
+  document.title = `${prefix}${tabName}`;
+}
+
+// Apply Language & Direction across the entire document
 window.applyLanguage = function(lang) {
   currentLang = lang;
   localStorage.setItem('roee_portfolio_lang', lang);
@@ -186,41 +347,51 @@ window.applyLanguage = function(lang) {
     sectionTitle.textContent = translations[lang].tab_titles[activeTab];
   }
 
+  updatePageTitle(activeTab);
+
   const dict = translations[lang];
 
-  // Helper safely updating elements
-  const updateGroup = (group) => {
-    if (!group) return;
-    Object.entries(group).forEach(([id, text]) => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = text;
-    });
-  };
-
+  // Update all sections
   updateGroup(dict.sidebar);
   updateGroup(dict.nav);
   updateGroup(dict.about);
   updateGroup(dict.experience);
+  updateGroup(dict.projects);
+  updateGroup(dict.homelab);
+  updateGroup(dict.contact);
+
+  // Update form inputs placeholder
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const messageInput = document.getElementById('message');
+
+  if (nameInput) nameInput.placeholder = dict.contact['placeholder-name'];
+  if (emailInput) emailInput.placeholder = dict.contact['placeholder-email'];
+  if (messageInput) messageInput.placeholder = dict.contact['placeholder-message'];
 };
 
-// Global toggleLanguage function
+// Global toggleLanguage function (called exclusively via event listener)
 window.toggleLanguage = function() {
   const newLang = (currentLang === 'en') ? 'he' : 'en';
   window.applyLanguage(newLang);
 };
 
-// DOM Ready bindings
+// DOM Ready initialization
 document.addEventListener('DOMContentLoaded', () => {
   const navButtons = document.querySelectorAll('.nav-btn');
   const tabPanes = document.querySelectorAll('.tab-pane');
   const sectionTitle = document.getElementById('section-title');
   const langToggleBtn = document.getElementById('lang-toggle');
 
+  // Single Click listener for Language Switcher
   if (langToggleBtn) {
-    langToggleBtn.addEventListener('click', window.toggleLanguage);
+    langToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.toggleLanguage();
+    });
   }
 
-  // Initialize
+  // Initialize Language
   window.applyLanguage(currentLang);
 
   // Tab switching
@@ -242,6 +413,8 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionTitle.textContent = translations[currentLang].tab_titles[targetTab];
       }
 
+      updatePageTitle(targetTab);
+
       if (history.pushState) {
         history.pushState(null, null, `#${targetTab}`);
       } else {
@@ -254,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Handle URL hash
+  // Handle URL hash on load
   function activateTabFromHash() {
     const hash = window.location.hash.replace('#', '');
     if (hash && translations['en'].tab_titles[hash]) {
@@ -266,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
   activateTabFromHash();
   window.addEventListener('hashchange', activateTabFromHash);
 
-  // Filter Projects
+  // Filter Projects with Smooth Card Transitions
   const filterButtons = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
 
@@ -281,6 +454,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const category = card.getAttribute('data-category');
         if (filter === 'all' || category === filter) {
           card.style.display = 'flex';
+          card.style.animation = 'none';
+          // Trigger DOM reflow for smooth scale/fade-in
+          void card.offsetWidth;
+          card.style.animation = 'fadeInCard 0.35s ease-out forwards';
         } else {
           card.style.display = 'none';
         }
@@ -288,10 +465,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Contact Form
-  const contactForm = document.getElementById('contact-form');
+  // Toast Helper
   const toast = document.getElementById('toast');
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
 
+  // Copy Email to Clipboard Action
+  const btnCopyEmail = document.getElementById('btn-copy-email');
+  if (btnCopyEmail) {
+    btnCopyEmail.addEventListener('click', () => {
+      const email = 'roeeilouz@gmail.com';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          showToast(translations[currentLang].contact['toast-msg-copied']);
+        }).catch(() => {
+          showToast(`Email: ${email}`);
+        });
+      } else {
+        // Fallback for older browsers
+        const temp = document.createElement('textarea');
+        temp.value = email;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        showToast(translations[currentLang].contact['toast-msg-copied']);
+      }
+    });
+  }
+
+  // Contact Form Submission (Mailto fallback)
+  const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -303,13 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const mailtoUrl = `mailto:roeeilouz@gmail.com?subject=Contact%20from%20ilouz.xyz%20(${encodeURIComponent(name)})&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(name)}%20(${encodeURIComponent(email)})`;
       
       window.location.href = mailtoUrl;
-
-      if (toast) {
-        toast.textContent = translations[currentLang].contact['toast-msg'];
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3500);
-      }
-
+      showToast(translations[currentLang].contact['toast-msg-email']);
       contactForm.reset();
     });
   }
