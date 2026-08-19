@@ -636,35 +636,51 @@
 
     .homelab-spec {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.1rem;
       margin-bottom: 2rem;
     }
 
     .spec-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 1.2rem;
+      border-radius: 14px;
+      padding: 1.4rem 1.2rem;
       text-align: center;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .spec-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
     }
 
     .spec-icon {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       color: var(--accent-red);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.25rem;
     }
 
     .spec-title {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       text-transform: uppercase;
+      letter-spacing: 0.6px;
       color: var(--text-muted);
+      font-weight: 600;
     }
 
     .spec-value {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--text-primary);
+      line-height: 1.35;
     }
 
     .contact-form {
@@ -864,11 +880,11 @@
         <h2 id="section-title" class="section-title">About Me</h2>
         
         <nav class="nav-tabs">
-          <button class="nav-btn active" data-tab="about">About</button>
-          <button class="nav-btn" data-tab="skills">Skills</button>
-          <button class="nav-btn" data-tab="projects">Projects</button>
-          <button class="nav-btn" data-tab="homelab">Home Lab</button>
-          <button class="nav-btn" data-tab="contact">Contact</button>
+          <button class="nav-btn active" data-tab="about"><i class="fa-solid fa-user"></i> About</button>
+          <button class="nav-btn" data-tab="skills"><i class="fa-solid fa-graduation-cap"></i> Skills</button>
+          <button class="nav-btn" data-tab="projects"><i class="fa-solid fa-code"></i> Projects</button>
+          <button class="nav-btn" data-tab="homelab"><i class="fa-solid fa-server"></i> Homelab</button>
+          <button class="nav-btn" data-tab="contact"><i class="fa-solid fa-envelope"></i> Contact</button>
         </nav>
       </header>
 
@@ -926,10 +942,15 @@
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-server"></i></div>
-            <h4 class="service-title">Systems & Self-Hosting</h4>
+            <h4 class="service-title">Systems & Homelab GitOps</h4>
             <p class="service-desc">
-              Managing self-hosted low-power servers, containerized workloads with Docker, CasaOS dashboarding, and Nginx Reverse Proxy (NPM) routing.
+              Managing a 24/7 Raspberry Pi 5 (8GB, 1TB NVMe, Debian 13) node orchestrating 30+ Docker Compose services, Zero Trust networking, and GitOps automation.
             </p>
+            <div style="margin-top: 0.8rem;">
+              <a href="#homelab" onclick="document.querySelector('[data-tab=homelab]').click()" class="project-link-btn" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
+                <i class="fa-solid fa-server"></i> View Architecture
+              </a>
+            </div>
           </div>
 
           <div class="service-card">
@@ -1142,48 +1163,52 @@
 
       <!-- ================= TAB 4: HOME LAB & SYSTEMS ================= -->
       <section id="homelab" class="tab-pane">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <h3 class="sub-heading" style="margin: 0 0 0.4rem 0;">Homelab Infrastructure & GitOps</h3>
-            <p class="intro-text" style="margin: 0;">
-              Production-grade, modular self-hosted node running on a high-performance <b>Raspberry Pi 5 (8GB RAM, 1TB NVMe SSD)</b> with Debian 13 Trixie, Zero Trust networking, and 30+ containerized microservices.
-            </p>
+        <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 19, 26, 0.95)); border: 1px solid var(--border-accent); border-radius: 16px; padding: 1.6rem; margin-bottom: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.6rem;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">🌌 Infrastructure & GitOps</span>
+            <span style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">24/7 Production Node</span>
           </div>
-          <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff; padding: 0.7rem 1.2rem; font-size: 0.9rem;">
-            <i class="fa-brands fa-github"></i> View Homelab GitOps Repo
-          </a>
+          <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">Raspberry Pi 5 Homelab Node</h3>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem;">
+            High-performance ARM64 node running <b>Debian GNU/Linux 13 (Trixie)</b>, orchestrating 30+ containerized microservices across media, telemetry, AI, and Zero Trust networking.
+          </p>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;">
+              <i class="fa-brands fa-github"></i> Explore Homelab GitOps Repo
+            </a>
+          </div>
         </div>
 
         <!-- Hardware Specs Matrix -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 1.8rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-microchip" style="color: var(--accent-red);"></i> Hardware Subsystem & Topology
         </h4>
         <div class="homelab-spec">
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-brands fa-raspberry-pi" style="color: #ef4444;"></i></div>
+            <div class="spec-icon"><i class="fa-brands fa-raspberry-pi"></i></div>
             <p class="spec-title">Host SoC Node</p>
             <p class="spec-value">RPi 5 8GB (4x Cortex-A76 @ 2.4GHz)</p>
           </div>
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-solid fa-hard-drive" style="color: #3b82f6;"></i></div>
+            <div class="spec-icon"><i class="fa-solid fa-hard-drive"></i></div>
             <p class="spec-title">Primary High-Speed Storage</p>
             <p class="spec-value">1.0 TB NVMe SSD (PCIe M.2 HAT)</p>
           </div>
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-brands fa-debian" style="color: #dc2626;"></i></div>
+            <div class="spec-icon"><i class="fa-brands fa-linux"></i></div>
             <p class="spec-title">Operating System</p>
-            <p class="spec-value">Debian GNU/Linux 13 (Trixie ARM64)</p>
+            <p class="spec-value">Debian 13 (Trixie ARM64)</p>
           </div>
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-solid fa-fan" style="color: #10b981;"></i></div>
+            <div class="spec-icon"><i class="fa-solid fa-fan"></i></div>
             <p class="spec-title">Thermal Management</p>
             <p class="spec-value">Active PWM Cooler (42°C – 55°C)</p>
           </div>
         </div>
 
         <!-- Networking & Zero Trust Ingress -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
-          <i class="fa-solid fa-shield-halved" style="color: var(--accent-red);"></i> Zero Trust Ingress & Routing
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-shield-halved" style="color: var(--accent-red);"></i> Zero Trust Ingress & Security
         </h4>
         <div class="service-grid">
           <div class="service-card">
@@ -1192,6 +1217,11 @@
             <p class="service-desc">
               Perimeter-less ingress via Cloudflare Tunnels (Zero Trust) paired with Nginx Proxy Manager for internal routing and automated Let's Encrypt SSL.
             </p>
+            <div class="project-tech" style="margin-top: 0.8rem;">
+              <span class="tech-badge">Cloudflare Zero Trust</span>
+              <span class="tech-badge">Nginx Proxy Manager</span>
+              <span class="tech-badge">Wildcard SSL</span>
+            </div>
           </div>
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-network-wired"></i></div>
@@ -1199,49 +1229,89 @@
             <p class="service-desc">
               Zero Trust remote access via Twingate Connectors, alongside an isolated container network namespace locked to a Gluetun VPN kill-switch.
             </p>
+            <div class="project-tech" style="margin-top: 0.8rem;">
+              <span class="tech-badge">Twingate Connector</span>
+              <span class="tech-badge">Gluetun VPN</span>
+              <span class="tech-badge">Kill-Switch Namespace</span>
+            </div>
           </div>
         </div>
 
         <!-- Core Stacks Matrix -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
-          <i class="fa-solid fa-layer-group" style="color: var(--accent-red);"></i> Containerized Stacks & Services
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-layer-group" style="color: var(--accent-red);"></i> Modular Stacks & Services (30+ Microservices)
         </h4>
         <div class="service-grid">
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-photo-film"></i></div>
+            <div class="service-icon"><i class="fa-solid fa-film"></i></div>
             <h4 class="service-title">Media & Cloud Storage</h4>
             <p class="service-desc">
-              <b>Jellyfin</b>, <b>Jellyseerr</b>, <b>Sonarr / Radarr / Lidarr / Bazarr</b>, <b>qBittorrent (VPN Locked)</b>, <b>Immich Photos (ML & pgvector)</b>, Filestash & Collabora CODE.
+              Self-hosted personal streaming pipeline, request portals, automated TV/movie organizers, and AI-powered photo backups.
             </p>
+            <div class="project-tech" style="margin-top: 0.8rem;">
+              <span class="tech-badge">Jellyfin</span>
+              <span class="tech-badge">Jellyseerr</span>
+              <span class="tech-badge">Sonarr</span>
+              <span class="tech-badge">Radarr</span>
+              <span class="tech-badge">Lidarr</span>
+              <span class="tech-badge">Bazarr</span>
+              <span class="tech-badge">qBittorrent (VPN)</span>
+              <span class="tech-badge">Immich (Photos ML)</span>
+              <span class="tech-badge">Filestash</span>
+              <span class="tech-badge">Collabora CODE</span>
+            </div>
           </div>
 
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-            <h4 class="service-title">Management & Telemetry</h4>
+            <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            <h4 class="service-title">Management & Observability</h4>
             <p class="service-desc">
-              <b>Glance Dashboard</b>, <b>Komodo Core & Periphery</b>, <b>Portainer EE</b>, <b>Beszel Metrics Hub</b>, <b>Uptime Kuma</b>, and Dockpeek real-time monitoring.
+              Unified dashboards, container orchestration, metrics collectors, ping monitors, and real-time sensor telemetry.
             </p>
+            <div class="project-tech" style="margin-top: 0.8rem;">
+              <span class="tech-badge">Glance Dashboard</span>
+              <span class="tech-badge">Komodo Core</span>
+              <span class="tech-badge">Portainer EE</span>
+              <span class="tech-badge">Beszel Hub</span>
+              <span class="tech-badge">Uptime Kuma</span>
+              <span class="tech-badge">Dockpeek</span>
+            </div>
           </div>
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-brain"></i></div>
-            <h4 class="service-title">AI, Automation & Knowledge</h4>
+            <h4 class="service-title">AI, Knowledge & Home Automation</h4>
             <p class="service-desc">
-              <b>Ollama Local LLM</b> runtime, <b>Odysseus Agent</b>, <b>Home Assistant</b>, <b>Linkwarden Bookmarks (Meilisearch + Postgres)</b>, and <b>Ntfy</b> push alerts.
+              Local LLM model inference, autonomous agent daemons, home automation hubs, vector bookmarking, and instant push notifications.
             </p>
+            <div class="project-tech" style="margin-top: 0.8rem;">
+              <span class="tech-badge">Ollama LLM Server</span>
+              <span class="tech-badge">Odysseus Agent</span>
+              <span class="tech-badge">Home Assistant</span>
+              <span class="tech-badge">Linkwarden</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">Ntfy Push</span>
+            </div>
           </div>
 
           <div class="service-card">
             <div class="service-icon"><i class="fa-solid fa-terminal"></i></div>
-            <h4 class="service-title">Native Systemd & Mesh Daemons</h4>
+            <h4 class="service-title">Native Systemd & Private Mesh</h4>
             <p class="service-desc">
-              <b>Code Server</b> (browser-based VS Code IDE), <b>RustDesk Relay</b>, <b>WolfNet</b> private mesh, and <b>WolfStack</b> remote management.
+              Browser-based VS Code environment, encrypted remote desktop relay, private mesh networking, and remote hardware management.
             </p>
+            <div class="project-tech" style="margin-top: 0.8rem;">
+              <span class="tech-badge">Code Server (VS Code)</span>
+              <span class="tech-badge">RustDesk Relay</span>
+              <span class="tech-badge">WolfNet Mesh</span>
+              <span class="tech-badge">WolfStack Node Mgr</span>
+              <span class="tech-badge">WolfUSB</span>
+            </div>
           </div>
         </div>
 
         <!-- Maintenance & Automation -->
-        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <i class="fa-solid fa-gears" style="color: var(--accent-red);"></i> GitOps & Automated Operations
         </h4>
         <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7;">

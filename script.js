@@ -38,12 +38,33 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionTitle.textContent = titles[targetTab];
       }
 
+      // Update URL hash without jumping
+      if (history.pushState) {
+        history.pushState(null, null, `#${targetTab}`);
+      } else {
+        location.hash = `#${targetTab}`;
+      }
+
       // Scroll smoothly to top of main content on mobile
       if (window.innerWidth < 1024) {
         document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
+
+  // Handle URL hash on initial load & hash change
+  function activateTabFromHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && titles[hash]) {
+      const btn = document.querySelector(`.nav-btn[data-tab="${hash}"]`);
+      if (btn) {
+        btn.click();
+      }
+    }
+  }
+
+  activateTabFromHash();
+  window.addEventListener('hashchange', activateTabFromHash);
 
   // Project Category Filter
   const filterButtons = document.querySelectorAll('.filter-btn');

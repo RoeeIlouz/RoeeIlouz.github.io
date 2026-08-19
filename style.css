@@ -661,35 +661,51 @@ body {
 --------------------------------------------------- */
 .homelab-spec {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.1rem;
   margin-bottom: 2rem;
 }
 
 .spec-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: 1.2rem;
+  border-radius: 14px;
+  padding: 1.4rem 1.2rem;
   text-align: center;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.spec-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
 }
 
 .spec-icon {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: var(--accent-red);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
 }
 
 .spec-title {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   text-transform: uppercase;
+  letter-spacing: 0.6px;
   color: var(--text-muted);
+  font-weight: 600;
 }
 
 .spec-value {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-primary);
+  line-height: 1.35;
 }
 
 /* ---------------------------------------------------
