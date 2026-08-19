@@ -1,26 +1,29 @@
 /* ===================================================
    ROEE ILOUZ (ROCI) - PERSONAL PORTFOLIO
-   Design Theme: Obsidian Dark & Amber Gold Glassmorphism
+   Design Theme: Obsidian Charcoal & Crimson Red (ROCIsApps Aesthetic)
    Inspired by vCard Personal Portfolio & GitProfile
    =================================================== */
 
 :root {
-  /* Colors */
-  --bg-body: #0b0f17;
-  --bg-sidebar: #111827;
-  --bg-card: rgba(17, 24, 39, 0.7);
-  --bg-card-hover: rgba(26, 34, 52, 0.85);
+  /* Colors - Matte Black, Charcoal Grey & Crimson Red */
+  --bg-body: #0a0c10;
+  --bg-sidebar: #12151d;
+  --bg-card: rgba(18, 21, 29, 0.75);
+  --bg-card-hover: rgba(28, 33, 46, 0.9);
   --bg-glass: rgba(255, 255, 255, 0.03);
   
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(245, 158, 11, 0.3);
-  --border-accent-glow: rgba(245, 158, 11, 0.6);
+  --border-accent: rgba(239, 68, 68, 0.35);
+  --border-accent-glow: rgba(239, 68, 68, 0.7);
 
-  --accent-gold: #f59e0b;
-  --accent-gold-hover: #fbbf24;
-  --accent-cyan: #06b6d4;
-  --accent-blue: #3b82f6;
+  /* Primary Accent: Crimson & Ruby Red */
+  --accent-red: #ef4444;
+  --accent-red-hover: #f87171;
+  --accent-crimson: #dc2626;
+  --accent-ruby: #e11d48;
+  --accent-dark-red: #991b1b;
   --accent-green: #10b981;
+  --accent-cyan: #06b6d4;
 
   --text-primary: #f9fafb;
   --text-secondary: #d1d5db;
@@ -33,8 +36,8 @@
 
   /* Transitions & Shadows */
   --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 25px rgba(245, 158, 11, 0.2);
+  --shadow-card: 0 12px 35px -10px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 25px rgba(239, 68, 68, 0.25);
 }
 
 /* Base Reset */
@@ -60,8 +63,8 @@ body {
   align-items: flex-start;
   padding: 2.5rem 1.5rem;
   background-image: 
-    radial-gradient(at 10% 10%, rgba(245, 158, 11, 0.04) 0px, transparent 50%),
-    radial-gradient(at 90% 90%, rgba(6, 182, 212, 0.04) 0px, transparent 50%);
+    radial-gradient(at 10% 10%, rgba(239, 68, 68, 0.05) 0px, transparent 50%),
+    radial-gradient(at 90% 90%, rgba(220, 38, 38, 0.04) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -78,7 +81,7 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-gold);
+  background: var(--accent-red);
 }
 
 /* Main Layout Grid */
@@ -126,7 +129,7 @@ body {
 
 .avatar-box:hover img {
   transform: scale(1.03);
-  border-color: var(--accent-gold);
+  border-color: var(--accent-red);
 }
 
 .status-dot {
@@ -151,9 +154,9 @@ body {
   display: inline-block;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--accent-gold);
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: var(--accent-red);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
   padding: 0.3rem 0.85rem;
   border-radius: 20px;
   margin-bottom: 1.8rem;
@@ -190,7 +193,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-gold);
+  color: var(--accent-red);
   font-size: 1.1rem;
 }
 
@@ -211,7 +214,7 @@ body {
 }
 
 .contact-info .value:hover {
-  color: var(--accent-gold);
+  color: var(--accent-red);
 }
 
 /* Social Buttons */
@@ -238,11 +241,11 @@ body {
 }
 
 .social-btn:hover {
-  background: var(--accent-gold);
-  color: #000;
-  border-color: var(--accent-gold);
+  background: var(--accent-red);
+  color: #fff;
+  border-color: var(--accent-red);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
 }
 
 /* ---------------------------------------------------
@@ -285,14 +288,14 @@ body {
   left: 0;
   width: 40px;
   height: 4px;
-  background: var(--accent-gold);
+  background: linear-gradient(90deg, var(--accent-red), var(--accent-ruby));
   border-radius: 2px;
 }
 
 .nav-tabs {
   display: flex;
   gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35);
   padding: 0.35rem;
   border-radius: 14px;
   border: 1px solid var(--border-subtle);
@@ -316,9 +319,9 @@ body {
 }
 
 .nav-btn.active {
-  background: var(--accent-gold);
-  color: #000;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
+  background: linear-gradient(135deg, var(--accent-crimson), var(--accent-red));
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
 }
 
 /* Tab Panes */
@@ -345,9 +348,9 @@ body {
 }
 
 .intro-quote {
-  border-left: 3px solid var(--accent-gold);
+  border-left: 3px solid var(--accent-red);
   padding: 0.75rem 1.2rem;
-  background: rgba(245, 158, 11, 0.04);
+  background: rgba(239, 68, 68, 0.05);
   border-radius: 0 10px 10px 0;
   font-style: italic;
   color: var(--text-primary);
@@ -385,7 +388,7 @@ body {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, var(--accent-gold), transparent);
+  background: linear-gradient(90deg, var(--accent-red), transparent);
   opacity: 0;
   transition: var(--transition-smooth);
 }
@@ -394,6 +397,7 @@ body {
   background: var(--bg-card-hover);
   border-color: var(--border-accent);
   transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.1);
 }
 
 .service-card:hover::before {
@@ -402,7 +406,7 @@ body {
 
 .service-icon {
   font-size: 1.8rem;
-  color: var(--accent-gold);
+  color: var(--accent-red);
   margin-bottom: 0.8rem;
 }
 
@@ -443,8 +447,8 @@ body {
 }
 
 .filter-btn:hover, .filter-btn.active {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--accent-gold);
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--accent-red);
   border-color: var(--border-accent);
 }
 
@@ -467,12 +471,12 @@ body {
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--border-accent);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
 .project-banner {
   height: 120px;
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(6, 182, 212, 0.15));
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(18, 21, 29, 0.95));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -490,7 +494,7 @@ body {
 .project-tag {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--accent-gold);
+  color: var(--accent-red);
   text-transform: uppercase;
   margin-bottom: 0.4rem;
 }
@@ -548,9 +552,9 @@ body {
 }
 
 .project-link-btn:hover {
-  background: var(--accent-gold);
-  color: #000;
-  border-color: var(--accent-gold);
+  background: var(--accent-red);
+  color: #fff;
+  border-color: var(--accent-red);
 }
 
 /* ---------------------------------------------------
@@ -585,8 +589,8 @@ body {
   height: 16px;
   border-radius: 50%;
   background: var(--bg-sidebar);
-  border: 3px solid var(--accent-gold);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+  border: 3px solid var(--accent-red);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
 }
 
 .timeline-title {
@@ -597,7 +601,7 @@ body {
 
 .timeline-meta {
   font-size: 0.82rem;
-  color: var(--accent-gold);
+  color: var(--accent-red);
   font-weight: 500;
   margin: 0.2rem 0 0.5rem;
 }
@@ -648,8 +652,8 @@ body {
 
 .skill-pill:hover {
   border-color: var(--border-accent);
-  background: rgba(245, 158, 11, 0.08);
-  color: var(--accent-gold);
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--accent-red);
 }
 
 /* ---------------------------------------------------
@@ -672,7 +676,7 @@ body {
 
 .spec-icon {
   font-size: 1.6rem;
-  color: var(--accent-cyan);
+  color: var(--accent-red);
   margin-bottom: 0.4rem;
 }
 
@@ -718,8 +722,8 @@ body {
 }
 
 .form-input:focus, .form-textarea:focus {
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18);
 }
 
 .form-textarea {
@@ -728,8 +732,8 @@ body {
 }
 
 .submit-btn {
-  background: var(--accent-gold);
-  color: #000;
+  background: linear-gradient(135deg, var(--accent-crimson), var(--accent-red));
+  color: #fff;
   font-family: inherit;
   font-weight: 700;
   font-size: 0.92rem;
@@ -745,9 +749,9 @@ body {
 }
 
 .submit-btn:hover {
-  background: var(--accent-gold-hover);
+  background: linear-gradient(135deg, var(--accent-ruby), var(--accent-red-hover));
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
 }
 
 /* Toast */
@@ -755,13 +759,13 @@ body {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background: var(--accent-green);
+  background: var(--accent-crimson);
   color: #fff;
   padding: 0.8rem 1.5rem;
   border-radius: 10px;
   font-weight: 600;
   font-size: 0.9rem;
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.5);
   opacity: 0;
   transform: translateY(20px);
   transition: var(--transition-smooth);
