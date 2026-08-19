@@ -1089,20 +1089,24 @@
           <div class="project-card" data-category="systems">
             <div class="project-banner">🏠</div>
             <div class="project-content">
-              <span class="project-tag">Self-Hosted Infrastructure</span>
-              <h4 class="project-name">Home Lab & Media Suite</h4>
+              <span class="project-tag">Production Homelab & GitOps</span>
+              <h4 class="project-name">Raspberry Pi 5 Infrastructure</h4>
               <p class="project-desc">
-                Self-hosted personal cloud on low-power hardware running CasaOS, containerized Docker microservices, automated backups, and secure Nginx routing.
+                High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Debian 13, Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, and 30+ containerized services.
               </p>
               <div class="project-tech">
-                <span class="tech-badge">CasaOS</span>
+                <span class="tech-badge">RPi 5</span>
+                <span class="tech-badge">Debian 13</span>
                 <span class="tech-badge">Docker</span>
-                <span class="tech-badge">NPM</span>
-                <span class="tech-badge">Linux</span>
+                <span class="tech-badge">Zero Trust</span>
+                <span class="tech-badge">1TB NVMe</span>
               </div>
-              <div class="project-links">
+              <div class="project-links" style="flex-wrap: wrap;">
+                <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;">
+                  <i class="fa-brands fa-github"></i> Homelab Repo
+                </a>
                 <a href="#homelab" onclick="document.querySelector('[data-tab=homelab]').click()" class="project-link-btn">
-                  <i class="fa-solid fa-server"></i> View Specs
+                  <i class="fa-solid fa-server"></i> Architecture
                 </a>
               </div>
             </div>
@@ -1138,46 +1142,113 @@
 
       <!-- ================= TAB 4: HOME LAB & SYSTEMS ================= -->
       <section id="homelab" class="tab-pane">
-        <h3 class="sub-heading" style="margin-top:0;">Self-Hosted Architecture</h3>
-        <p class="intro-text">
-          My home lab environment serves as a 24/7 self-hosted platform for media storage, network automation, reverse proxying, and local test deployments.
-        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <h3 class="sub-heading" style="margin: 0 0 0.4rem 0;">Homelab Infrastructure & GitOps</h3>
+            <p class="intro-text" style="margin: 0;">
+              Production-grade, modular self-hosted node running on a high-performance <b>Raspberry Pi 5 (8GB RAM, 1TB NVMe SSD)</b> with Debian 13 Trixie, Zero Trust networking, and 30+ containerized microservices.
+            </p>
+          </div>
+          <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff; padding: 0.7rem 1.2rem; font-size: 0.9rem;">
+            <i class="fa-brands fa-github"></i> View Homelab GitOps Repo
+          </a>
+        </div>
 
+        <!-- Hardware Specs Matrix -->
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 1.5rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-microchip" style="color: var(--accent-red);"></i> Hardware Subsystem & Topology
+        </h4>
         <div class="homelab-spec">
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-solid fa-cubes"></i></div>
-            <p class="spec-title">Container Engine</p>
-            <p class="spec-value">Docker Compose</p>
+            <div class="spec-icon"><i class="fa-brands fa-raspberry-pi" style="color: #ef4444;"></i></div>
+            <p class="spec-title">Host SoC Node</p>
+            <p class="spec-value">RPi 5 8GB (4x Cortex-A76 @ 2.4GHz)</p>
           </div>
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <p class="spec-title">Reverse Proxy</p>
-            <p class="spec-value">Nginx Proxy Manager</p>
+            <div class="spec-icon"><i class="fa-solid fa-hard-drive" style="color: #3b82f6;"></i></div>
+            <p class="spec-title">Primary High-Speed Storage</p>
+            <p class="spec-value">1.0 TB NVMe SSD (PCIe M.2 HAT)</p>
           </div>
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-solid fa-house-laptop"></i></div>
-            <p class="spec-title">Dashboard</p>
-            <p class="spec-value">CasaOS UI</p>
+            <div class="spec-icon"><i class="fa-brands fa-debian" style="color: #dc2626;"></i></div>
+            <p class="spec-title">Operating System</p>
+            <p class="spec-value">Debian GNU/Linux 13 (Trixie ARM64)</p>
           </div>
           <div class="spec-card">
-            <div class="spec-icon"><i class="fa-solid fa-microchip"></i></div>
-            <p class="spec-title">Server OS</p>
-            <p class="spec-value">Debian Linux</p>
+            <div class="spec-icon"><i class="fa-solid fa-fan" style="color: #10b981;"></i></div>
+            <p class="spec-title">Thermal Management</p>
+            <p class="spec-value">Active PWM Cooler (42°C – 55°C)</p>
           </div>
         </div>
 
-        <h3 class="sub-heading">Self-Hosted Services Stack</h3>
+        <!-- Networking & Zero Trust Ingress -->
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-shield-halved" style="color: var(--accent-red);"></i> Zero Trust Ingress & Routing
+        </h4>
         <div class="service-grid">
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-network-wired"></i></div>
-            <h4 class="service-title">Secure Ingress & SSL</h4>
-            <p class="service-desc">Wildcard SSL termination with Let's Encrypt, Cloudflare DNS integration, and automated internal network routing.</p>
+            <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
+            <h4 class="service-title">Cloudflare Tunnels & NPM</h4>
+            <p class="service-desc">
+              Perimeter-less ingress via Cloudflare Tunnels (Zero Trust) paired with Nginx Proxy Manager for internal routing and automated Let's Encrypt SSL.
+            </p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-database"></i></div>
-            <h4 class="service-title">Storage & Automation</h4>
-            <p class="service-desc">Centralized NAS storage partitions, automated directory sync, and local developer test endpoints.</p>
+            <div class="service-icon"><i class="fa-solid fa-network-wired"></i></div>
+            <h4 class="service-title">Twingate Mesh & Gluetun VPN</h4>
+            <p class="service-desc">
+              Zero Trust remote access via Twingate Connectors, alongside an isolated container network namespace locked to a Gluetun VPN kill-switch.
+            </p>
           </div>
+        </div>
+
+        <!-- Core Stacks Matrix -->
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-layer-group" style="color: var(--accent-red);"></i> Containerized Stacks & Services
+        </h4>
+        <div class="service-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-photo-film"></i></div>
+            <h4 class="service-title">Media & Cloud Storage</h4>
+            <p class="service-desc">
+              <b>Jellyfin</b>, <b>Jellyseerr</b>, <b>Sonarr / Radarr / Lidarr / Bazarr</b>, <b>qBittorrent (VPN Locked)</b>, <b>Immich Photos (ML & pgvector)</b>, Filestash & Collabora CODE.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h4 class="service-title">Management & Telemetry</h4>
+            <p class="service-desc">
+              <b>Glance Dashboard</b>, <b>Komodo Core & Periphery</b>, <b>Portainer EE</b>, <b>Beszel Metrics Hub</b>, <b>Uptime Kuma</b>, and Dockpeek real-time monitoring.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-brain"></i></div>
+            <h4 class="service-title">AI, Automation & Knowledge</h4>
+            <p class="service-desc">
+              <b>Ollama Local LLM</b> runtime, <b>Odysseus Agent</b>, <b>Home Assistant</b>, <b>Linkwarden Bookmarks (Meilisearch + Postgres)</b>, and <b>Ntfy</b> push alerts.
+            </p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-terminal"></i></div>
+            <h4 class="service-title">Native Systemd & Mesh Daemons</h4>
+            <p class="service-desc">
+              <b>Code Server</b> (browser-based VS Code IDE), <b>RustDesk Relay</b>, <b>WolfNet</b> private mesh, and <b>WolfStack</b> remote management.
+            </p>
+          </div>
+        </div>
+
+        <!-- Maintenance & Automation -->
+        <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 0.8rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-gears" style="color: var(--accent-red);"></i> GitOps & Automated Operations
+        </h4>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.2rem; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7;">
+          <p style="margin: 0 0 0.5rem 0;"><span style="color: var(--accent-red);"># Automated Daily / Weekly Health & Retention Scripts</span></p>
+          <p style="margin: 0;">• <code style="color: #60a5fa;">backup.sh</code>: Automated encrypted backup archives with scheduled retention pruning</p>
+          <p style="margin: 0;">• <code style="color: #34d399;">check-health.sh</code>: Real-time sensor, thermal range, memory pressure & container diagnostics</p>
+          <p style="margin: 0;">• <code style="color: #fbbf24;">update-stacks.sh</code>: Non-destructive container pull, compose rebuild & dangling image prune</p>
         </div>
       </section>
 
