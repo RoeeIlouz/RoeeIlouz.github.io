@@ -153,7 +153,7 @@ const translations = {
       'text-btn-submit': 'Send Message',
       'text-copy-email': 'Copy Email',
       'toast-msg-email': '🚀 Opening your email client...',
-      'toast-msg-copied': '📋 Email copied to clipboard (roeeilouz@gmail.com)!'
+      'toast-msg-copied': '📋 Email copied to clipboard (roee.ilouz@gmail.com)!'
     }
   },
   he: {
@@ -304,7 +304,7 @@ const translations = {
       'text-btn-submit': 'שלח הודעה',
       'text-copy-email': 'העתק אימייל',
       'toast-msg-email': '🚀 פותח את תוכנת הדוא״ל שלך...',
-      'toast-msg-copied': '📋 כתובת הדוא״ל הועתקה ללוח (roeeilouz@gmail.com)!'
+      'toast-msg-copied': '📋 כתובת הדוא״ל הועתקה ללוח (roee.ilouz@gmail.com)!'
     }
   }
 };
@@ -478,7 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCopyEmail = document.getElementById('btn-copy-email');
   if (btnCopyEmail) {
     btnCopyEmail.addEventListener('click', () => {
-      const email = 'roeeilouz@gmail.com';
+      const email = 'roee.ilouz@gmail.com';
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(email).then(() => {
           showToast(translations[currentLang].contact['toast-msg-copied']);
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
 
-      const mailtoUrl = `mailto:roeeilouz@gmail.com?subject=Contact%20from%20ilouz.xyz%20(${encodeURIComponent(name)})&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(name)}%20(${encodeURIComponent(email)})`;
+      const mailtoUrl = `mailto:roee.ilouz@gmail.com?subject=Contact%20from%20ilouz.xyz%20(${encodeURIComponent(name)})&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(name)}%20(${encodeURIComponent(email)})`;
       
       window.location.href = mailtoUrl;
       showToast(translations[currentLang].contact['toast-msg-email']);
