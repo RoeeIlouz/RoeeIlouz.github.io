@@ -26,7 +26,7 @@ const translations = {
       'label-languages': 'Languages',
       'val-languages': 'Hebrew & English',
       'label-ecosystem': 'Apps Ecosystem',
-      'text-request-cv': 'Download CV (PDF)'
+      'text-request-cv': 'Request CV by Email'
     },
     nav: {
       'nav-about': 'About',
@@ -177,7 +177,7 @@ const translations = {
       'label-languages': 'שפות',
       'val-languages': 'עברית ואנגלית',
       'label-ecosystem': 'אתר סביבת אפליקציות',
-      'text-request-cv': 'הורדת קורות חיים (PDF)'
+      'text-request-cv': 'בקשת קורות חיים במייל'
     },
     nav: {
       'nav-about': 'עליי',
