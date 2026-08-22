@@ -25,8 +25,7 @@ const translations = {
       'val-location': 'Jerusalem, Israel 🇮🇱',
       'label-languages': 'Languages',
       'val-languages': 'Hebrew & English',
-      'label-ecosystem': 'Apps Ecosystem',
-      'text-request-cv': 'Download CV (PDF)'
+      'label-ecosystem': 'Apps Ecosystem'
     },
     nav: {
       'nav-about': 'About',
@@ -176,8 +175,7 @@ const translations = {
       'val-location': 'ירושלים, ישראל 🇮🇱',
       'label-languages': 'שפות',
       'val-languages': 'עברית ואנגלית',
-      'label-ecosystem': 'אתר סביבת אפליקציות',
-      'text-request-cv': 'הורדת קורות חיים (PDF)'
+      'label-ecosystem': 'אתר סביבת אפליקציות'
     },
     nav: {
       'nav-about': 'עליי',
