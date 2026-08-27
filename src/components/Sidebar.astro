@@ -1,0 +1,89 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].sidebar;
+---
+
+<aside class="sidebar">
+  <div class="avatar-box">
+    <img src="https://avatars.githubusercontent.com/u/65816424?v=4" alt="Roee Ilouz Avatar" loading="eager" width="140" height="140" />
+    <span class="status-dot" title="Active & Building"></span>
+  </div>
+
+  <h1 class="profile-name">{t.profile_name}</h1>
+  <span class="profile-tag">{t.profile_tag}</span>
+
+  <div class="sidebar-divider"></div>
+
+  <ul class="contact-list">
+    <li class="contact-item">
+      <div class="contact-icon">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <div class="contact-info">
+        <p class="label">{t.label_education}</p>
+        <p class="value">{t.val_education}</p>
+      </div>
+    </li>
+
+    <li class="contact-item">
+      <div class="contact-icon">
+        <i class="fa-solid fa-globe"></i>
+      </div>
+      <div class="contact-info">
+        <p class="label">{t.label_website}</p>
+        <a href="https://roee.ilouz.xyz" class="value">roee.ilouz.xyz</a>
+      </div>
+    </li>
+
+    <li class="contact-item">
+      <div class="contact-icon">
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <div class="contact-info">
+        <p class="label">{t.label_location}</p>
+        <p class="value">{t.val_location}</p>
+      </div>
+    </li>
+
+    <li class="contact-item">
+      <div class="contact-icon">
+        <i class="fa-solid fa-language"></i>
+      </div>
+      <div class="contact-info">
+        <p class="label">{t.label_languages}</p>
+        <p class="value">{t.val_languages}</p>
+      </div>
+    </li>
+
+    <li class="contact-item">
+      <div class="contact-icon">
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+      <div class="contact-info">
+        <p class="label">{t.label_ecosystem}</p>
+        <a href="https://rocisapps.com" target="_blank" rel="noopener noreferrer" class="value">rocisapps.com</a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="social-links">
+    <a href="https://github.com/RoeeIlouz" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub" aria-label="GitHub Profile">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="https://x.com/Roee_Ilouz" target="_blank" rel="noopener noreferrer" class="social-btn" title="X (Twitter)" aria-label="X (Twitter) Profile">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+    <a href="mailto:roee.ilouz@gmail.com" class="social-btn" title="Email" aria-label="Send Email">
+      <i class="fa-solid fa-envelope"></i>
+    </a>
+  </div>
+</aside>

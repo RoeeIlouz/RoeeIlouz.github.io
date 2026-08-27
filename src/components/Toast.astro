@@ -1,0 +1,16 @@
+---
+---
+
+<div id="toast" class="toast-msg"></div>
+
+<script is:inline>
+  window.showToast = function(msg) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3500);
+  };
+</script>

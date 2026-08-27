@@ -1,0 +1,49 @@
+---
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  appId: string;
+  lang: Lang;
+  category?: string;
+}
+
+const {
+  appId,
+  lang,
+  category = 'Productivity'
+} = Astro.props;
+
+const isHe = lang === 'he';
+const storeUrl = `https://play.google.com/store/apps/details?id=${appId}`;
+const storeLabel = isHe ? 'Google Play' : 'Google Play';
+const liveStatus = isHe ? 'זמין בחנות Play' : 'Live on Google Play';
+const categoryLabel = isHe ? 'פרודוקטיביות' : category;
+const freeLabel = isHe ? 'חינמי' : 'Free';
+---
+
+<div class="playstore-status-pill" data-playstore-id={appId}>
+  <div class="playstore-status-left">
+    <span class="playstore-pulse-dot" title={liveStatus}></span>
+    <a href={storeUrl} target="_blank" rel="noopener noreferrer" class="playstore-badge" aria-label="View on Google Play">
+      <i class="fa-brands fa-google-play" style="color: #34A853;"></i>
+      <span class="playstore-name">{storeLabel}</span>
+    </a>
+  </div>
+
+  <div class="playstore-status-right">
+    <span class="playstore-metric">
+      <i class="fa-brands fa-android" style="color: #3DDC84; font-size: 0.8rem;"></i>
+      <span>Android</span>
+    </span>
+
+    <span class="playstore-metric">
+      <i class="fa-solid fa-list-check" style="color: #60A5FA; font-size: 0.75rem;"></i>
+      <span>{categoryLabel}</span>
+    </span>
+
+    <span class="playstore-metric">
+      <i class="fa-solid fa-circle-check" style="color: #10B981; font-size: 0.75rem;"></i>
+      <span>{freeLabel}</span>
+    </span>
+  </div>
+</div>

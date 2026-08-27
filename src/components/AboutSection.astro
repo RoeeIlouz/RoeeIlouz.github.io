@@ -1,0 +1,111 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+import PlayStoreStatus from './PlayStoreStatus.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].about;
+---
+
+<section id="about" class="tab-pane active">
+  <!-- Live Pulse Status Chip -->
+  <div class="status-live-chip">
+    <span class="status-live-dot"></span>
+    <span>⚡ Actively Building ROCIs Ecosystem & Cross-Platform Apps</span>
+  </div>
+
+  <p class="intro-text">
+    <Fragment set:html={t.intro} />
+  </p>
+
+  <div class="intro-quote">
+    {t.quote}
+  </div>
+
+  <!-- Quick Key Metrics Grid -->
+  <div class="metrics-grid">
+    <div class="metric-card spotlight-card">
+      <span class="metric-number">30+</span>
+      <span class="metric-label">{t.metrics.services}</span>
+    </div>
+    <div class="metric-card spotlight-card">
+      <span class="metric-number">4+</span>
+      <span class="metric-label">{t.metrics.apps}</span>
+    </div>
+    <div class="metric-card spotlight-card">
+      <span class="metric-number">99.9%</span>
+      <span class="metric-label">{t.metrics.availability}</span>
+    </div>
+    <div class="metric-card spotlight-card">
+      <span class="metric-number">B.Sc.</span>
+      <span class="metric-label">{t.metrics.degree}</span>
+    </div>
+  </div>
+
+  <!-- Featured App Banner: ROCIs Tasks -->
+  <div class="featured-banner spotlight-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;">
+      <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">{t.feat_tag}</span>
+      <span style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">{t.feat_badge}</span>
+    </div>
+    <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">{t.feat_title}</h3>
+    <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.8rem;">
+      {t.feat_desc}
+    </p>
+
+    <!-- Google Play Live Status Integration -->
+    <div style="margin-bottom: 1.1rem;">
+      <PlayStoreStatus appId="com.rocisapps.tasks" lang={lang} />
+    </div>
+
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <a href="https://play.google.com/store/apps/details?id=com.rocisapps.tasks" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;">
+        <i class="fa-brands fa-google-play"></i> Google Play
+      </a>
+      <a href="https://tasks.rocisapps.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> tasks.rocisapps.com
+      </a>
+      <a href="https://rocisapps.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+        <i class="fa-solid fa-globe"></i> rocisapps.com
+      </a>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">{t.heading_doing}</h3>
+  <div class="service-grid">
+    
+    <div class="service-card spotlight-card">
+      <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+      <h4 class="service-title">{t.svc_mobile_title}</h4>
+      <p class="service-desc">{t.svc_mobile_desc}</p>
+    </div>
+
+    <div class="service-card spotlight-card">
+      <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+      <h4 class="service-title">{t.svc_ee_title}</h4>
+      <p class="service-desc">{t.svc_ee_desc}</p>
+    </div>
+
+    <div class="service-card spotlight-card">
+      <div class="service-icon"><i class="fa-solid fa-server"></i></div>
+      <h4 class="service-title">{t.svc_sys_title}</h4>
+      <p class="service-desc">{t.svc_sys_desc}</p>
+      <div style="margin-top: 0.8rem;">
+        <a href="#homelab" data-switch-tab="homelab" class="project-link-btn" style="font-size: 0.78rem; padding: 0.35rem 0.75rem;">
+          <i class="fa-solid fa-server"></i> <span>{t.svc_sys_btn}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="service-card spotlight-card">
+      <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+      <h4 class="service-title">{t.svc_ai_title}</h4>
+      <p class="service-desc">{t.svc_ai_desc}</p>
+    </div>
+
+  </div>
+</section>

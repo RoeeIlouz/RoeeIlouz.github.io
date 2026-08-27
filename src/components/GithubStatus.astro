@@ -1,0 +1,76 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  repo: string;
+  lang: Lang;
+  defaultStars?: number;
+  defaultForks?: number;
+  defaultLanguage?: string;
+}
+
+const {
+  repo,
+  lang,
+  defaultStars = 0,
+  defaultForks = 0,
+  defaultLanguage = 'Code'
+} = Astro.props;
+
+const t = translations[lang].projects;
+
+const langColors: Record<string, string> = {
+  Dart: '#00B4AB',
+  TypeScript: '#3178C6',
+  JavaScript: '#F7DF1E',
+  Shell: '#89E051',
+  Python: '#3572A5',
+  HTML: '#E34F26',
+  CSS: '#563D7C',
+  Astro: '#FF5D01'
+};
+
+const dotColor = langColors[defaultLanguage] || '#EF4444';
+---
+
+<div class="github-status-pill" data-github-repo={repo}>
+  <div class="github-status-left">
+    <span class="github-pulse-dot" title={t.status_active}></span>
+    <span class="github-lang-badge">
+      <span class="github-lang-dot" style={`background-color: ${dotColor};`} data-gh-dot></span>
+      <span class="github-lang-name" data-gh-lang>{defaultLanguage}</span>
+    </span>
+  </div>
+
+  <div class="github-status-right">
+    <a
+      href={`https://github.com/${repo}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-metric"
+      title={`${t.stars} on GitHub`}
+      aria-label={`${t.stars} on GitHub`}
+    >
+      <i class="fa-solid fa-star" style="color: #fbbf24; font-size: 0.75rem;"></i>
+      <span class="metric-val" data-gh-stars>{defaultStars}</span>
+    </a>
+
+    <a
+      href={`https://github.com/${repo}/fork`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-metric"
+      title={`${t.forks} on GitHub`}
+      aria-label={`${t.forks} on GitHub`}
+    >
+      <i class="fa-solid fa-code-fork" style="color: #9ca3af; font-size: 0.75rem;"></i>
+      <span class="metric-val" data-gh-forks>{defaultForks}</span>
+    </a>
+
+    <span class="github-metric github-updated" data-gh-updated>
+      <i class="fa-regular fa-clock" style="color: #6b7280; font-size: 0.72rem;"></i>
+      <span class="metric-val updated-text">Active</span>
+    </span>
+  </div>
+</div>

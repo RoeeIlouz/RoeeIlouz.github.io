@@ -1,0 +1,100 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+import {
+  homelabSpecs,
+  zeroTrustServices,
+  modularStacks,
+  maintenanceScripts
+} from '../data/homelab';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].homelab;
+---
+
+<section id="homelab" class="tab-pane">
+  <div class="featured-banner spotlight-card" style="margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.6rem;">
+      <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">{t.banner_tag}</span>
+      <span style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">{t.banner_badge}</span>
+    </div>
+    <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">{t.banner_title}</h3>
+    <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.2rem;">
+      <Fragment set:html={t.banner_desc} />
+    </p>
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <a href="https://github.com/RoeeIlouz/Homelab" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: var(--accent-crimson); color: #fff;" aria-label="Explore Homelab GitOps repository on GitHub">
+        <i class="fa-brands fa-github"></i> <span>{t.banner_btn}</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hardware Specs Matrix -->
+  <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 1.8rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+    <i class="fa-solid fa-microchip" style="color: var(--accent-red);"></i> {t.hw_heading}
+  </h4>
+  <div class="homelab-spec">
+    {homelabSpecs.map(spec => (
+      <div class="spec-card spotlight-card">
+        <div class="spec-icon"><i class={spec.icon}></i></div>
+        <p class="spec-title">{spec.title[lang]}</p>
+        <p class="spec-value">{spec.value[lang]}</p>
+      </div>
+    ))}
+  </div>
+
+  <!-- Networking & Zero Trust Ingress -->
+  <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+    <i class="fa-solid fa-shield-halved" style="color: var(--accent-red);"></i> {t.sec_heading}
+  </h4>
+  <div class="service-grid">
+    {zeroTrustServices.map(svc => (
+      <div class="service-card spotlight-card">
+        <div class="service-icon"><i class={svc.icon}></i></div>
+        <h4 class="service-title">{svc.title[lang]}</h4>
+        <p class="service-desc">{svc.description[lang]}</p>
+        <div class="project-tech" style="margin-top: 0.8rem;">
+          {svc.badges.map(b => (
+            <span class="tech-badge">{b}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Core Stacks Matrix -->
+  <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+    <i class="fa-solid fa-layer-group" style="color: var(--accent-red);"></i> {t.stacks_heading}
+  </h4>
+  <div class="service-grid">
+    {modularStacks.map(stack => (
+      <div class="service-card spotlight-card">
+        <div class="service-icon"><i class={stack.icon}></i></div>
+        <h4 class="service-title">{stack.title[lang]}</h4>
+        <p class="service-desc">{stack.description[lang]}</p>
+        <div class="project-tech" style="margin-top: 0.8rem;">
+          {stack.badges.map(b => (
+            <span class="tech-badge">{b}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Maintenance & Automation -->
+  <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+    <i class="fa-solid fa-gears" style="color: var(--accent-red);"></i> {t.ops_heading}
+  </h4>
+  <div class="maintenance-box spotlight-card">
+    <p style="margin: 0 0 0.5rem 0;"><span style="color: var(--accent-red);">{t.ops_subtitle}</span></p>
+    {maintenanceScripts.map(script => (
+      <p style="margin: 0;">
+        • <code style={`color: ${script.color};`}>{script.name}</code>: <span>{script.description[lang]}</span>
+      </p>
+    ))}
+  </div>
+</section>

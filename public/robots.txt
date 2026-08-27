@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://roee.ilouz.xyz/sitemap.xml

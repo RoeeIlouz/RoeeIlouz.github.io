@@ -1,0 +1,167 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+import Toast from '../components/Toast.astro';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  activeTab?: string;
+}
+
+const { lang, title, description, activeTab = 'about' } = Astro.props;
+const t = translations[lang];
+const isRtl = lang === 'he';
+
+const pageTitle = title || `${t.doc_title_prefix}${t.tab_titles.about}`;
+const metaDesc = description || (lang === 'en'
+  ? 'Personal portfolio and workspace of Roee Ilouz (ROCI). Electrical Engineering student, Flutter/Dart mobile developer, and self-hosted systems enthusiast.'
+  : 'הפורטפוליו האישי של רועי אילוז. סטודנט להנדסת חשמל, מפתח אפליקציות Flutter ומנהל תשתיות מחשוב עצמאיות.');
+---
+
+<!DOCTYPE html>
+<html lang={lang} dir={isRtl ? 'rtl' : 'ltr'}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="UA_6j9NEGu3aBu7P_cL6vkusxH26-WcNpCITqrg-dBE" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={metaDesc} />
+  <meta name="keywords" content="Roee Ilouz, ROCI, Electrical Engineering, Flutter, Dart, Mobile Developer, Self-Hosting, Linux, CasaOS, Docker, MCP, רועי אילוז" />
+  <meta name="author" content="Roee Ilouz" />
+
+  <!-- Canonical & Alternate Links -->
+  <link rel="canonical" href={`https://roee.ilouz.xyz${lang === 'he' ? '/he/' : '/'}`} />
+  <link rel="alternate" hreflang="en" href="https://roee.ilouz.xyz/" />
+  <link rel="alternate" hreflang="he" href="https://roee.ilouz.xyz/he/" />
+  <link rel="alternate" hreflang="x-default" href="https://roee.ilouz.xyz/" />
+
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={metaDesc} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={`https://roee.ilouz.xyz${lang === 'he' ? '/he/' : '/'}`} />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/65816424?v=4" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={metaDesc} />
+  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/65816424?v=4" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/65816424?v=4" />
+
+  <!-- Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Heebo:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body data-lang={lang} data-active-tab={activeTab}>
+  <div class="layout-container">
+    <slot />
+  </div>
+
+  <Toast />
+
+  <!-- Client-side Router, Interactivity & Spotlight Script -->
+  <script is:inline define:vars={{ titles: t.tab_titles, titlePrefix: t.doc_title_prefix, lang }}>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navButtons = document.querySelectorAll('.nav-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+      const sectionTitle = document.getElementById('section-title');
+      const langToggleLink = document.querySelector('.lang-toggle-btn');
+
+      function switchTab(tabId) {
+        navButtons.forEach(btn => {
+          if (btn.getAttribute('data-tab') === tabId) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        tabPanes.forEach(pane => {
+          if (pane.id === tabId) {
+            pane.classList.add('active');
+          } else {
+            pane.classList.remove('active');
+          }
+        });
+
+        if (sectionTitle && titles[tabId]) {
+          sectionTitle.textContent = titles[tabId];
+        }
+
+        document.title = `${titlePrefix}${titles[tabId] || 'Portfolio'}`;
+
+        if (window.history.pushState) {
+          window.history.pushState(null, null, `#${tabId}`);
+        } else {
+          location.hash = `#${tabId}`;
+        }
+
+        // Update language toggle link to preserve current tab in destination URL
+        if (langToggleLink) {
+          const basePath = langToggleLink.getAttribute('href').split('#')[0];
+          langToggleLink.setAttribute('href', `${basePath}#${tabId}`);
+        }
+      }
+
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetTab = btn.getAttribute('data-tab');
+          if (targetTab) {
+            switchTab(targetTab);
+            if (window.innerWidth < 1024) {
+              document.querySelector('.main-content')?.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
+      });
+
+      // Handle tab click from other sections (e.g. "View Architecture")
+      document.querySelectorAll('[data-switch-tab]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = el.getAttribute('data-switch-tab');
+          if (target) {
+            switchTab(target);
+            document.querySelector('.main-content')?.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Handle URL hash on initial page load
+      function handleHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && titles[hash]) {
+          switchTab(hash);
+        } else if (langToggleLink) {
+          const basePath = langToggleLink.getAttribute('href').split('#')[0];
+          langToggleLink.setAttribute('href', `${basePath}#about`);
+        }
+      }
+
+      handleHash();
+      window.addEventListener('hashchange', handleHash);
+
+      // Interactive Mouse Spotlight for all .spotlight-card elements
+      document.addEventListener('mousemove', (e) => {
+        const cards = document.querySelectorAll('.spotlight-card');
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

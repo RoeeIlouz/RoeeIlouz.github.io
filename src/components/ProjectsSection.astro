@@ -1,0 +1,299 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+import { projectsData } from '../data/projects';
+import GithubStatus from './GithubStatus.astro';
+import PlayStoreStatus from './PlayStoreStatus.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].projects;
+---
+
+<section id="projects" class="tab-pane">
+  <!-- GitHub Activity Header Banner -->
+  <div class="github-profile-banner">
+    <div class="github-banner-content">
+      <div class="github-banner-icon">
+        <i class="fa-brands fa-github"></i>
+      </div>
+      <div>
+        <h4 class="github-banner-title">{t.github_header_title}</h4>
+        <p class="github-banner-sub">{t.github_header_subtitle}</p>
+      </div>
+    </div>
+    <a
+      href="https://github.com/RoeeIlouz?tab=repositories"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="project-link-btn"
+      style="white-space: nowrap;"
+    >
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      <span>{t.view_all_github}</span>
+    </a>
+  </div>
+
+  <!-- Search & Filter Controls -->
+  <div class="projects-controls">
+    <div class="project-search-box">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input
+        type="text"
+        id="project-search-input"
+        class="project-search-input"
+        placeholder={t.search_placeholder}
+        aria-label="Search projects"
+      />
+      <button id="project-search-clear" class="search-clear-btn" title="Clear search" style="display: none;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="filter-list" role="tablist" aria-label="Filter projects by category">
+      <button class="filter-btn active" data-filter="all" id="filter-all" aria-label="Show all projects">
+        <span>{t.filter_all}</span>
+      </button>
+      <button class="filter-btn" data-filter="mobile" id="filter-mobile" aria-label="Filter mobile apps">
+        <span>{t.filter_mobile}</span>
+      </button>
+      <button class="filter-btn" data-filter="systems" id="filter-systems" aria-label="Filter systems and homelab">
+        <span>{t.filter_systems}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- No Results Found State -->
+  <div id="no-projects-msg" class="no-results-box" style="display: none;">
+    <i class="fa-solid fa-magnifying-glass-arrow-right" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 0.5rem;"></i>
+    <p>{t.no_results}</p>
+  </div>
+
+  <!-- Projects Grid with Spotlights -->
+  <div class="projects-grid" id="projects-grid">
+    {projectsData.map(proj => (
+      <div
+        class="project-card spotlight-card"
+        data-category={proj.category}
+        data-title={proj.title[lang].toLowerCase()}
+        data-desc={proj.description[lang].toLowerCase()}
+        data-tech={proj.tech.join(' ').toLowerCase()}
+      >
+        <div class="project-banner">{proj.emoji}</div>
+        <div class="project-content">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem;">
+            <span class="project-tag">{proj.tag[lang]}</span>
+          </div>
+          
+          <h4 class="project-name">{proj.title[lang]}</h4>
+          <p class="project-desc">{proj.description[lang]}</p>
+
+          {proj.playStoreId && (
+            <div style="margin-bottom: 0.6rem;">
+              <PlayStoreStatus appId={proj.playStoreId} lang={lang} />
+            </div>
+          )}
+
+          {proj.githubRepo && (
+            <GithubStatus
+              repo={proj.githubRepo}
+              lang={lang}
+              defaultStars={proj.defaultStars}
+              defaultForks={proj.defaultForks}
+              defaultLanguage={proj.defaultLanguage}
+            />
+          )}
+
+          <div class="project-tech">
+            {proj.tech.map(tech => (
+              <span class="tech-badge">{tech}</span>
+            ))}
+          </div>
+
+          <div class="project-links" style="flex-wrap: wrap;">
+            {proj.links.map(link => {
+              const label = link.label || (link.labelKey ? t[link.labelKey as keyof typeof t] : '');
+              const linkStyle = link.primary ? 'background: var(--accent-crimson); color: #fff;' : '';
+              
+              if (link.isTabLink && link.tabTarget) {
+                return (
+                  <a
+                    href={link.url}
+                    data-switch-tab={link.tabTarget}
+                    class="project-link-btn"
+                    style={linkStyle}
+                  >
+                    <i class={link.icon}></i>
+                    <span>{label}</span>
+                  </a>
+                );
+              }
+
+              return (
+                <a
+                  href={link.url}
+                  target={link.target || undefined}
+                  rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
+                  class="project-link-btn"
+                  style={linkStyle}
+                >
+                  <i class={link.icon}></i>
+                  <span>{label}</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Client-side GitHub Live Fetcher & Instant Search Script -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Client-Side Live GitHub Metadata Sync with Cache
+    async function syncGithubRepos() {
+      const pills = document.querySelectorAll('.github-status-pill[data-github-repo]');
+      if (!pills.length) return;
+
+      const cacheKey = 'roee_github_cache_v1';
+      const cacheTimeKey = 'roee_github_cache_time';
+      const now = Date.now();
+      const cachedData = JSON.parse(sessionStorage.getItem(cacheKey) || '{}');
+      const cachedTime = parseInt(sessionStorage.getItem(cacheTimeKey) || '0', 10);
+
+      const needsFetch = !cachedTime || (now - cachedTime > 600000);
+
+      for (const pill of pills) {
+        const repo = pill.getAttribute('data-github-repo');
+        if (!repo) continue;
+
+        let data = cachedData[repo];
+
+        if (needsFetch || !data) {
+          try {
+            const res = await fetch(`https://api.github.com/repos/${repo}`);
+            if (res.ok) {
+              const json = await res.json();
+              data = {
+                stars: json.stargazers_count,
+                forks: json.forks_count,
+                language: json.language,
+                pushed_at: json.pushed_at
+              };
+              cachedData[repo] = data;
+              sessionStorage.setItem(cacheKey, JSON.stringify(cachedData));
+              sessionStorage.setItem(cacheTimeKey, now.toString());
+            }
+          } catch (e) {
+            // Silently fallback to default props
+          }
+        }
+
+        if (data) {
+          const starsEl = pill.querySelector('[data-gh-stars]');
+          const forksEl = pill.querySelector('[data-gh-forks]');
+          const langEl = pill.querySelector('[data-gh-lang]');
+          const updatedEl = pill.querySelector('.updated-text');
+
+          if (starsEl && typeof data.stars === 'number') starsEl.textContent = data.stars;
+          if (forksEl && typeof data.forks === 'number') forksEl.textContent = data.forks;
+          if (langEl && data.language) langEl.textContent = data.language;
+
+          if (updatedEl && data.pushed_at) {
+            const pushedDate = new Date(data.pushed_at);
+            const daysAgo = Math.floor((now - pushedDate.getTime()) / (1000 * 60 * 60 * 24));
+            if (daysAgo === 0) {
+              updatedEl.textContent = 'Today';
+            } else if (daysAgo === 1) {
+              updatedEl.textContent = '1d ago';
+            } else if (daysAgo < 30) {
+              updatedEl.textContent = `${daysAgo}d ago`;
+            } else {
+              const monthsAgo = Math.floor(daysAgo / 30);
+              updatedEl.textContent = `${monthsAgo}mo ago`;
+            }
+          }
+        }
+      }
+    }
+
+    syncGithubRepos();
+
+    // 2. Real-time Project Search & Category Filter Interactivity
+    const searchInput = document.getElementById('project-search-input');
+    const searchClear = document.getElementById('project-search-clear');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    const noResultsMsg = document.getElementById('no-projects-msg');
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function filterProjects() {
+      let visibleCount = 0;
+
+      projectCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const title = card.getAttribute('data-title') || '';
+        const desc = card.getAttribute('data-desc') || '';
+        const tech = card.getAttribute('data-tech') || '';
+
+        const matchesCategory = currentFilter === 'all' || category === currentFilter;
+        const matchesSearch = !searchQuery || 
+          title.includes(searchQuery) || 
+          desc.includes(searchQuery) || 
+          tech.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          card.style.display = 'flex';
+          card.style.animation = 'none';
+          void card.offsetWidth;
+          card.style.animation = 'fadeInCard 0.3s ease-out forwards';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (noResultsMsg) {
+        noResultsMsg.style.display = visibleCount === 0 ? 'flex' : 'none';
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        if (searchClear) {
+          searchClear.style.display = searchQuery ? 'block' : 'none';
+        }
+        filterProjects();
+      });
+    }
+
+    if (searchClear) {
+      searchClear.addEventListener('click', () => {
+        if (searchInput) {
+          searchInput.value = '';
+          searchQuery = '';
+          searchClear.style.display = 'none';
+          filterProjects();
+          searchInput.focus();
+        }
+      });
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterProjects();
+      });
+    });
+  });
+</script>

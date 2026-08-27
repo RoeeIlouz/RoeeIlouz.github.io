@@ -1,0 +1,102 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].contact;
+---
+
+<section id="contact" class="tab-pane">
+  <h3 class="sub-heading" style="margin-top:0;">{t.heading}</h3>
+  <p class="intro-text">
+    {t.intro}
+  </p>
+
+  <form id="contact-form" class="contact-form">
+    <div class="form-row">
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="form-input"
+        placeholder={t.placeholder_name}
+        required
+        aria-label="Your Name"
+      />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-input"
+        placeholder={t.placeholder_email}
+        required
+        aria-label="Your Email"
+      />
+    </div>
+    <textarea
+      id="message"
+      name="message"
+      class="form-textarea"
+      placeholder={t.placeholder_message}
+      required
+      aria-label="Your Message"
+    ></textarea>
+    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+      <button type="submit" class="submit-btn" id="form-btn-submit" aria-label="Send message via email">
+        <i class="fa-solid fa-paper-plane"></i> <span>{t.btn_submit}</span>
+      </button>
+      <button
+        type="button"
+        class="project-link-btn"
+        id="btn-copy-email"
+        aria-label="Copy email address to clipboard"
+        style="padding: 0.85rem 1.4rem; font-weight: 700; font-size: 0.92rem;"
+      >
+        <i class="fa-solid fa-copy"></i> <span>{t.btn_copy_email}</span>
+      </button>
+    </div>
+  </form>
+</section>
+
+<script is:inline define:vars={{ toastCopied: t.toast_copied, toastEmail: t.toast_email }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Copy Email to Clipboard
+    const btnCopyEmail = document.getElementById('btn-copy-email');
+    if (btnCopyEmail) {
+      btnCopyEmail.addEventListener('click', async () => {
+        const email = 'roee.ilouz@gmail.com';
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(email);
+            if (window.showToast) window.showToast(toastCopied);
+          } else {
+            prompt('Copy email:', email);
+          }
+        } catch {
+          if (window.showToast) window.showToast(`Email: ${email}`);
+        }
+      });
+    }
+
+    // Contact Form (Mailto)
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name')?.value || '';
+        const email = document.getElementById('email')?.value || '';
+        const message = document.getElementById('message')?.value || '';
+
+        const mailtoUrl = `mailto:roee.ilouz@gmail.com?subject=Contact%20from%20roee.ilouz.xyz%20(${encodeURIComponent(name)})&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(name)}%20(${encodeURIComponent(email)})`;
+        
+        window.location.href = mailtoUrl;
+        if (window.showToast) window.showToast(toastEmail);
+        contactForm.reset();
+      });
+    }
+  });
+</script>

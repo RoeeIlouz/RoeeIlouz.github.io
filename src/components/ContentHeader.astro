@@ -1,0 +1,40 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+  activeTab?: string;
+}
+
+const { lang, activeTab = 'about' } = Astro.props;
+const t = translations[lang];
+const otherLangHref = t.other_lang_path;
+---
+
+<header class="content-header">
+  <div style="display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;">
+    <h2 id="section-title" class="section-title">{t.tab_titles[activeTab as keyof typeof t.tab_titles] || t.tab_titles.about}</h2>
+    <a href={otherLangHref} class="lang-toggle-btn" title="Switch Language / החלף שפה" aria-label="Toggle language">
+      <i class="fa-solid fa-globe"></i> <span>{t.lang_label}</span>
+    </a>
+  </div>
+  
+  <nav class="nav-tabs" aria-label="Portfolio sections navigation">
+    <button class:list={['nav-btn', { active: activeTab === 'about' }]} data-tab="about" aria-label="About section">
+      <i class="fa-solid fa-user"></i> <span>{t.nav.about}</span>
+    </button>
+    <button class:list={['nav-btn', { active: activeTab === 'skills' }]} data-tab="skills" aria-label="Experience and education section">
+      <i class="fa-solid fa-briefcase"></i> <span>{t.nav.skills}</span>
+    </button>
+    <button class:list={['nav-btn', { active: activeTab === 'projects' }]} data-tab="projects" aria-label="Projects section">
+      <i class="fa-solid fa-code"></i> <span>{t.nav.projects}</span>
+    </button>
+    <button class:list={['nav-btn', { active: activeTab === 'homelab' }]} data-tab="homelab" aria-label="Homelab infrastructure section">
+      <i class="fa-solid fa-server"></i> <span>{t.nav.homelab}</span>
+    </button>
+    <button class:list={['nav-btn', { active: activeTab === 'contact' }]} data-tab="contact" aria-label="Contact section">
+      <i class="fa-solid fa-envelope"></i> <span>{t.nav.contact}</span>
+    </button>
+  </nav>
+</header>

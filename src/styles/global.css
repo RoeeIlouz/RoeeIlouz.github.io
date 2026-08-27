@@ -1,22 +1,22 @@
 /* ===================================================
-   ROEE ILOUZ (ROCI) - PERSONAL PORTFOLIO
-   Design Theme: Obsidian Charcoal & Crimson Red (ROCIsApps Aesthetic)
-   Inspired by vCard Personal Portfolio & GitProfile
+   ROEE ILOUZ (ROCI) - PERSONAL PORTFOLIO & HUB
+   Design Theme: Obsidian Charcoal & Crimson Glow (Astro 5)
    =================================================== */
 
 :root {
-  /* Colors - Matte Black, Charcoal Grey & Crimson Red */
+  /* Obsidian Base Palette */
   --bg-body: #080a0f;
   --bg-sidebar: #10131a;
   --bg-card: rgba(16, 19, 26, 0.85);
   --bg-card-hover: rgba(24, 29, 40, 0.95);
-  --bg-glass: rgba(255, 255, 255, 0.03);
+  --bg-glass: rgba(255, 255, 255, 0.035);
+  --bg-glass-heavy: rgba(255, 255, 255, 0.06);
   
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-accent: rgba(239, 68, 68, 0.4);
   --border-accent-glow: rgba(239, 68, 68, 0.7);
 
-  /* Primary Accent: Crimson & Ruby Red */
+  /* Primary Crimson & Neon Accents */
   --accent-red: #ef4444;
   --accent-red-hover: #f87171;
   --accent-crimson: #dc2626;
@@ -24,6 +24,8 @@
   --accent-dark-red: #991b1b;
   --accent-green: #10b981;
   --accent-cyan: #06b6d4;
+  --accent-blue: #3b82f6;
+  --accent-amber: #f59e0b;
 
   --text-primary: #f9fafb;
   --text-secondary: #d1d5db;
@@ -63,8 +65,9 @@ body {
   align-items: flex-start;
   padding: 2.5rem 1.5rem;
   background-image: 
-    radial-gradient(at 15% 15%, rgba(239, 68, 68, 0.08) 0px, transparent 50%),
-    radial-gradient(at 85% 85%, rgba(220, 38, 38, 0.06) 0px, transparent 50%);
+    radial-gradient(at 15% 15%, rgba(239, 68, 68, 0.09) 0px, transparent 50%),
+    radial-gradient(at 85% 85%, rgba(220, 38, 38, 0.07) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(16, 19, 26, 0.5) 0px, transparent 100%);
   background-attachment: fixed;
 }
 
@@ -95,7 +98,38 @@ body {
 }
 
 /* ---------------------------------------------------
-   SIDEBAR (vCard Sidebar)
+   SPOTLIGHT EFFECT (Mouse Glow on Cards)
+--------------------------------------------------- */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+    rgba(239, 68, 68, 0.12),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------
+   SIDEBAR (vCard Profile Card)
 --------------------------------------------------- */
 .sidebar {
   background: var(--bg-sidebar);
@@ -107,7 +141,7 @@ body {
   top: 2rem;
   height: fit-content;
   text-align: center;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 }
 
 .avatar-box {
@@ -141,6 +175,7 @@ body {
   height: 18px;
   border-radius: 50%;
   border: 3px solid var(--bg-sidebar);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
 }
 
 .profile-name {
@@ -168,7 +203,6 @@ body {
   margin: 1.5rem 0;
 }
 
-/* Contact List in Sidebar */
 .contact-list {
   list-style: none;
   text-align: left;
@@ -217,7 +251,6 @@ body {
   color: var(--accent-red);
 }
 
-/* Social Buttons */
 .social-links {
   display: flex;
   justify-content: center;
@@ -257,11 +290,10 @@ body {
   border-radius: 20px;
   padding: 2.5rem;
   box-shadow: var(--shadow-card);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
   min-width: 0;
 }
 
-/* Header Navbar */
 .content-header {
   display: flex;
   justify-content: space-between;
@@ -312,6 +344,10 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
 }
 
 .nav-btn:hover {
@@ -324,7 +360,6 @@ body {
   box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
 }
 
-/* Tab Panes */
 .tab-pane {
   display: none;
   animation: fadeIn 0.35s ease-in-out;
@@ -339,12 +374,43 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* About Intro Box */
+/* ---------------------------------------------------
+   ABOUT SECTION & QUICK METRICS
+--------------------------------------------------- */
+.status-live-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  margin-bottom: 1.4rem;
+}
+
+.status-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+  animation: livePulse 2s infinite;
+}
+
+@keyframes livePulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px var(--accent-green); }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
 .intro-text {
   font-size: 1.05rem;
   color: var(--text-secondary);
   line-height: 1.8;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
 }
 
 .intro-quote {
@@ -354,10 +420,68 @@ body {
   border-radius: 0 10px 10px 0;
   font-style: italic;
   color: var(--text-primary);
+  margin-bottom: 1.8rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
-/* Service / Specialization Cards */
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.1rem 0.9rem;
+  text-align: center;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.metric-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.15);
+}
+
+.metric-number {
+  font-size: 1.55rem;
+  font-weight: 800;
+  font-family: var(--font-code);
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #fff, var(--accent-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.metric-label {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.featured-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(16, 19, 26, 0.95));
+  border: 1px solid var(--border-accent);
+  border-radius: 16px;
+  padding: 1.6rem;
+  margin-bottom: 2.2rem;
+  transition: var(--transition-smooth);
+}
+
+.featured-banner:hover {
+  border-color: var(--accent-red);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+}
+
 .sub-heading {
   font-size: 1.3rem;
   font-weight: 600;
@@ -424,12 +548,111 @@ body {
 }
 
 /* ---------------------------------------------------
-   PROJECTS SECTION (Filter + Cards)
+   PROJECTS SECTION, SEARCH & GITHUB BADGES
 --------------------------------------------------- */
+.github-profile-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.3));
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.github-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.github-banner-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.github-banner-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.github-banner-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.projects-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.project-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.project-search-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 0.75rem 2.8rem 0.75rem 2.8rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.88rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.project-search-input:focus {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  background: var(--bg-card-hover);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 1.1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.2rem;
+  transition: var(--transition-smooth);
+}
+
+.search-clear-btn:hover {
+  color: var(--accent-red);
+}
+
 .filter-list {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1.8rem;
   flex-wrap: wrap;
 }
 
@@ -452,9 +675,22 @@ body {
   border-color: var(--border-accent);
 }
 
+.no-results-box {
+  background: var(--bg-card);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 16px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   gap: 1.5rem;
 }
 
@@ -487,8 +723,8 @@ body {
 }
 
 .project-banner {
-  height: 120px;
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(16, 19, 26, 0.95));
+  height: 110px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(16, 19, 26, 0.95));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -515,15 +751,81 @@ body {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .project-desc {
   font-size: 0.88rem;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   flex: 1;
+}
+
+/* GitHub Status Pill inside Cards */
+.github-status-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-family: var(--font-code);
+}
+
+.github-status-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.github-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
+}
+
+.github-lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+}
+
+.github-lang-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.github-status-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.github-metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.github-metric:hover {
+  color: var(--text-primary);
+}
+
+.metric-val {
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .project-tech {
@@ -623,7 +925,6 @@ body {
   color: var(--text-muted);
 }
 
-/* Skills Category Boxes */
 .skill-category {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -669,8 +970,51 @@ body {
 }
 
 /* ---------------------------------------------------
-   HOME LAB & SELF HOSTING TAB
+   HOME LAB & TELEMETRY
 --------------------------------------------------- */
+.homelab-telemetry-ribbon {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.telemetry-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-family: var(--font-code);
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+}
+
+.telemetry-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.pulse-green {
+  background: var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
+  animation: livePulse 2s infinite;
+}
+
+.pulse-blue {
+  background: var(--accent-blue);
+  box-shadow: 0 0 6px var(--accent-blue);
+}
+
+.pulse-amber {
+  background: var(--accent-amber);
+  box-shadow: 0 0 6px var(--accent-amber);
+}
+
 .homelab-spec {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -720,8 +1064,19 @@ body {
   line-height: 1.35;
 }
 
+.maintenance-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.2rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
 /* ---------------------------------------------------
-   CONTACT FORM / MODAL
+   CONTACT FORM & TOAST
 --------------------------------------------------- */
 .contact-form {
   display: flex;
@@ -782,7 +1137,6 @@ body {
   box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45);
 }
 
-/* Toast */
 .toast-msg {
   position: fixed;
   bottom: 2rem;
@@ -820,6 +1174,7 @@ body {
   align-items: center;
   gap: 0.45rem;
   transition: var(--transition-smooth);
+  text-decoration: none;
 }
 
 .lang-toggle-btn:hover {
@@ -833,6 +1188,24 @@ body {
 --------------------------------------------------- */
 [dir="rtl"] {
   font-family: 'Heebo', var(--font-main);
+}
+
+[dir="rtl"] .contact-list {
+  text-align: right;
+}
+
+[dir="rtl"] .search-icon {
+  right: 1.1rem;
+  left: auto;
+}
+
+[dir="rtl"] .search-clear-btn {
+  left: 1.1rem;
+  right: auto;
+}
+
+[dir="rtl"] .project-search-input {
+  padding: 0.75rem 2.8rem 0.75rem 2.8rem;
 }
 
 [dir="rtl"] .section-title::after {
@@ -878,6 +1251,10 @@ body {
   .sidebar {
     position: static;
   }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
@@ -902,4 +1279,73 @@ body {
   .form-row {
     grid-template-columns: 1fr;
   }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .github-profile-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* Google Play Status Pill */
+.playstore-status-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(52, 168, 83, 0.25);
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.75rem;
+  font-family: var(--font-code);
+  transition: var(--transition-smooth);
+}
+
+.playstore-status-pill:hover {
+  border-color: rgba(52, 168, 83, 0.5);
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.playstore-status-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.playstore-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34A853;
+  box-shadow: 0 0 6px #34A853;
+  animation: livePulse 2s infinite;
+}
+
+.playstore-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.playstore-badge:hover {
+  color: #34A853;
+}
+
+.playstore-status-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.playstore-metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
 }

@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import ContentHeader from '../components/ContentHeader.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ExperienceSection from '../components/ExperienceSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import HomelabSection from '../components/HomelabSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+---
+
+<BaseLayout lang="en">
+  <Sidebar lang="en" />
+  
+  <main class="main-content">
+    <ContentHeader lang="en" activeTab="about" />
+    <AboutSection lang="en" />
+    <ExperienceSection lang="en" />
+    <ProjectsSection lang="en" />
+    <HomelabSection lang="en" />
+    <ContactSection lang="en" />
+  </main>
+</BaseLayout>
