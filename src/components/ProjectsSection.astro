@@ -23,6 +23,20 @@ const t = translations[lang].projects;
       <div>
         <h4 class="github-banner-title">{t.github_header_title}</h4>
         <p class="github-banner-sub">{t.github_header_subtitle}</p>
+        <div class="github-live-meta-row" style="display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 0.4rem; font-size: 0.76rem; font-family: var(--font-code);">
+          <span style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--accent-green);">
+            <span class="github-pulse-dot" style="animation: livePulse 1.5s infinite;"></span>
+            <span id="gh-stream-status">{t.live_sync}</span>
+          </span>
+          <span style="color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.3rem;">
+            <i class="fa-solid fa-code-branch" style="color: var(--accent-red); font-size: 0.72rem;"></i>
+            <span>{t.live_repos}: <b style="color: var(--text-primary);" data-gh-user-repos>7</b></span>
+          </span>
+          <span style="color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.3rem;">
+            <i class="fa-solid fa-star" style="color: #fbbf24; font-size: 0.72rem;"></i>
+            <span>{t.live_stars}: <b style="color: var(--text-primary);" data-gh-total-stars>4</b></span>
+          </span>
+        </div>
       </div>
     </div>
     <a
@@ -31,6 +45,7 @@ const t = translations[lang].projects;
       rel="noopener noreferrer"
       class="project-link-btn"
       style="white-space: nowrap;"
+      aria-label="View all GitHub repositories"
     >
       <i class="fa-solid fa-arrow-up-right-from-square"></i>
       <span>{t.view_all_github}</span>
@@ -82,7 +97,15 @@ const t = translations[lang].projects;
         data-desc={proj.description[lang].toLowerCase()}
         data-tech={proj.tech.join(' ').toLowerCase()}
       >
-        <div class="project-banner">{proj.emoji}</div>
+        <div class="project-banner">
+          {proj.image ? (
+            <div class="project-icon-wrapper">
+              <img src={proj.image} alt={proj.title[lang]} class="project-img-icon" />
+            </div>
+          ) : (
+            <span>{proj.emoji}</span>
+          )}
+        </div>
         <div class="project-content">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem;">
             <span class="project-tag">{proj.tag[lang]}</span>
@@ -152,45 +175,103 @@ const t = translations[lang].projects;
   </div>
 </section>
 
-<!-- Client-side GitHub Live Fetcher & Instant Search Script -->
+<!-- Client-side GitHub Live Streamer & Instant Search Script -->
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    // 1. Client-Side Live GitHub Metadata Sync with Cache
-    async function syncGithubRepos() {
+    const langColors = {
+      Dart: '#00B4AB',
+      TypeScript: '#3178C6',
+      JavaScript: '#F7DF1E',
+      Shell: '#89E051',
+      Python: '#3572A5',
+      HTML: '#E34F26',
+      CSS: '#563D7C',
+      Astro: '#FF5D01',
+      Rust: '#DEA584',
+      C: '#555555',
+      'C++': '#F34B7D'
+    };
+
+    function formatRelativeTime(dateString) {
+      const now = Date.now();
+      const date = new Date(dateString);
+      const diffSec = Math.max(1, Math.floor((now - date.getTime()) / 1000));
+      if (diffSec < 60) return 'Just now';
+      const diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return `${diffMin}m ago`;
+      const diffHours = Math.floor(diffMin / 60);
+      if (diffHours < 24) return `${diffHours}h ago`;
+      const diffDays = Math.floor(diffHours / 24);
+      if (diffDays === 1) return '1d ago';
+      if (diffDays < 30) return `${diffDays}d ago`;
+      const diffMonths = Math.floor(diffDays / 30);
+      if (diffMonths < 12) return `${diffMonths}mo ago`;
+      return `${Math.floor(diffMonths / 12)}y ago`;
+    }
+
+    // 1. Client-Side Live GitHub Real-Time Streamer
+    async function streamGithubData() {
       const pills = document.querySelectorAll('.github-status-pill[data-github-repo]');
       if (!pills.length) return;
 
-      const cacheKey = 'roee_github_cache_v1';
-      const cacheTimeKey = 'roee_github_cache_time';
-      const now = Date.now();
-      const cachedData = JSON.parse(sessionStorage.getItem(cacheKey) || '{}');
-      const cachedTime = parseInt(sessionStorage.getItem(cacheTimeKey) || '0', 10);
+      let totalStars = 0;
+      let reposMap = {};
 
-      const needsFetch = !cachedTime || (now - cachedTime > 600000);
+      // Primary Stream: Fetch all repositories in a single efficient API call
+      try {
+        const reposRes = await fetch('https://api.github.com/users/RoeeIlouz/repos?per_page=100&sort=updated', {
+          headers: { Accept: 'application/vnd.github.v3+json' }
+        });
+        if (reposRes.ok) {
+          const reposList = await reposRes.json();
+          if (Array.isArray(reposList)) {
+            reposList.forEach(r => {
+              if (r.full_name) reposMap[r.full_name.toLowerCase()] = r;
+              if (r.name) reposMap[r.name.toLowerCase()] = r;
+              if (typeof r.stargazers_count === 'number') totalStars += r.stargazers_count;
+            });
+          }
+        }
+      } catch (err) {
+        // Will fallback to individual repo checks if needed
+      }
 
+      // Stream User Stats
+      try {
+        const userRes = await fetch('https://api.github.com/users/RoeeIlouz', {
+          headers: { Accept: 'application/vnd.github.v3+json' }
+        });
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          const repoCountEl = document.querySelector('[data-gh-user-repos]');
+          if (repoCountEl && typeof userData.public_repos === 'number') {
+            repoCountEl.textContent = userData.public_repos;
+          }
+        }
+      } catch (err) {
+        // Fail silently
+      }
+
+      // Stream each Repository card
       for (const pill of pills) {
-        const repo = pill.getAttribute('data-github-repo');
-        if (!repo) continue;
+        const repoAttr = pill.getAttribute('data-github-repo');
+        if (!repoAttr) continue;
+        const repoKey = repoAttr.toLowerCase();
 
-        let data = cachedData[repo];
+        let data = reposMap[repoKey] || reposMap[repoKey.split('/')[1] || ''];
 
-        if (needsFetch || !data) {
+        // Fallback to individual API call if not found in bulk list
+        if (!data) {
           try {
-            const res = await fetch(`https://api.github.com/repos/${repo}`);
+            const res = await fetch(`https://api.github.com/repos/${repoAttr}`, {
+              headers: { Accept: 'application/vnd.github.v3+json' }
+            });
             if (res.ok) {
-              const json = await res.json();
-              data = {
-                stars: json.stargazers_count,
-                forks: json.forks_count,
-                language: json.language,
-                pushed_at: json.pushed_at
-              };
-              cachedData[repo] = data;
-              sessionStorage.setItem(cacheKey, JSON.stringify(cachedData));
-              sessionStorage.setItem(cacheTimeKey, now.toString());
+              data = await res.json();
+              if (typeof data.stargazers_count === 'number') totalStars += data.stargazers_count;
             }
-          } catch (e) {
-            // Silently fallback to default props
+          } catch (err) {
+            // Keep default values
           }
         }
 
@@ -198,31 +279,46 @@ const t = translations[lang].projects;
           const starsEl = pill.querySelector('[data-gh-stars]');
           const forksEl = pill.querySelector('[data-gh-forks]');
           const langEl = pill.querySelector('[data-gh-lang]');
+          const dotEl = pill.querySelector('[data-gh-dot]');
           const updatedEl = pill.querySelector('.updated-text');
 
-          if (starsEl && typeof data.stars === 'number') starsEl.textContent = data.stars;
-          if (forksEl && typeof data.forks === 'number') forksEl.textContent = data.forks;
-          if (langEl && data.language) langEl.textContent = data.language;
-
-          if (updatedEl && data.pushed_at) {
-            const pushedDate = new Date(data.pushed_at);
-            const daysAgo = Math.floor((now - pushedDate.getTime()) / (1000 * 60 * 60 * 24));
-            if (daysAgo === 0) {
-              updatedEl.textContent = 'Today';
-            } else if (daysAgo === 1) {
-              updatedEl.textContent = '1d ago';
-            } else if (daysAgo < 30) {
-              updatedEl.textContent = `${daysAgo}d ago`;
-            } else {
-              const monthsAgo = Math.floor(daysAgo / 30);
-              updatedEl.textContent = `${monthsAgo}mo ago`;
+          if (starsEl && typeof data.stargazers_count === 'number') {
+            starsEl.textContent = data.stargazers_count;
+          }
+          if (forksEl && typeof data.forks_count === 'number') {
+            forksEl.textContent = data.forks_count;
+          }
+          if (langEl && data.language) {
+            langEl.textContent = data.language;
+            if (dotEl && langColors[data.language]) {
+              dotEl.style.backgroundColor = langColors[data.language];
             }
+          }
+          if (updatedEl && data.pushed_at) {
+            updatedEl.textContent = formatRelativeTime(data.pushed_at);
+            updatedEl.setAttribute('title', `Last updated: ${new Date(data.pushed_at).toLocaleString()}`);
           }
         }
       }
+
+      const totalStarsEl = document.querySelector('[data-gh-total-stars]');
+      if (totalStarsEl && totalStars > 0) {
+        totalStarsEl.textContent = totalStars;
+      }
     }
 
-    syncGithubRepos();
+    // Run initial stream immediately
+    streamGithubData();
+
+    // Re-run stream when switching to projects tab
+    document.querySelectorAll('[data-tab-target="projects"], [data-switch-tab="projects"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setTimeout(streamGithubData, 100);
+      });
+    });
+
+    // Stream polling every 30 seconds
+    setInterval(streamGithubData, 30000);
 
     // 2. Real-time Project Search & Category Filter Interactivity
     const searchInput = document.getElementById('project-search-input');

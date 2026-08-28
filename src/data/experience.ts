@@ -62,12 +62,12 @@ export const educationList: TimelineItem[] = [
       he: 'סטודנט לתואר ראשון בהנדסת חשמל (B.Sc.)'
     },
     meta: {
-      en: 'Undergraduate Student • Academic Studies',
-      he: 'סטודנט לתואר ראשון • מכללת אפקה להנדסה ומדעים'
+      en: 'Afeka College of Engineering, Tel Aviv • 2024 – 2028 (Expected)',
+      he: 'מכללת אפקה להנדסה ומדעים, תל אביב • 2024 – 2028'
     },
     description: {
-      en: 'Focusing on circuit theory, electrical signals, electromagnetic physics, classical mechanics, and mathematical modeling for engineering systems.',
-      he: 'התמקדות בתורת המעגלים החשמליים, אותות ומערכות, פיזיקה אלקטרומגנטית, מכניקה קלאסית ומודלים מתמטיים הנדסיים.'
+      en: 'Focusing on electrical circuit theory, linear signals & systems, electromagnetics, classical physics, and mathematical modeling for engineering systems. Coursework emphasizes circuit analysis, signal processing, and low-level embedded hardware.',
+      he: 'התמקדות בתורת המעגלים החשמליים, אותות ומערכות ליניאריות, פיזיקה אלקטרומגנטית, מכניקה קלאסית ומודלים מתמטיים הנדסיים. דגש על ניתוח מעגלים, יסודות עיבוד אותות וחומרה משובצת מחשב.'
     }
   },
   {
@@ -128,19 +128,25 @@ export const certificationsList: CertItem[] = [
 export const skillCategories: SkillCategory[] = [
   {
     title: {
-      en: 'Mobile & App Development',
-      he: 'פיתוח מובייל ואפליקציות'
+      en: 'Mobile & Frontend Development',
+      he: 'פיתוח מובייל ופרונטאנד'
     },
     icon: 'fa-solid fa-mobile-screen',
     iconColor: 'var(--accent-red)',
     skills: [
       { label: 'Flutter', icon: 'fa-brands fa-flutter', iconColor: '#02569b' },
-      { label: '🎯 Dart' },
-      { label: '💳 RevenueCat SDK' },
+      { label: 'Dart' },
+      { label: 'RevenueCat SDK' },
       { label: 'Android', icon: 'fa-brands fa-android', iconColor: '#3ddc84' },
       { label: 'iOS', icon: 'fa-brands fa-apple', iconColor: '#fff' },
-      { label: 'JavaScript', icon: 'fa-brands fa-js', iconColor: '#f7df1e' },
-      { label: 'HTML5 / CSS3', icon: 'fa-brands fa-html5', iconColor: '#e34f26' }
+      { label: 'JavaScript / TypeScript', icon: 'fa-brands fa-js', iconColor: '#f7df1e' },
+      { label: 'HTML5 / CSS3', icon: 'fa-brands fa-html5', iconColor: '#e34f26' },
+      {
+        label: {
+          en: '🚀 Astro (Learning)',
+          he: '🚀 Astro (בלמידה)'
+        }
+      }
     ]
   },
   {
@@ -163,18 +169,40 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: {
-      en: 'Hardware, Mechatronics & Languages',
-      he: 'חומרה, מכטרוניקה ושפות קוד'
+      en: 'Hardware & Embedded Systems (Academic Studies)',
+      he: 'חומרה ומערכות משובצות (בלימודים אקדמיים)'
     },
     icon: 'fa-solid fa-microchip',
     iconColor: 'var(--accent-ruby)',
     skills: [
-      { label: '⚡ Circuit Analysis' },
+      {
+        label: {
+          en: '⚡ Circuit Analysis (Studying)',
+          he: '⚡ ניתוח מעגלים חשמליים (בלימודים)'
+        }
+      },
+      {
+        label: {
+          en: '📟 Linear Signals & Systems (Studying)',
+          he: '📟 אותות ומערכות ליניאריות (בלימודים)'
+        }
+      },
       { label: '🤖 Mechatronic Systems' },
       { label: '⚙️ Machine Control' },
       { label: '🔧 C Programming' },
       { label: 'Python', icon: 'fa-brands fa-python', iconColor: '#3776ab' },
-      { label: '📟 Embedded Hardware' }
+      {
+        label: {
+          en: '🦀 Rust (Learning)',
+          he: '🦀 Rust (בלמידה)'
+        }
+      },
+      {
+        label: {
+          en: '🔌 Embedded Hardware (Studying)',
+          he: '🔌 חומרה משובצת מחשב (בלימודים)'
+        }
+      }
     ]
   },
   {

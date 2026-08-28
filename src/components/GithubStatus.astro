@@ -20,6 +20,38 @@ const {
 
 const t = translations[lang].projects;
 
+let liveStars = defaultStars;
+let liveForks = defaultForks;
+let liveLanguage = defaultLanguage;
+let liveUpdatedText = 'Active';
+let liveUpdatedIso = '';
+
+try {
+  const res = await fetch(`https://api.github.com/repos/${repo}`, {
+    headers: {
+      'User-Agent': 'RoeeIlouz-Portfolio-Build',
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  });
+  if (res.ok) {
+    const data = await res.json();
+    liveStars = data.stargazers_count ?? defaultStars;
+    liveForks = data.forks_count ?? defaultForks;
+    liveLanguage = data.language ?? defaultLanguage;
+    if (data.pushed_at) {
+      liveUpdatedIso = data.pushed_at;
+      const daysAgo = Math.floor((Date.now() - new Date(data.pushed_at).getTime()) / (1000 * 60 * 60 * 24));
+      if (daysAgo === 0) liveUpdatedText = 'Today';
+      else if (daysAgo === 1) liveUpdatedText = '1d ago';
+      else if (daysAgo < 30) liveUpdatedText = `${daysAgo}d ago`;
+      else if (daysAgo < 365) liveUpdatedText = `${Math.floor(daysAgo / 30)}mo ago`;
+      else liveUpdatedText = `${Math.floor(daysAgo / 365)}y ago`;
+    }
+  }
+} catch {
+  // Graceful fallback to default values
+}
+
 const langColors: Record<string, string> = {
   Dart: '#00B4AB',
   TypeScript: '#3178C6',
@@ -28,10 +60,13 @@ const langColors: Record<string, string> = {
   Python: '#3572A5',
   HTML: '#E34F26',
   CSS: '#563D7C',
-  Astro: '#FF5D01'
+  Astro: '#FF5D01',
+  Rust: '#DEA584',
+  C: '#555555',
+  'C++': '#F34B7D'
 };
 
-const dotColor = langColors[defaultLanguage] || '#EF4444';
+const dotColor = langColors[liveLanguage] || '#EF4444';
 ---
 
 <div class="github-status-pill" data-github-repo={repo}>
@@ -39,7 +74,7 @@ const dotColor = langColors[defaultLanguage] || '#EF4444';
     <span class="github-pulse-dot" title={t.status_active}></span>
     <span class="github-lang-badge">
       <span class="github-lang-dot" style={`background-color: ${dotColor};`} data-gh-dot></span>
-      <span class="github-lang-name" data-gh-lang>{defaultLanguage}</span>
+      <span class="github-lang-name" data-gh-lang>{liveLanguage}</span>
     </span>
   </div>
 
@@ -53,7 +88,7 @@ const dotColor = langColors[defaultLanguage] || '#EF4444';
       aria-label={`${t.stars} on GitHub`}
     >
       <i class="fa-solid fa-star" style="color: #fbbf24; font-size: 0.75rem;"></i>
-      <span class="metric-val" data-gh-stars>{defaultStars}</span>
+      <span class="metric-val" data-gh-stars>{liveStars}</span>
     </a>
 
     <a
@@ -65,12 +100,13 @@ const dotColor = langColors[defaultLanguage] || '#EF4444';
       aria-label={`${t.forks} on GitHub`}
     >
       <i class="fa-solid fa-code-fork" style="color: #9ca3af; font-size: 0.75rem;"></i>
-      <span class="metric-val" data-gh-forks>{defaultForks}</span>
+      <span class="metric-val" data-gh-forks>{liveForks}</span>
     </a>
 
-    <span class="github-metric github-updated" data-gh-updated>
+    <span class="github-metric github-updated" data-gh-updated title={liveUpdatedIso ? `Last updated: ${new Date(liveUpdatedIso).toLocaleString()}` : 'Live active status'}>
       <i class="fa-regular fa-clock" style="color: #6b7280; font-size: 0.72rem;"></i>
-      <span class="metric-val updated-text">Active</span>
+      <span class="metric-val updated-text">{liveUpdatedText}</span>
     </span>
   </div>
 </div>
+

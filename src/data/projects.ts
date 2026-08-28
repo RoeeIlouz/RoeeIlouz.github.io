@@ -14,6 +14,7 @@ export interface ProjectLink {
 export interface Project {
   id: string;
   emoji: string;
+  image?: string;
   category: 'mobile' | 'systems' | 'ai';
   githubRepo?: string; // e.g. "RoeeIlouz/ROCIsTasks-Public"
   playStoreId?: string; // e.g. "com.rocisapps.tasks"
@@ -31,10 +32,11 @@ export const projectsData: Project[] = [
   {
     id: 'rocis-tasks',
     emoji: '📋',
+    image: '/images/rocis-tasks-icon.png',
     category: 'mobile',
     githubRepo: 'RoeeIlouz/ROCIsTasks-Public',
     playStoreId: 'com.rocisapps.tasks',
-    defaultStars: 0,
+    defaultStars: 1,
     defaultForks: 0,
     defaultLanguage: 'Dart',
     tag: {
@@ -46,10 +48,10 @@ export const projectsData: Project[] = [
       he: 'ROCIs Tasks'
     },
     description: {
-      en: 'Smart productivity, task management, checklists, attachments, natural language input, offline synchronization, and seamless Google Calendar integration.',
-      he: "אפליקציית ניהול משימות ופרודוקטיביות חכמה: צ'קליסטים, קבצים מצורפים, הזנה בשפה טבעית, סנכרון Offline מלא ואינטגרציה ל-Google Calendar."
+      en: 'Production cross-platform mobile app built with Flutter & Dart using Clean Architecture. Features reactive local persistence, offline-first sync, natural language parsing, Google Calendar API integration, and subscription monetization via RevenueCat SDK.',
+      he: 'אפליקציית מובייל חוצת-פלטפורמות ב-Flutter & Dart בארכיטקטורת Clean Architecture. כוללת סנכרון Offline-first מלא, זיהוי שפה טבעית, אינטגרציה מול Google Calendar ומערך מנויים מלא מבוסס RevenueCat SDK.'
     },
-    tech: ['Flutter', 'Dart', 'RevenueCat', 'Google Calendar'],
+    tech: ['Flutter', 'Dart', 'RevenueCat', 'Google Calendar API', 'Offline-First SQLite', 'Clean Architecture'],
     links: [
       {
         label: 'Google Play',
@@ -75,6 +77,7 @@ export const projectsData: Project[] = [
   {
     id: 'rocis-apps-platform',
     emoji: '✨',
+    image: '/images/rocis-apps-icon.png',
     category: 'mobile',
     githubRepo: 'RoeeIlouz/ROCIsApp.github.io',
     defaultStars: 0,
@@ -92,7 +95,7 @@ export const projectsData: Project[] = [
       en: 'The official home of the ROCIs Apps brand suite. Showcasing modern mobile apps, design systems, software releases, privacy policies, and web experiences.',
       he: 'הבית הרשמי של סוויטת מוצרי ROCIs Apps. מציג אפליקציות מובייל מודרניות, שפות עיצוב, גרסאות תוכנה, מדיניות פרטיות וחוויות רשת.'
     },
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Brand Hub'],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Brand Hub', 'Responsive UI'],
     links: [
       {
         label: 'rocisapps.com',
@@ -112,6 +115,7 @@ export const projectsData: Project[] = [
   {
     id: 'homelab-infrastructure',
     emoji: '🏠',
+    image: '/images/raspberry-pi-icon.png',
     category: 'systems',
     githubRepo: 'RoeeIlouz/Homelab',
     defaultStars: 1,
@@ -126,10 +130,10 @@ export const projectsData: Project[] = [
       he: 'תשתית Raspberry Pi 5'
     },
     description: {
-      en: 'High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Raspberry Pi OS Lite, Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, and 30+ containerized services.',
-      he: 'צומת ARM64 בעל ביצועים גבוהים הפועל 24/7 (8GB זיכרון, 1TB NVMe SSD) על גבי Raspberry Pi OS Lite, עם גישת Zero Trust, שער VPN ומעל 30 שירותי קונטיינרים.'
+      en: 'High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Raspberry Pi OS Lite. Implements perimeter-less Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, automated backups, and 30+ containerized services.',
+      he: 'צומת ARM64 בעל ביצועים גבוהים הפועל 24/7 (8GB זיכרון, 1TB NVMe SSD) על גבי Raspberry Pi OS Lite, עם גישת Zero Trust ללא פתיחת פורטים, שער VPN ומעל 30 שירותי קונטיינרים.'
     },
-    tech: ['RPi 5', 'RPi OS Lite', 'Docker', 'Zero Trust', '1TB NVMe'],
+    tech: ['RPi 5 ARM64', 'Docker Compose', 'Zero Trust', 'Cloudflare Tunnels', 'Twingate', '1TB NVMe', 'GitOps'],
     links: [
       {
         labelKey: 'btn_homelab_repo',
@@ -152,7 +156,7 @@ export const projectsData: Project[] = [
     emoji: '🌐',
     category: 'mobile',
     githubRepo: 'RoeeIlouz/RoeeIlouz.github.io',
-    defaultStars: 0,
+    defaultStars: 1,
     defaultForks: 0,
     defaultLanguage: 'Astro',
     tag: {
@@ -164,8 +168,8 @@ export const projectsData: Project[] = [
       he: 'roee.ilouz.xyz'
     },
     description: {
-      en: 'Personal digital headquarters and interactive web application hub, built for ultra-fast performance and clean glassmorphism UX.',
-      he: 'מרכז הפעילות הדיגיטלי והאתר האישי, בנוי לביצועים מהירים במיוחד וחוויית Glassmorphism נקייה.'
+      en: 'Personal digital headquarters and interactive web application hub, built for ultra-fast performance, dark Obsidian aesthetics, and clean glassmorphism UX.',
+      he: 'מרכז הפעילות הדיגיטלי והאתר האישי, בנוי לביצועים מהירים במיוחד, עיצוב Obsidian וחוויית Glassmorphism נקייה.'
     },
     tech: ['Astro 5', 'TypeScript', 'CSS3', 'GitHub Pages'],
     links: [

@@ -732,6 +732,27 @@ body {
   border-bottom: 1px solid var(--border-subtle);
 }
 
+.project-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.project-img-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .project-content {
   padding: 1.4rem;
   flex: 1;
@@ -788,6 +809,22 @@ body {
   border-radius: 50%;
   background: var(--accent-green);
   box-shadow: 0 0 6px var(--accent-green);
+  animation: livePulse 2s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
 }
 
 .github-lang-badge {

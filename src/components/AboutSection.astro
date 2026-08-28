@@ -12,10 +12,10 @@ const t = translations[lang].about;
 ---
 
 <section id="about" class="tab-pane active">
-  <!-- Live Pulse Status Chip -->
+  <!-- Live Status & Availability Chip -->
   <div class="status-live-chip">
     <span class="status-live-dot"></span>
-    <span>⚡ Actively Building ROCIs Ecosystem & Cross-Platform Apps</span>
+    <span>{t.status_badge}</span>
   </div>
 
   <p class="intro-text">
@@ -52,7 +52,10 @@ const t = translations[lang].about;
       <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; letter-spacing: 0.5px;">{t.feat_tag}</span>
       <span style="font-size: 0.75rem; background: rgba(255, 255, 255, 0.06); padding: 0.2rem 0.6rem; border-radius: 6px; color: var(--text-muted);">{t.feat_badge}</span>
     </div>
-    <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">{t.feat_title}</h3>
+    <div style="display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.6rem;">
+      <img src="/images/rocis-tasks-icon.png" alt="ROCIs Tasks Icon" width="44" height="44" style="border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); object-fit: cover;" />
+      <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin: 0;">{t.feat_title}</h3>
+    </div>
     <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.8rem;">
       {t.feat_desc}
     </p>
