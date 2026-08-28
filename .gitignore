@@ -17,6 +17,8 @@ pnpm-debug.log*
 .env
 .env.production
 
-# OS metadata
+# OS & cloud metadata
 .DS_Store
 Thumbs.db
+*.driveupload
+.tmp.driveupload/

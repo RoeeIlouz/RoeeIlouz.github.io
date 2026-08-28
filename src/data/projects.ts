@@ -126,10 +126,10 @@ export const projectsData: Project[] = [
       he: 'תשתית Raspberry Pi 5'
     },
     description: {
-      en: 'High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Debian 13, Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, and 30+ containerized services.',
-      he: 'צומת ARM64 בעל ביצועים גבוהים הפועל 24/7 (8GB זיכרון, 1TB NVMe SSD) על גבי Debian 13, עם גישת Zero Trust, שער VPN ומעל 30 שירותי קונטיינרים.'
+      en: 'High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Raspberry Pi OS Lite, Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, and 30+ containerized services.',
+      he: 'צומת ARM64 בעל ביצועים גבוהים הפועל 24/7 (8GB זיכרון, 1TB NVMe SSD) על גבי Raspberry Pi OS Lite, עם גישת Zero Trust, שער VPN ומעל 30 שירותי קונטיינרים.'
     },
-    tech: ['RPi 5', 'Debian 13', 'Docker', 'Zero Trust', '1TB NVMe'],
+    tech: ['RPi 5', 'RPi OS Lite', 'Docker', 'Zero Trust', '1TB NVMe'],
     links: [
       {
         labelKey: 'btn_homelab_repo',

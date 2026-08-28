@@ -154,7 +154,7 @@ export const skillCategories: SkillCategory[] = [
       { label: '🌐 Cisco CCNA' },
       { label: '🖧 Routing & Switching' },
       { label: '🏢 Active Directory / IT' },
-      { label: 'Linux (Debian 13)', icon: 'fa-brands fa-linux', iconColor: '#fcc624' },
+      { label: 'Linux (RPi OS / Debian)', icon: 'fa-brands fa-linux', iconColor: '#fcc624' },
       { label: 'Docker & Compose', icon: 'fa-brands fa-docker', iconColor: '#2496ed' },
       { label: '🛡️ Nginx Proxy Manager' },
       { label: '🔒 Zero Trust Tunnels' },

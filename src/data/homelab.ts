@@ -49,8 +49,8 @@ export const homelabSpecs: SpecItem[] = [
       he: 'מערכת הפעלה'
     },
     value: {
-      en: 'Debian 13 (Raspberry Pi OS Lite)',
-      he: 'Debian 13 (Raspberry Pi OS Lite)'
+      en: 'Raspberry Pi OS Lite (64-bit)',
+      he: 'Raspberry Pi OS Lite (64-bit)'
     }
   },
   {
