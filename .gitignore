@@ -1,6 +1,6 @@
 # build output
 dist/
-
+.agent/
 # generated types
 .astro/
 
@@ -22,3 +22,5 @@ pnpm-debug.log*
 Thumbs.db
 *.driveupload
 .tmp.driveupload/
+*.code-workspace
+

@@ -75,6 +75,44 @@ export const projectsData: Project[] = [
     ]
   },
   {
+    id: 'rocis-schedule',
+    emoji: '🎓',
+    image: '/images/rocis-schedule-icon.png',
+    category: 'mobile',
+    githubRepo: 'RoeeIlouz/ROCIs-Schedule',
+    defaultStars: 1,
+    defaultForks: 0,
+    defaultLanguage: 'Dart',
+    tag: {
+      en: 'Academic Timetable & GPA (WIP)',
+      he: 'מערכת שעות ומעקב ציונים (בפיתוח)'
+    },
+    title: {
+      en: 'ROCIs Schedule',
+      he: 'ROCIs Schedule'
+    },
+    description: {
+      en: 'Next-generation offline-first academic management app built with Flutter & Dart. Unifies weekly timetable navigation, impending exam countdown alerts, weighted 4.0 GPA tracker, .ics calendar imports (Canvas/Moodle), and ecosystem bridge to ROCIs Tasks.',
+      he: 'אפליקציית ניהול אקדמי offline-first ב-Flutter & Dart. כוללת לוח זמנים שבועי אינטראקטיבי, ספירה לאחור לבחינות בזמן אמת, מחשבון GPA משוקלל (סולם 4.0), ייבוא יומני .ics מ-Canvas ו-Moodle וסנכרון מלא מול ROCIs Tasks.'
+    },
+    tech: ['Flutter', 'Dart', 'Offline SQLite', '.ICS Importer', 'GPA Calculator', 'ROCIs Tasks Bridge', 'In Development'],
+    links: [
+      {
+        label: 'rocisapps.com/#schedule',
+        url: 'https://rocisapps.com/#schedule',
+        icon: 'fa-solid fa-arrow-up-right-from-square',
+        primary: true,
+        target: '_blank'
+      },
+      {
+        labelKey: 'btn_repo',
+        url: 'https://github.com/RoeeIlouz/ROCIs-Schedule',
+        icon: 'fa-brands fa-github',
+        target: '_blank'
+      }
+    ]
+  },
+  {
     id: 'rocis-apps-platform',
     emoji: '✨',
     image: '/images/rocis-apps-icon.png',

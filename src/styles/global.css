@@ -768,6 +768,27 @@ body {
   margin-bottom: 0.4rem;
 }
 
+.project-tag-wip {
+  color: #00BFA5 !important;
+  background: rgba(0, 191, 165, 0.12);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 191, 165, 0.28);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.project-tag-wip::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00BFA5;
+  box-shadow: 0 0 6px #00BFA5;
+}
+
 .project-name {
   font-size: 1.2rem;
   font-weight: 700;

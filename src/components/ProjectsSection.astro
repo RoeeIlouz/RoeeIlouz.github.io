@@ -108,7 +108,9 @@ const t = translations[lang].projects;
         </div>
         <div class="project-content">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem;">
-            <span class="project-tag">{proj.tag[lang]}</span>
+            <span class={`project-tag ${proj.tag[lang].includes('WIP') || proj.tag[lang].includes('בפיתוח') ? 'project-tag-wip' : ''}`}>
+              {proj.tag[lang]}
+            </span>
           </div>
           
           <h4 class="project-name">{proj.title[lang]}</h4>
