@@ -2,8 +2,8 @@
 import type { Lang } from '../i18n/translations';
 import { translations } from '../i18n/translations';
 import { projectsData } from '../data/projects';
+import SectionHeader from './SectionHeader.astro';
 import GithubStatus from './GithubStatus.astro';
-import PlayStoreStatus from './PlayStoreStatus.astro';
 
 interface Props {
   lang: Lang;
@@ -11,117 +11,77 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = translations[lang].projects;
+
+const filters = [
+  { id: 'all', label: t.filter_all },
+  { id: 'mobile', label: t.filter_mobile },
+  { id: 'web', label: t.filter_web },
+  { id: 'systems', label: t.filter_systems }
+];
+
+const statusLabel = { live: t.status_live, wip: t.status_wip, active: t.status_active };
 ---
 
-<section id="projects" class="tab-pane">
-  <!-- GitHub Activity Header Banner -->
-  <div class="github-profile-banner">
-    <div class="github-banner-content">
-      <div class="github-banner-icon">
-        <i class="fa-brands fa-github"></i>
-      </div>
-      <div>
-        <h4 class="github-banner-title">{t.github_header_title}</h4>
-        <p class="github-banner-sub">{t.github_header_subtitle}</p>
-        <div class="github-live-meta-row" style="display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 0.4rem; font-size: 0.76rem; font-family: var(--font-code);">
-          <span style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--accent-green);">
-            <span class="github-pulse-dot" style="animation: livePulse 1.5s infinite;"></span>
-            <span id="gh-stream-status">{t.live_sync}</span>
-          </span>
-          <span style="color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.3rem;">
-            <i class="fa-solid fa-code-branch" style="color: var(--accent-red); font-size: 0.72rem;"></i>
-            <span>{t.live_repos}: <b style="color: var(--text-primary);" data-gh-user-repos>7</b></span>
-          </span>
-          <span style="color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.3rem;">
-            <i class="fa-solid fa-star" style="color: #fbbf24; font-size: 0.72rem;"></i>
-            <span>{t.live_stars}: <b style="color: var(--text-primary);" data-gh-total-stars>4</b></span>
-          </span>
-        </div>
-      </div>
-    </div>
-    <a
-      href="https://github.com/RoeeIlouz?tab=repositories"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="project-link-btn"
-      style="white-space: nowrap;"
-      aria-label="View all GitHub repositories"
-    >
-      <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      <span>{t.view_all_github}</span>
+<section id="projects" class="section" aria-labelledby="projects-title">
+  <div class="section-head-row">
+    <SectionHeader id="projects-title" eyebrow={t.eyebrow} title={t.title} lede={t.lede} />
+    <a href="https://github.com/RoeeIlouz?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+      <i class="fa-brands fa-github" aria-hidden="true"></i> {t.view_all_github}
     </a>
   </div>
 
-  <!-- Search & Filter Controls -->
-  <div class="projects-controls">
-    <div class="project-search-box">
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+  <div class="toolbar">
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
       <input
-        type="text"
-        id="project-search-input"
-        class="project-search-input"
+        type="search"
+        id="project-search"
+        class="search-input"
         placeholder={t.search_placeholder}
-        aria-label="Search projects"
+        aria-label={t.search_label}
+        autocomplete="off"
+        spellcheck="false"
+        maxlength="80"
       />
-      <button id="project-search-clear" class="search-clear-btn" title="Clear search" style="display: none;">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
     </div>
-
-    <div class="filter-list" role="tablist" aria-label="Filter projects by category">
-      <button class="filter-btn active" data-filter="all" id="filter-all" aria-label="Show all projects">
-        <span>{t.filter_all}</span>
-      </button>
-      <button class="filter-btn" data-filter="mobile" id="filter-mobile" aria-label="Filter mobile apps">
-        <span>{t.filter_mobile}</span>
-      </button>
-      <button class="filter-btn" data-filter="systems" id="filter-systems" aria-label="Filter systems and homelab">
-        <span>{t.filter_systems}</span>
-      </button>
+    <div class="segmented" role="group" aria-label={t.filter_label}>
+      {filters.map((f, i) => (
+        <button type="button" class="segmented-btn" data-filter={f.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {f.label}
+        </button>
+      ))}
     </div>
   </div>
 
-  <!-- No Results Found State -->
-  <div id="no-projects-msg" class="no-results-box" style="display: none;">
-    <i class="fa-solid fa-magnifying-glass-arrow-right" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 0.5rem;"></i>
-    <p>{t.no_results}</p>
-  </div>
+  <p id="no-projects" class="empty-state" hidden>
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    {t.no_results}
+  </p>
 
-  <!-- Projects Grid with Spotlights -->
-  <div class="projects-grid" id="projects-grid">
-    {projectsData.map(proj => (
-      <div
-        class="project-card spotlight-card"
+  <div class="project-grid" id="project-grid">
+    {projectsData.map((proj) => (
+      <article
+        class="project-card"
         data-category={proj.category}
-        data-title={proj.title[lang].toLowerCase()}
-        data-desc={proj.description[lang].toLowerCase()}
-        data-tech={proj.tech.join(' ').toLowerCase()}
+        data-search={[proj.title[lang], proj.description[lang], proj.tag[lang], ...proj.tech].join(' ').toLowerCase()}
       >
-        <div class="project-banner">
-          {proj.image ? (
-            <div class="project-icon-wrapper">
-              <img src={proj.image} alt={proj.title[lang]} class="project-img-icon" />
-            </div>
-          ) : (
-            <span>{proj.emoji}</span>
-          )}
+        <div class="project-head">
+          <span class:list={['project-icon', { 'project-icon--contain': proj.imageFit === 'contain' }]}>
+            {proj.image
+              ? <img src={proj.image} alt="" width="40" height="40" loading="lazy" decoding="async" />
+              : <i class={proj.icon} aria-hidden="true"></i>}
+          </span>
+          <span class={`badge badge--${proj.status}`}>{proj.status === 'wip' ? statusLabel.wip : proj.tag[lang]}</span>
         </div>
-        <div class="project-content">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem;">
-            <span class={`project-tag ${proj.tag[lang].includes('WIP') || proj.tag[lang].includes('בפיתוח') ? 'project-tag-wip' : ''}`}>
-              {proj.tag[lang]}
-            </span>
-          </div>
-          
-          <h4 class="project-name">{proj.title[lang]}</h4>
-          <p class="project-desc">{proj.description[lang]}</p>
 
-          {proj.playStoreId && (
-            <div style="margin-bottom: 0.6rem;">
-              <PlayStoreStatus appId={proj.playStoreId} lang={lang} />
-            </div>
-          )}
+        <h3 class="project-title">{proj.title[lang]}</h3>
+        <p class="project-desc">{proj.description[lang]}</p>
 
+        <ul class="chips">
+          {proj.tech.map((tech) => <li class="chip">{tech}</li>)}
+        </ul>
+
+        <div class="project-foot">
           {proj.githubRepo && (
             <GithubStatus
               repo={proj.githubRepo}
@@ -131,267 +91,24 @@ const t = translations[lang].projects;
               defaultLanguage={proj.defaultLanguage}
             />
           )}
-
-          <div class="project-tech">
-            {proj.tech.map(tech => (
-              <span class="tech-badge">{tech}</span>
-            ))}
-          </div>
-
-          <div class="project-links" style="flex-wrap: wrap;">
-            {proj.links.map(link => {
-              const label = link.label || (link.labelKey ? t[link.labelKey as keyof typeof t] : '');
-              const linkStyle = link.primary ? 'background: var(--accent-crimson); color: #fff;' : '';
-              
-              if (link.isTabLink && link.tabTarget) {
-                return (
-                  <a
-                    href={link.url}
-                    data-switch-tab={link.tabTarget}
-                    class="project-link-btn"
-                    style={linkStyle}
-                  >
-                    <i class={link.icon}></i>
-                    <span>{label}</span>
-                  </a>
-                );
-              }
-
+          <div class="project-links">
+            {proj.links.map((link) => {
+              const label = link.label ?? (link.labelKey ? t[link.labelKey] : '');
               return (
                 <a
                   href={link.url}
-                  target={link.target || undefined}
-                  rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
-                  class="project-link-btn"
-                  style={linkStyle}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  class:list={['btn', 'btn--sm', link.primary ? 'btn--primary' : 'btn--ghost']}
                 >
-                  <i class={link.icon}></i>
-                  <span>{label}</span>
+                  <i class={link.icon} aria-hidden="true"></i>
+                  {label}
                 </a>
               );
             })}
           </div>
         </div>
-      </div>
+      </article>
     ))}
   </div>
 </section>
-
-<!-- Client-side GitHub Live Streamer & Instant Search Script -->
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const langColors = {
-      Dart: '#00B4AB',
-      TypeScript: '#3178C6',
-      JavaScript: '#F7DF1E',
-      Shell: '#89E051',
-      Python: '#3572A5',
-      HTML: '#E34F26',
-      CSS: '#563D7C',
-      Astro: '#FF5D01',
-      Rust: '#DEA584',
-      C: '#555555',
-      'C++': '#F34B7D'
-    };
-
-    function formatRelativeTime(dateString) {
-      const now = Date.now();
-      const date = new Date(dateString);
-      const diffSec = Math.max(1, Math.floor((now - date.getTime()) / 1000));
-      if (diffSec < 60) return 'Just now';
-      const diffMin = Math.floor(diffSec / 60);
-      if (diffMin < 60) return `${diffMin}m ago`;
-      const diffHours = Math.floor(diffMin / 60);
-      if (diffHours < 24) return `${diffHours}h ago`;
-      const diffDays = Math.floor(diffHours / 24);
-      if (diffDays === 1) return '1d ago';
-      if (diffDays < 30) return `${diffDays}d ago`;
-      const diffMonths = Math.floor(diffDays / 30);
-      if (diffMonths < 12) return `${diffMonths}mo ago`;
-      return `${Math.floor(diffMonths / 12)}y ago`;
-    }
-
-    // 1. Client-Side Live GitHub Real-Time Streamer
-    async function streamGithubData() {
-      const pills = document.querySelectorAll('.github-status-pill[data-github-repo]');
-      if (!pills.length) return;
-
-      let totalStars = 0;
-      let reposMap = {};
-
-      // Primary Stream: Fetch all repositories in a single efficient API call
-      try {
-        const reposRes = await fetch('https://api.github.com/users/RoeeIlouz/repos?per_page=100&sort=updated', {
-          headers: { Accept: 'application/vnd.github.v3+json' }
-        });
-        if (reposRes.ok) {
-          const reposList = await reposRes.json();
-          if (Array.isArray(reposList)) {
-            reposList.forEach(r => {
-              if (r.full_name) reposMap[r.full_name.toLowerCase()] = r;
-              if (r.name) reposMap[r.name.toLowerCase()] = r;
-              if (typeof r.stargazers_count === 'number') totalStars += r.stargazers_count;
-            });
-          }
-        }
-      } catch (err) {
-        // Will fallback to individual repo checks if needed
-      }
-
-      // Stream User Stats
-      try {
-        const userRes = await fetch('https://api.github.com/users/RoeeIlouz', {
-          headers: { Accept: 'application/vnd.github.v3+json' }
-        });
-        if (userRes.ok) {
-          const userData = await userRes.json();
-          const repoCountEl = document.querySelector('[data-gh-user-repos]');
-          if (repoCountEl && typeof userData.public_repos === 'number') {
-            repoCountEl.textContent = userData.public_repos;
-          }
-        }
-      } catch (err) {
-        // Fail silently
-      }
-
-      // Stream each Repository card
-      for (const pill of pills) {
-        const repoAttr = pill.getAttribute('data-github-repo');
-        if (!repoAttr) continue;
-        const repoKey = repoAttr.toLowerCase();
-
-        let data = reposMap[repoKey] || reposMap[repoKey.split('/')[1] || ''];
-
-        // Fallback to individual API call if not found in bulk list
-        if (!data) {
-          try {
-            const res = await fetch(`https://api.github.com/repos/${repoAttr}`, {
-              headers: { Accept: 'application/vnd.github.v3+json' }
-            });
-            if (res.ok) {
-              data = await res.json();
-              if (typeof data.stargazers_count === 'number') totalStars += data.stargazers_count;
-            }
-          } catch (err) {
-            // Keep default values
-          }
-        }
-
-        if (data) {
-          const starsEl = pill.querySelector('[data-gh-stars]');
-          const forksEl = pill.querySelector('[data-gh-forks]');
-          const langEl = pill.querySelector('[data-gh-lang]');
-          const dotEl = pill.querySelector('[data-gh-dot]');
-          const updatedEl = pill.querySelector('.updated-text');
-
-          if (starsEl && typeof data.stargazers_count === 'number') {
-            starsEl.textContent = data.stargazers_count;
-          }
-          if (forksEl && typeof data.forks_count === 'number') {
-            forksEl.textContent = data.forks_count;
-          }
-          if (langEl && data.language) {
-            langEl.textContent = data.language;
-            if (dotEl && langColors[data.language]) {
-              dotEl.style.backgroundColor = langColors[data.language];
-            }
-          }
-          if (updatedEl && data.pushed_at) {
-            updatedEl.textContent = formatRelativeTime(data.pushed_at);
-            updatedEl.setAttribute('title', `Last updated: ${new Date(data.pushed_at).toLocaleString()}`);
-          }
-        }
-      }
-
-      const totalStarsEl = document.querySelector('[data-gh-total-stars]');
-      if (totalStarsEl && totalStars > 0) {
-        totalStarsEl.textContent = totalStars;
-      }
-    }
-
-    // Run initial stream immediately
-    streamGithubData();
-
-    // Re-run stream when switching to projects tab
-    document.querySelectorAll('[data-tab-target="projects"], [data-switch-tab="projects"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        setTimeout(streamGithubData, 100);
-      });
-    });
-
-    // Stream polling every 30 seconds
-    setInterval(streamGithubData, 30000);
-
-    // 2. Real-time Project Search & Category Filter Interactivity
-    const searchInput = document.getElementById('project-search-input');
-    const searchClear = document.getElementById('project-search-clear');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    const noResultsMsg = document.getElementById('no-projects-msg');
-
-    let currentFilter = 'all';
-    let searchQuery = '';
-
-    function filterProjects() {
-      let visibleCount = 0;
-
-      projectCards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        const title = card.getAttribute('data-title') || '';
-        const desc = card.getAttribute('data-desc') || '';
-        const tech = card.getAttribute('data-tech') || '';
-
-        const matchesCategory = currentFilter === 'all' || category === currentFilter;
-        const matchesSearch = !searchQuery || 
-          title.includes(searchQuery) || 
-          desc.includes(searchQuery) || 
-          tech.includes(searchQuery);
-
-        if (matchesCategory && matchesSearch) {
-          card.style.display = 'flex';
-          card.style.animation = 'none';
-          void card.offsetWidth;
-          card.style.animation = 'fadeInCard 0.3s ease-out forwards';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      if (noResultsMsg) {
-        noResultsMsg.style.display = visibleCount === 0 ? 'flex' : 'none';
-      }
-    }
-
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value.trim().toLowerCase();
-        if (searchClear) {
-          searchClear.style.display = searchQuery ? 'block' : 'none';
-        }
-        filterProjects();
-      });
-    }
-
-    if (searchClear) {
-      searchClear.addEventListener('click', () => {
-        if (searchInput) {
-          searchInput.value = '';
-          searchQuery = '';
-          searchClear.style.display = 'none';
-          filterProjects();
-          searchInput.focus();
-        }
-      });
-    }
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentFilter = btn.getAttribute('data-filter') || 'all';
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        filterProjects();
-      });
-    });
-  });
-</script>

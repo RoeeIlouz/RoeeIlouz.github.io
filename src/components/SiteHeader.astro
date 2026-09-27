@@ -1,0 +1,40 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang];
+const home = lang === 'he' ? '/he/' : '/';
+const sections = ['about', 'projects', 'experience', 'homelab', 'contact'] as const;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href={`${home}#about`} class="brand" aria-label={t.sidebar.name}>
+      <span class="brand-mark" aria-hidden="true">RI</span>
+      <span class="brand-name">{t.sidebar.name}</span>
+    </a>
+
+    <nav class="site-nav" aria-label={lang === 'he' ? 'ניווט ראשי' : 'Primary'}>
+      {sections.map((id) => (
+        <a href={`#${id}`} class="nav-link" data-nav={id}>{t.nav[id]}</a>
+      ))}
+    </nav>
+
+    <a
+      href={t.lang_switch.href}
+      hreflang={t.lang_switch.hreflang}
+      lang={t.lang_switch.hreflang}
+      class="lang-toggle"
+      aria-label={t.lang_switch.aria}
+      data-lang-toggle
+    >
+      <i class="fa-solid fa-language" aria-hidden="true"></i>
+      <span>{t.lang_switch.label}</span>
+    </a>
+  </div>
+</header>

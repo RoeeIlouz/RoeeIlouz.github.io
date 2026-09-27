@@ -1,12 +1,8 @@
 ---
 import type { Lang } from '../i18n/translations';
 import { translations } from '../i18n/translations';
-import {
-  leadershipExperience,
-  educationList,
-  certificationsList,
-  skillCategories
-} from '../data/experience';
+import { leadershipExperience, educationList, certificationsList, skillCategories } from '../data/experience';
+import SectionHeader from './SectionHeader.astro';
 
 interface Props {
   lang: Lang;
@@ -14,81 +10,73 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = translations[lang].experience;
-const isRtl = lang === 'he';
-const iconMarginStyle = isRtl ? 'margin-left: 0.4rem;' : 'margin-right: 0.4rem;';
+
+const timelines = [
+  { icon: 'fa-solid fa-briefcase', heading: t.heading_exp, items: leadershipExperience },
+  { icon: 'fa-solid fa-graduation-cap', heading: t.heading_edu, items: educationList }
+];
 ---
 
-<section id="skills" class="tab-pane">
-  <!-- Leadership & Technical Experience -->
-  <h3 class="sub-heading" style="margin-top:0;">
-    <i class="fa-solid fa-briefcase" style={`color: var(--accent-red); ${iconMarginStyle}`}></i>
-    {t.heading_exp}
-  </h3>
-  <div class="timeline">
-    {leadershipExperience.map(item => (
-      <div class="timeline-item">
-        <span class="timeline-dot"></span>
-        <h4 class="timeline-title">{item.title[lang]}</h4>
-        <p class="timeline-meta">{item.meta[lang]}</p>
-        <p class="timeline-text">{item.description[lang]}</p>
-      </div>
-    ))}
-  </div>
+<section id="experience" class="section" aria-labelledby="experience-title">
+  <SectionHeader id="experience-title" eyebrow={t.eyebrow} title={t.title} />
 
-  <!-- Academic Journey & Education -->
-  <h3 class="sub-heading">
-    <i class="fa-solid fa-graduation-cap" style={`color: var(--accent-red); ${iconMarginStyle}`}></i>
-    {t.heading_edu}
-  </h3>
-  <div class="timeline">
-    {educationList.map(item => (
-      <div class="timeline-item">
-        <span class="timeline-dot"></span>
-        <h4 class="timeline-title">{item.title[lang]}</h4>
-        <p class="timeline-meta">{item.meta[lang]}</p>
-        <p class="timeline-text">{item.description[lang]}</p>
-      </div>
-    ))}
-  </div>
-
-  <!-- Professional Certifications & Training -->
-  <h3 class="sub-heading">
-    <i class="fa-solid fa-certificate" style={`color: var(--accent-red); ${iconMarginStyle}`}></i>
-    {t.heading_certs}
-  </h3>
-  <div class="homelab-spec" style="margin-bottom: 2rem;">
-    {certificationsList.map(cert => (
-      <div class="spec-card">
-        <div class="spec-icon"><i class={cert.icon} style={`color:${cert.iconColor};`}></i></div>
-        <p class="spec-title">{cert.provider}</p>
-        <p class="spec-value" style="font-size: 0.9rem;">{cert.title[lang]}</p>
-      </div>
-    ))}
-  </div>
-
-  <!-- Technical Skills & Arsenal -->
-  <h3 class="sub-heading">
-    <i class="fa-solid fa-screwdriver-wrench" style={`color: var(--accent-red); ${iconMarginStyle}`}></i>
-    {t.heading_skills}
-  </h3>
-
-  {skillCategories.map(cat => (
-    <div class="skill-category">
-      <h4 class="skill-category-title">
-        <i class={cat.icon} style={`color:${cat.iconColor};`}></i>
-        <span>{cat.title[lang]}</span>
-      </h4>
-      <div class="skill-pills">
-        {cat.skills.map(s => {
-          const label = typeof s.label === 'string' ? s.label : s.label[lang];
-          return (
-            <span class="skill-pill">
-              {s.icon && <i class={s.icon} style={s.iconColor ? `color:${s.iconColor};` : undefined}></i>}
-              {label}
-            </span>
-          );
-        })}
-      </div>
+  {timelines.map((group) => (
+    <div class="block">
+      <h3 class="sub-heading">
+        <i class={group.icon} aria-hidden="true"></i>
+        {group.heading}
+      </h3>
+      <ol class="timeline">
+        {group.items.map((item) => (
+          <li class="timeline-item">
+            <h4 class="timeline-title">{item.title[lang]}</h4>
+            <p class="timeline-meta">{item.meta[lang]}</p>
+            <p class="timeline-text">{item.description[lang]}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   ))}
+
+  <div class="block">
+    <h3 class="sub-heading">
+      <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+      {t.heading_certs}
+    </h3>
+    <ul class="card-grid card-grid--4">
+      {certificationsList.map((cert) => (
+        <li class="card card--compact">
+          <span class="icon-tile icon-tile--sm" aria-hidden="true"><i class={cert.icon}></i></span>
+          <p class="card-kicker">{cert.provider}</p>
+          <p class="card-title card-title--sm">{cert.title[lang]}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="block">
+    <h3 class="sub-heading">
+      <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+      {t.heading_skills}
+    </h3>
+    <div class="card-grid card-grid--2">
+      {skillCategories.map((cat) => (
+        <div class="card">
+          <h4 class="card-title card-title--row">
+            <i class={cat.icon} aria-hidden="true"></i>
+            {cat.title[lang]}
+          </h4>
+          <ul class="chips">
+            {cat.skills.map((s) => (
+              <li class:list={['chip', 'chip--lg', { 'chip--learning': s.learning }]}>
+                {s.icon && <i class={s.icon} aria-hidden="true"></i>}
+                {typeof s.label === 'string' ? s.label : s.label[lang]}
+                {s.learning && <span class="chip-note">{t.learning}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
 </section>

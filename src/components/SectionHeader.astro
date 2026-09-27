@@ -1,0 +1,17 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  large?: boolean;
+}
+
+const { id, eyebrow, title, lede, large = false } = Astro.props;
+---
+
+<header class="section-head">
+  <p class="eyebrow">{eyebrow}</p>
+  <h2 id={id} class:list={['section-title', { 'section-title--hero': large }]}>{title}</h2>
+  {lede && <p class="section-lede"><Fragment set:html={lede} /></p>}
+</header>

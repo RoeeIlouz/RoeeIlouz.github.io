@@ -8,7 +8,6 @@ export interface TimelineItem {
 
 export interface CertItem {
   icon: string;
-  iconColor: string;
   provider: string;
   title: Record<Lang, string>;
 }
@@ -16,11 +15,10 @@ export interface CertItem {
 export interface SkillCategory {
   title: Record<Lang, string>;
   icon: string;
-  iconColor: string;
   skills: {
     label: Record<Lang, string> | string;
     icon?: string;
-    iconColor?: string;
+    learning?: boolean; // currently studying / learning
   }[];
 }
 
@@ -89,146 +87,79 @@ export const educationList: TimelineItem[] = [
 export const certificationsList: CertItem[] = [
   {
     icon: 'fa-solid fa-network-wired',
-    iconColor: '#3b82f6',
-    provider: 'Cisco NetAcademy',
-    title: {
-      en: 'CCNA Routing & Switching',
-      he: 'CCNA ניתוב ומיתוג רשתות'
-    }
+    provider: 'Cisco Networking Academy',
+    title: { en: 'CCNA Routing & Switching', he: 'CCNA ניתוב ומיתוג רשתות' }
   },
   {
     icon: 'fa-solid fa-desktop',
-    iconColor: '#10b981',
-    provider: 'Cisco NetAcademy',
-    title: {
-      en: 'IT Essentials Hardware & OS',
-      he: 'IT Essentials חומרה ומערכות הפעלה'
-    }
+    provider: 'Cisco Networking Academy',
+    title: { en: 'IT Essentials: Hardware & OS', he: 'IT Essentials חומרה ומערכות הפעלה' }
   },
   {
     icon: 'fa-brands fa-python',
-    iconColor: '#f59e0b',
     provider: 'Programming',
-    title: {
-      en: 'Python Course',
-      he: 'קורס תכנות Python'
-    }
+    title: { en: 'Python Programming', he: 'קורס תכנות Python' }
   },
   {
     icon: 'fa-solid fa-microchip',
-    iconColor: '#ef4444',
     provider: 'Technical Training',
-    title: {
-      en: 'Systems Technician',
-      he: 'טכנאי מערכות מחשוב ותקשורת'
-    }
+    title: { en: 'Computer & Communications Systems Technician', he: 'טכנאי מערכות מחשוב ותקשורת' }
   }
 ];
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: {
-      en: 'Mobile & Frontend Development',
-      he: 'פיתוח מובייל ופרונטאנד'
-    },
+    title: { en: 'Mobile & Frontend', he: 'מובייל ופרונטאנד' },
     icon: 'fa-solid fa-mobile-screen',
-    iconColor: 'var(--accent-red)',
     skills: [
-      { label: 'Flutter', icon: 'fa-brands fa-flutter', iconColor: '#02569b' },
+      { label: 'Flutter', icon: 'fa-brands fa-flutter' },
       { label: 'Dart' },
+      { label: 'Android', icon: 'fa-brands fa-android' },
+      { label: 'iOS', icon: 'fa-brands fa-apple' },
       { label: 'RevenueCat SDK' },
-      { label: 'Android', icon: 'fa-brands fa-android', iconColor: '#3ddc84' },
-      { label: 'iOS', icon: 'fa-brands fa-apple', iconColor: '#fff' },
-      { label: 'JavaScript / TypeScript', icon: 'fa-brands fa-js', iconColor: '#f7df1e' },
-      { label: 'HTML5 / CSS3', icon: 'fa-brands fa-html5', iconColor: '#e34f26' },
-      {
-        label: {
-          en: '🚀 Astro (Learning)',
-          he: '🚀 Astro (בלמידה)'
-        }
-      }
+      { label: 'TypeScript / JavaScript', icon: 'fa-brands fa-js' },
+      { label: 'HTML & CSS', icon: 'fa-brands fa-html5' },
+      { label: 'Astro', learning: true }
     ]
   },
   {
-    title: {
-      en: 'Systems, Networking & Homelab',
-      he: 'תשתיות, רשתות ומעבדת בית'
-    },
+    title: { en: 'Systems & Networking', he: 'תשתיות ורשתות' },
     icon: 'fa-solid fa-network-wired',
-    iconColor: 'var(--accent-cyan)',
     skills: [
-      { label: '🌐 Cisco CCNA' },
-      { label: '🖧 Routing & Switching' },
-      { label: '🏢 Active Directory / IT' },
-      { label: 'Linux (RPi OS / Debian)', icon: 'fa-brands fa-linux', iconColor: '#fcc624' },
-      { label: 'Docker & Compose', icon: 'fa-brands fa-docker', iconColor: '#2496ed' },
-      { label: '🛡️ Nginx Proxy Manager' },
-      { label: '🔒 Zero Trust Tunnels' },
-      { label: '💻 Bash Scripting' }
+      { label: 'Linux (Debian / RPi OS)', icon: 'fa-brands fa-linux' },
+      { label: 'Docker & Compose', icon: 'fa-brands fa-docker' },
+      { label: 'Cisco CCNA' },
+      { label: { en: 'Routing & Switching', he: 'ניתוב ומיתוג' } },
+      { label: 'Active Directory' },
+      { label: 'Nginx Proxy Manager' },
+      { label: 'Zero Trust Tunnels' },
+      { label: 'Bash' }
     ]
   },
   {
-    title: {
-      en: 'Hardware & Embedded Systems (Academic Studies)',
-      he: 'חומרה ומערכות משובצות (בלימודים אקדמיים)'
-    },
+    title: { en: 'Hardware & Embedded', he: 'חומרה ומערכות משובצות' },
     icon: 'fa-solid fa-microchip',
-    iconColor: 'var(--accent-ruby)',
     skills: [
-      {
-        label: {
-          en: '⚡ Circuit Analysis (Studying)',
-          he: '⚡ ניתוח מעגלים חשמליים (בלימודים)'
-        }
-      },
-      {
-        label: {
-          en: '📟 Linear Signals & Systems (Studying)',
-          he: '📟 אותות ומערכות ליניאריות (בלימודים)'
-        }
-      },
-      { label: '🤖 Mechatronic Systems' },
-      { label: '⚙️ Machine Control' },
-      { label: '🔧 C Programming' },
-      { label: 'Python', icon: 'fa-brands fa-python', iconColor: '#3776ab' },
-      {
-        label: {
-          en: '🦀 Rust (Learning)',
-          he: '🦀 Rust (בלמידה)'
-        }
-      },
-      {
-        label: {
-          en: '🔌 Embedded Hardware (Studying)',
-          he: '🔌 חומרה משובצת מחשב (בלימודים)'
-        }
-      }
+      { label: { en: 'Circuit Analysis', he: 'ניתוח מעגלים חשמליים' }, learning: true },
+      { label: { en: 'Signals & Systems', he: 'אותות ומערכות' }, learning: true },
+      { label: { en: 'Embedded Hardware', he: 'חומרה משובצת מחשב' }, learning: true },
+      { label: { en: 'Mechatronic Systems', he: 'מערכות מכטרוניקה' } },
+      { label: { en: 'Machine Control', he: 'בקרת מכונות' } },
+      { label: 'C' },
+      { label: 'Python', icon: 'fa-brands fa-python' },
+      { label: 'Rust', learning: true }
     ]
   },
   {
-    title: {
-      en: 'AI Tooling & Methodologies',
-      he: 'כלי AI ומתודולוגיות'
-    },
-    icon: 'fa-solid fa-brain',
-    iconColor: 'var(--accent-green)',
+    title: { en: 'Tooling & Leadership', he: 'כלים ומנהיגות' },
+    icon: 'fa-solid fa-compass-drafting',
     skills: [
-      { label: '🤖 Model Context Protocol (MCP)' },
-      { label: '🚀 Google Antigravity IDE' },
-      { label: 'Git & GitHub', icon: 'fa-brands fa-git-alt', iconColor: '#f05032' },
-      { label: '🛠️ VS Code' },
-      {
-        label: {
-          en: '👥 Team Leadership & Command',
-          he: '👥 מנהיגות, פיקוד וניהול צוות'
-        }
-      },
-      {
-        label: {
-          en: '⏱️ High-Pressure Execution',
-          he: '⏱️ תפקוד ופתרון תקלות תחת לחץ'
-        }
-      }
+      { label: 'Git & GitHub', icon: 'fa-brands fa-git-alt' },
+      { label: 'Model Context Protocol (MCP)' },
+      { label: 'Google Antigravity IDE' },
+      { label: 'VS Code' },
+      { label: { en: 'Team leadership', he: 'מנהיגות וניהול צוות' } },
+      { label: { en: 'Incident response under pressure', he: 'פתרון תקלות תחת לחץ' } }
     ]
   }
 ];

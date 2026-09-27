@@ -15,7 +15,6 @@ export interface ServiceStack {
 
 export interface MaintenanceScript {
   name: string;
-  color: string;
   description: Record<Lang, string>;
 }
 
@@ -175,7 +174,6 @@ export const modularStacks: ServiceStack[] = [
 export const maintenanceScripts: MaintenanceScript[] = [
   {
     name: 'backup.sh',
-    color: '#60a5fa',
     description: {
       en: 'Automated encrypted backup archives with scheduled retention pruning',
       he: 'ארכיוני גיבוי מוצפנים אוטומטיים עם מחיקת גרסאות ישנות מתוזמנת'
@@ -183,7 +181,6 @@ export const maintenanceScripts: MaintenanceScript[] = [
   },
   {
     name: 'check-health.sh',
-    color: '#34d399',
     description: {
       en: 'Real-time sensor, thermal range, memory pressure & container diagnostics',
       he: 'אבחון חיישנים, טמפרטורה, עומס זיכרון ותקינות קונטיינרים בזמן אמת'
@@ -191,7 +188,6 @@ export const maintenanceScripts: MaintenanceScript[] = [
   },
   {
     name: 'update-stacks.sh',
-    color: '#fbbf24',
     description: {
       en: 'Non-destructive container pull, compose rebuild & dangling image prune',
       he: 'משיכת גרסאות חדשות, בנייה מחדש ללא השבתה וניקוי תמונות מיותרות'

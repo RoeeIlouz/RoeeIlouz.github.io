@@ -1,23 +1,24 @@
 import type { Lang } from '../i18n/translations';
 
 export interface ProjectLink {
-  labelKey?: string;
+  labelKey?: 'btn_repo' | 'btn_play' | 'btn_homelab_repo' | 'btn_arch' | 'btn_live' | 'btn_code';
   label?: string;
   url: string;
   icon: string;
   primary?: boolean;
-  target?: string;
-  isTabLink?: boolean;
-  tabTarget?: string;
+  external?: boolean;
 }
+
+export type ProjectStatus = 'live' | 'wip' | 'active';
 
 export interface Project {
   id: string;
-  emoji: string;
+  icon: string; // Font Awesome fallback when there is no image
   image?: string;
-  category: 'mobile' | 'systems' | 'ai';
+  imageFit?: 'cover' | 'contain'; // contain = transparent logo shown with padding
+  category: 'mobile' | 'systems' | 'web';
+  status: ProjectStatus;
   githubRepo?: string; // e.g. "RoeeIlouz/ROCIsTasks-Public"
-  playStoreId?: string; // e.g. "com.rocisapps.tasks"
   defaultStars?: number;
   defaultForks?: number;
   defaultLanguage?: string;
@@ -28,19 +29,24 @@ export interface Project {
   links: ProjectLink[];
 }
 
+export const ROCIS_SCHEDULE_REPO = 'RoeeIlouz/ROCIs-Schedule';
+export const ROCIS_SCHEDULE_REPO_URL = `https://github.com/${ROCIS_SCHEDULE_REPO}`;
+export const ROCIS_TASKS_REPO = 'RoeeIlouz/ROCIsTasks-Public';
+export const ROCIS_TASKS_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.rocisapps.tasks';
+
 export const projectsData: Project[] = [
   {
     id: 'rocis-tasks',
-    emoji: '📋',
+    icon: 'fa-solid fa-list-check',
     image: '/images/rocis-tasks-icon.png',
     category: 'mobile',
-    githubRepo: 'RoeeIlouz/ROCIsTasks-Public',
-    playStoreId: 'com.rocisapps.tasks',
+    status: 'live',
+    githubRepo: ROCIS_TASKS_REPO,
     defaultStars: 1,
     defaultForks: 0,
     defaultLanguage: 'Dart',
     tag: {
-      en: 'Flagship Mobile App',
+      en: 'Flagship app',
       he: 'אפליקציית דגל'
     },
     title: {
@@ -48,180 +54,125 @@ export const projectsData: Project[] = [
       he: 'ROCIs Tasks'
     },
     description: {
-      en: 'Production cross-platform mobile app built with Flutter & Dart using Clean Architecture. Features reactive local persistence, offline-first sync, natural language parsing, Google Calendar API integration, and subscription monetization via RevenueCat SDK.',
-      he: 'אפליקציית מובייל חוצת-פלטפורמות ב-Flutter & Dart בארכיטקטורת Clean Architecture. כוללת סנכרון Offline-first מלא, זיהוי שפה טבעית, אינטגרציה מול Google Calendar ומערך מנויים מלא מבוסס RevenueCat SDK.'
+      en: 'Production cross-platform task manager built with Flutter & Dart on Clean Architecture. Offline-first sync, natural-language input, Google Calendar integration, and RevenueCat subscriptions.',
+      he: 'אפליקציית ניהול משימות חוצת-פלטפורמות ב-Flutter & Dart בארכיטקטורת Clean Architecture. סנכרון Offline-first, הזנה בשפה טבעית, אינטגרציה עם Google Calendar ומנויים מבוססי RevenueCat.'
     },
-    tech: ['Flutter', 'Dart', 'RevenueCat', 'Google Calendar API', 'Offline-First SQLite', 'Clean Architecture'],
+    tech: ['Flutter', 'Dart', 'Clean Architecture', 'SQLite', 'Google Calendar API', 'RevenueCat'],
     links: [
-      {
-        label: 'Google Play',
-        url: 'https://play.google.com/store/apps/details?id=com.rocisapps.tasks',
-        icon: 'fa-brands fa-google-play',
-        primary: true,
-        target: '_blank'
-      },
-      {
-        label: 'tasks.rocisapps.com',
-        url: 'https://tasks.rocisapps.com',
-        icon: 'fa-solid fa-globe',
-        target: '_blank'
-      },
-      {
-        labelKey: 'btn_repo',
-        url: 'https://github.com/RoeeIlouz/ROCIsTasks-Public',
-        icon: 'fa-brands fa-github',
-        target: '_blank'
-      }
+      { label: 'Google Play', url: ROCIS_TASKS_PLAY_URL, icon: 'fa-brands fa-google-play', primary: true, external: true },
+      { label: 'tasks.rocisapps.com', url: 'https://tasks.rocisapps.com', icon: 'fa-solid fa-globe', external: true },
+      { labelKey: 'btn_repo', url: `https://github.com/${ROCIS_TASKS_REPO}`, icon: 'fa-brands fa-github', external: true }
     ]
   },
   {
     id: 'rocis-schedule',
-    emoji: '🎓',
+    icon: 'fa-solid fa-graduation-cap',
     image: '/images/rocis-schedule-icon.png',
     category: 'mobile',
-    githubRepo: 'RoeeIlouz/ROCIs-Schedule',
+    status: 'wip',
+    githubRepo: ROCIS_SCHEDULE_REPO,
     defaultStars: 1,
     defaultForks: 0,
     defaultLanguage: 'Dart',
     tag: {
-      en: 'Academic Timetable & GPA (WIP)',
-      he: 'מערכת שעות ומעקב ציונים (בפיתוח)'
+      en: 'In development',
+      he: 'בפיתוח'
     },
     title: {
       en: 'ROCIs Schedule',
       he: 'ROCIs Schedule'
     },
     description: {
-      en: 'Next-generation offline-first academic management app built with Flutter & Dart. Unifies weekly timetable navigation, impending exam countdown alerts, weighted 4.0 GPA tracker, .ics calendar imports (Canvas/Moodle), and ecosystem bridge to ROCIs Tasks.',
-      he: 'אפליקציית ניהול אקדמי offline-first ב-Flutter & Dart. כוללת לוח זמנים שבועי אינטראקטיבי, ספירה לאחור לבחינות בזמן אמת, מחשבון GPA משוקלל (סולם 4.0), ייבוא יומני .ics מ-Canvas ו-Moodle וסנכרון מלא מול ROCIs Tasks.'
+      en: 'Offline-first academic companion built with Flutter & Dart. Weekly timetable, live exam countdowns, a weighted 4.0 GPA tracker, one-tap .ics imports from Canvas and Moodle, and a bridge to ROCIs Tasks.',
+      he: 'אפליקציית ניהול אקדמי offline-first ב-Flutter & Dart. מערכת שעות שבועית, ספירה לאחור לבחינות, מחשבון GPA משוקלל (סולם 4.0), ייבוא יומני ‎.ics מ-Canvas ו-Moodle וחיבור ל-ROCIs Tasks.'
     },
-    tech: ['Flutter', 'Dart', 'Offline SQLite', '.ICS Importer', 'GPA Calculator', 'ROCIs Tasks Bridge', 'In Development'],
+    tech: ['Flutter', 'Dart', 'SQLite', 'Firebase', '.ics Import', 'GPA Engine'],
     links: [
-      {
-        label: 'rocisapps.com/#schedule',
-        url: 'https://rocisapps.com/#schedule',
-        icon: 'fa-solid fa-arrow-up-right-from-square',
-        primary: true,
-        target: '_blank'
-      },
-      {
-        labelKey: 'btn_repo',
-        url: 'https://github.com/RoeeIlouz/ROCIs-Schedule',
-        icon: 'fa-brands fa-github',
-        target: '_blank'
-      }
+      { labelKey: 'btn_repo', url: ROCIS_SCHEDULE_REPO_URL, icon: 'fa-brands fa-github', primary: true, external: true },
+      { label: 'rocisapps.com', url: 'https://rocisapps.com/#schedule', icon: 'fa-solid fa-arrow-up-right-from-square', external: true }
     ]
   },
   {
     id: 'rocis-apps-platform',
-    emoji: '✨',
+    icon: 'fa-solid fa-layer-group',
     image: '/images/rocis-apps-icon.png',
-    category: 'mobile',
+    category: 'web',
+    status: 'live',
     githubRepo: 'RoeeIlouz/ROCIsApp.github.io',
     defaultStars: 0,
     defaultForks: 0,
     defaultLanguage: 'HTML',
     tag: {
-      en: 'Ecosystem & Brand Hub',
-      he: 'סביבת מותג ואתר רשמי'
+      en: 'Brand hub',
+      he: 'אתר המותג'
     },
     title: {
       en: 'ROCIs Apps Platform',
       he: 'פלטפורמת ROCIs Apps'
     },
     description: {
-      en: 'The official home of the ROCIs Apps brand suite. Showcasing modern mobile apps, design systems, software releases, privacy policies, and web experiences.',
-      he: 'הבית הרשמי של סוויטת מוצרי ROCIs Apps. מציג אפליקציות מובייל מודרניות, שפות עיצוב, גרסאות תוכנה, מדיניות פרטיות וחוויות רשת.'
+      en: 'The official home of the ROCIs Apps suite: product pages, design system, release notes, and privacy policies for every app in the ecosystem.',
+      he: 'הבית הרשמי של סוויטת ROCIs Apps: דפי מוצר, שפת עיצוב, הערות גרסה ומדיניות פרטיות לכל אפליקציה באקוסיסטם.'
     },
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Brand Hub', 'Responsive UI'],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI'],
     links: [
-      {
-        label: 'rocisapps.com',
-        url: 'https://rocisapps.com',
-        icon: 'fa-solid fa-arrow-up-right-from-square',
-        primary: true,
-        target: '_blank'
-      },
-      {
-        labelKey: 'btn_play',
-        url: 'https://play.google.com/store/apps/details?id=com.rocisapps.tasks',
-        icon: 'fa-brands fa-android',
-        target: '_blank'
-      }
+      { label: 'rocisapps.com', url: 'https://rocisapps.com', icon: 'fa-solid fa-arrow-up-right-from-square', primary: true, external: true },
+      { labelKey: 'btn_code', url: 'https://github.com/RoeeIlouz/ROCIsApp.github.io', icon: 'fa-brands fa-github', external: true }
     ]
   },
   {
     id: 'homelab-infrastructure',
-    emoji: '🏠',
+    icon: 'fa-brands fa-raspberry-pi',
     image: '/images/raspberry-pi-icon.png',
+    imageFit: 'contain',
     category: 'systems',
+    status: 'active',
     githubRepo: 'RoeeIlouz/Homelab',
     defaultStars: 1,
     defaultForks: 0,
     defaultLanguage: 'Shell',
     tag: {
-      en: 'Production Homelab & GitOps',
-      he: 'מעבדת ייצור ו-GitOps'
+      en: 'Homelab & GitOps',
+      he: 'מעבדה ביתית ו-GitOps'
     },
     title: {
       en: 'Raspberry Pi 5 Infrastructure',
       he: 'תשתית Raspberry Pi 5'
     },
     description: {
-      en: 'High-performance 24/7 ARM64 node (8GB RAM, 1TB NVMe SSD) running Raspberry Pi OS Lite. Implements perimeter-less Zero Trust ingress (Cloudflare/Twingate), VPN kill-switch, automated backups, and 30+ containerized services.',
-      he: 'צומת ARM64 בעל ביצועים גבוהים הפועל 24/7 (8GB זיכרון, 1TB NVMe SSD) על גבי Raspberry Pi OS Lite, עם גישת Zero Trust ללא פתיחת פורטים, שער VPN ומעל 30 שירותי קונטיינרים.'
+      en: '24/7 ARM64 node (8 GB RAM, 1 TB NVMe) on Raspberry Pi OS Lite. Zero Trust ingress via Cloudflare and Twingate, a VPN kill-switch, automated backups, and 30+ containerized services.',
+      he: 'צומת ARM64 הפועל 24/7 (‏8GB זיכרון, 1TB NVMe) על Raspberry Pi OS Lite. גישת Zero Trust דרך Cloudflare ו-Twingate, שער VPN עם Kill-Switch, גיבויים אוטומטיים ומעל 30 שירותי קונטיינרים.'
     },
-    tech: ['RPi 5 ARM64', 'Docker Compose', 'Zero Trust', 'Cloudflare Tunnels', 'Twingate', '1TB NVMe', 'GitOps'],
+    tech: ['Docker Compose', 'Zero Trust', 'Cloudflare Tunnels', 'Twingate', 'Bash', 'GitOps'],
     links: [
-      {
-        labelKey: 'btn_homelab_repo',
-        url: 'https://github.com/RoeeIlouz/Homelab',
-        icon: 'fa-brands fa-github',
-        primary: true,
-        target: '_blank'
-      },
-      {
-        labelKey: 'btn_arch',
-        url: '#homelab',
-        icon: 'fa-solid fa-server',
-        isTabLink: true,
-        tabTarget: 'homelab'
-      }
+      { labelKey: 'btn_homelab_repo', url: 'https://github.com/RoeeIlouz/Homelab', icon: 'fa-brands fa-github', primary: true, external: true },
+      { labelKey: 'btn_arch', url: '#homelab', icon: 'fa-solid fa-server' }
     ]
   },
   {
     id: 'roee-portfolio-hub',
-    emoji: '🌐',
-    category: 'mobile',
+    icon: 'fa-solid fa-code',
+    category: 'web',
+    status: 'live',
     githubRepo: 'RoeeIlouz/RoeeIlouz.github.io',
     defaultStars: 1,
     defaultForks: 0,
     defaultLanguage: 'Astro',
     tag: {
-      en: 'Personal Digital Hub',
-      he: 'האתר והפורטפוליו האישי'
+      en: 'This website',
+      he: 'האתר הזה'
     },
     title: {
       en: 'roee.ilouz.xyz',
       he: 'roee.ilouz.xyz'
     },
     description: {
-      en: 'Personal digital headquarters and interactive web application hub, built for ultra-fast performance, dark Obsidian aesthetics, and clean glassmorphism UX.',
-      he: 'מרכז הפעילות הדיגיטלי והאתר האישי, בנוי לביצועים מהירים במיוחד, עיצוב Obsidian וחוויית Glassmorphism נקייה.'
+      en: 'This bilingual portfolio. Static Astro build with a strict Content Security Policy, fully self-hosted assets, and zero framework JavaScript.',
+      he: 'הפורטפוליו הדו-לשוני הזה. אתר Astro סטטי עם מדיניות Content Security Policy קפדנית, נכסים מאוחסנים עצמאית וללא JavaScript של פריימוורק.'
     },
-    tech: ['Astro 5', 'TypeScript', 'CSS3', 'GitHub Pages'],
+    tech: ['Astro', 'TypeScript', 'CSS', 'CSP', 'GitHub Actions'],
     links: [
-      {
-        labelKey: 'btn_live',
-        url: 'https://roee.ilouz.xyz',
-        icon: 'fa-solid fa-arrow-up-right-from-square'
-      },
-      {
-        labelKey: 'btn_code',
-        url: 'https://github.com/RoeeIlouz/RoeeIlouz.github.io',
-        icon: 'fa-brands fa-github',
-        target: '_blank'
-      }
+      { labelKey: 'btn_code', url: 'https://github.com/RoeeIlouz/RoeeIlouz.github.io', icon: 'fa-brands fa-github', primary: true, external: true }
     ]
   }
 ];
