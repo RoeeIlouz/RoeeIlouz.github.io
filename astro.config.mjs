@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://roee.ilouz.xyz',
   base: '/',
+  integrations: [react()],
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'he'],
@@ -33,6 +36,7 @@ export default defineConfig({
     syntaxHighlight: false
   },
   vite: {
+    plugins: [tailwindcss()],
     build: {
       // Keep fonts and icons as real files instead of inlined data: URIs.
       assetsInlineLimit: 0

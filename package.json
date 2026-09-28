@@ -10,14 +10,27 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^7.0.0",
     "@fontsource-variable/heebo": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fortawesome/fontawesome-free": "^7.3.1",
-    "astro": "^7.3.5"
+    "astro": "^7.3.5",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.43.0",
+    "lightswind": "^3.2.5",
+    "lucide-react": "^1.48.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^2.6.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3"
   },
   "engines": {

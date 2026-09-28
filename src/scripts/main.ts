@@ -204,3 +204,19 @@ form?.addEventListener('submit', (e) => {
   showToast(form.dataset.toast ?? '');
   form.reset();
 });
+
+/* ---------- Lightswind Interactive Card Spotlight Tracking ---------- */
+const interactiveCards = document.querySelectorAll<HTMLElement>('.project-card, .card, .feature-card');
+interactiveCards.forEach((card) => {
+  card.addEventListener('pointermove', (e: PointerEvent) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+  card.addEventListener('pointerleave', () => {
+    card.style.setProperty('--mouse-x', '-500px');
+    card.style.setProperty('--mouse-y', '-500px');
+  });
+});

@@ -9,6 +9,7 @@ import {
 } from '../data/projects';
 import SectionHeader from './SectionHeader.astro';
 import GithubStatus from './GithubStatus.astro';
+import { BorderBeam } from './lightswind/border-beam';
 
 interface Props {
   lang: Lang;
@@ -33,7 +34,7 @@ const services = [
 ---
 
 <section id="about" class="section section--hero" aria-labelledby="about-title">
-  <SectionHeader id="about-title" eyebrow={t.eyebrow} title={t.title} lede={t.lede} large />
+  <SectionHeader id="about-title" eyebrow={t.eyebrow} title={t.title} lede={t.lede} large lang={lang} />
 
   <div class="hero-actions">
     <a href="#projects" class="btn btn--primary">
@@ -58,6 +59,7 @@ const services = [
   <h3 class="sub-heading">{t.featured_heading}</h3>
   <div class="featured-grid">
     <article class="feature-card feature-card--tasks">
+      <BorderBeam client:visible size={120} duration={7} colorFrom="#ef4444" colorTo="#f87171" glowIntensity={0.6} />
       <div class="feature-top">
         <span class="badge badge--live">{t.tasks.status}</span>
         <span class="feature-kind">{t.tasks.sub}</span>
@@ -87,6 +89,7 @@ const services = [
     </article>
 
     <article class="feature-card feature-card--schedule">
+      <BorderBeam client:visible size={120} duration={7} colorFrom="#0ea5e9" colorTo="#34d399" glowIntensity={0.6} />
       <div class="feature-top">
         <span class="badge badge--wip">{t.schedule.status}</span>
         <span class="feature-kind">{t.schedule.sub}</span>
