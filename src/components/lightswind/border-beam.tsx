@@ -101,8 +101,10 @@ export const BorderBeam = ({
   return (
  <div className="pointer-events-none absolute inset-0 rounded-[inherit] 
     border border-transparent [mask-clip:padding-box,border-box] 
-    [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]"
- 
+    [mask-composite:exclude] [mask-image:linear-gradient(#000,#000),linear-gradient(#000,#000)]"
+      // exclude = border-box minus padding-box, so only the 1px border ring shows
+      // the beam (the upstream transparent+intersect mask hid it entirely).
+
       // style={{ 
       //   borderWidth: `${borderThickness}px`,
       // }}

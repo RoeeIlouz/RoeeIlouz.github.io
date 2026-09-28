@@ -15,8 +15,11 @@ const { id, eyebrow, title, lede, large = false, lang = 'en' } = Astro.props;
 
 <header class="section-head">
   <p class="eyebrow">
-    <ShinyText client:visible direction={lang === 'he' ? 'right-to-left' : 'left-to-right'} speed={3.5} className="font-mono text-xs uppercase tracking-widest text-inherit">
+    {/* client:only: server-rendered style="" attributes would be blocked by the CSP.
+        Colors come from the site theme; Lightswind's --foreground/--primary are unset here. */}
+    <ShinyText client:only="react" direction={lang === 'he' ? 'right-to-left' : 'left-to-right'} speed={3.5} shineWidth={16} baseColor="var(--accent-text)" shineColor="var(--text)" className="font-mono text-xs uppercase tracking-widest">
       {eyebrow}
+      <Fragment slot="fallback">{eyebrow}</Fragment>
     </ShinyText>
   </p>
   <h2 id={id} class:list={['section-title', { 'section-title--hero': large }]}>{title}</h2>

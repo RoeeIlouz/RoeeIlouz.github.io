@@ -115,7 +115,8 @@ export function ShinyText({
     const shineEnd = `${finalShineColor} ${transparentEndPos}%`;
 
     return gradientType === "linear"
-      ? `linear-gradient(${gradientDirection}, ${finalBaseColor}, transparent ${transparentStartPos - 5}%, ${shineStart}, ${shineEnd}, transparent ${transparentEndPos + 5}%, ${finalBaseColor})`
+      ? // Fade to the base color, not transparent, so letters beside the shine stay readable.
+        `linear-gradient(${gradientDirection}, ${finalBaseColor}, ${finalBaseColor} ${transparentStartPos - 5}%, ${shineStart}, ${shineEnd}, ${finalBaseColor} ${transparentEndPos + 5}%, ${finalBaseColor})`
       : `radial-gradient(ellipse at center, ${finalShineColor} ${intensity * 100}%, transparent)`;
   };
 
