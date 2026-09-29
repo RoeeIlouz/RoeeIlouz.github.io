@@ -1,0 +1,48 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { notes } from '../data/notes';
+
+interface Props {
+  frontmatter: { slug: string };
+}
+
+const { frontmatter } = Astro.props;
+const note = notes.find((n) => n.slug === frontmatter.slug);
+if (!note) throw new Error(`Unknown note slug: ${frontmatter.slug}`);
+const others = notes.filter((n) => n.slug !== note.slug);
+const date = new Date(note.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout lang="en" title={`${note.title.en} · Roee Ilouz`} description={note.summary.en}>
+  <article class="note section">
+    <a href="/#notes" class="text-link note-back">
+      <i class="fa-solid fa-arrow-left flip-rtl" aria-hidden="true"></i> All notes
+    </a>
+    <header class="note-head">
+      <p class="note-meta"><time datetime={note.date}>{date}</time> · {note.minutes} min read</p>
+      <h1 class="section-title">{note.title.en}</h1>
+      <ul class="chips">
+        {note.tags.map((t) => <li class="chip">{t}</li>)}
+      </ul>
+    </header>
+    <div class="note-body">
+      <slot />
+    </div>
+    <footer class="note-foot">
+      <h2 class="sub-heading">More notes</h2>
+      <div class="note-list">
+        {others.map((n) => (
+          <a class="card note-card" href={`/notes/${n.slug}/`}>
+            <span class="icon-tile" aria-hidden="true"><i class={n.icon}></i></span>
+            <div class="note-card-body">
+              <h3 class="card-title">{n.title.en}</h3>
+              <p class="card-text">{n.summary.en}</p>
+              <p class="note-card-meta">{n.minutes} min read</p>
+            </div>
+            <i class="fa-solid fa-arrow-right note-card-arrow" aria-hidden="true"></i>
+          </a>
+        ))}
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

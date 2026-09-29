@@ -12,13 +12,12 @@ interface Props {
   defaultLanguage?: string;
 }
 
-const { repo, lang, defaultStars = 0, defaultForks = 0, defaultLanguage = 'Code' } = Astro.props;
+// Star and fork counts are deliberately not shown; language and last push are.
+const { repo, lang, defaultLanguage = 'Code' } = Astro.props;
 const t = translations[lang].projects;
 
 // Build-time snapshot; the client script refreshes these values on load.
 const data = await fetchRepo(repo);
-const stars = data?.stargazers_count ?? defaultStars;
-const forks = data?.forks_count ?? defaultForks;
 const language = data?.language ?? defaultLanguage;
 const pushedAt = data?.pushed_at ?? '';
 const updated = pushedAt ? relativeTime(pushedAt, lang) : '';
@@ -29,14 +28,6 @@ const updated = pushedAt ? relativeTime(pushedAt, lang) : '';
     <span class="repo-lang-dot" aria-hidden="true"></span>
     <span data-gh-lang-name>{language}</span>
   </span>
-  <a href={`https://github.com/${repo}/stargazers`} target="_blank" rel="noopener noreferrer" class="repo-stat" aria-label={`${t.stars}: ${stars}`} data-gh-stars-link>
-    <i class="fa-solid fa-star" aria-hidden="true"></i>
-    <span data-gh-stars>{stars}</span>
-  </a>
-  <a href={`https://github.com/${repo}/forks`} target="_blank" rel="noopener noreferrer" class="repo-stat" aria-label={`${t.forks}: ${forks}`} data-gh-forks-link>
-    <i class="fa-solid fa-code-fork" aria-hidden="true"></i>
-    <span data-gh-forks>{forks}</span>
-  </a>
   <span class="repo-stat repo-updated" hidden={!updated} title={t.updated}>
     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
     <time datetime={pushedAt} data-gh-updated>{updated}</time>

@@ -12,4 +12,13 @@
     <xhtml:link rel="alternate" hreflang="he" href="https://roee.ilouz.xyz/he/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://roee.ilouz.xyz/" />
   </url>
+  <url>
+    <loc>https://roee.ilouz.xyz/notes/offline-first-sync/</loc>
+  </url>
+  <url>
+    <loc>https://roee.ilouz.xyz/notes/patch-first-releases/</loc>
+  </url>
+  <url>
+    <loc>https://roee.ilouz.xyz/notes/cross-app-auth/</loc>
+  </url>
 </urlset>

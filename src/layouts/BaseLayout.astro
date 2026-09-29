@@ -14,13 +14,19 @@ import Sidebar from '../components/Sidebar.astro';
 
 interface Props {
   lang: Lang;
+  /** Set on sub-pages (e.g. notes); home pages use the translated meta. */
+  title?: string;
+  description?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, title: pageTitle, description: pageDescription } = Astro.props;
 const t = translations[lang];
 const isRtl = lang === 'he';
 const siteUrl = 'https://roee.ilouz.xyz';
-const canonical = `${siteUrl}${lang === 'he' ? '/he/' : '/'}`;
+const isHome = pageTitle === undefined;
+const canonical = `${siteUrl}${Astro.url.pathname}`;
+const title = pageTitle ?? t.meta.title;
+const description = pageDescription ?? t.meta.description;
 const ogImage = `${siteUrl}/images/avatar.jpg`;
 
 const jsonLd = {
@@ -60,25 +66,25 @@ const jsonLd = {
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#09090b" />
   <meta name="google-site-verification" content="UA_6j9NEGu3aBu7P_cL6vkusxH26-WcNpCITqrg-dBE" />
-  <title>{t.meta.title}</title>
-  <meta name="description" content={t.meta.description} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
   <meta name="author" content="Roee Ilouz" />
 
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang="en" href={`${siteUrl}/`} />
-  <link rel="alternate" hreflang="he" href={`${siteUrl}/he/`} />
-  <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+  {isHome && <link rel="alternate" hreflang="en" href={`${siteUrl}/`} />}
+  {isHome && <link rel="alternate" hreflang="he" href={`${siteUrl}/he/`} />}
+  {isHome && <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />}
 
-  <meta property="og:title" content={t.meta.title} />
-  <meta property="og:description" content={t.meta.description} />
-  <meta property="og:type" content="profile" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={isHome ? 'profile' : 'article'} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:locale" content={isRtl ? 'he_IL' : 'en_US'} />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={t.meta.title} />
-  <meta name="twitter:description" content={t.meta.description} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
 
   <link rel="icon" type="image/jpeg" href="/images/avatar.jpg" />

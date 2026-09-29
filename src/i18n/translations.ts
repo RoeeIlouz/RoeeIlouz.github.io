@@ -12,6 +12,7 @@ export const translations = {
     nav: {
       about: 'About',
       projects: 'Projects',
+      notes: 'Notes',
       experience: 'Experience',
       homelab: 'Homelab',
       contact: 'Contact'
@@ -33,15 +34,15 @@ export const translations = {
     },
     about: {
       eyebrow: 'About',
-      title: 'I build reliable mobile apps and the infrastructure behind them.',
+      title: 'Electrical engineering student. I ship production apps and run the infrastructure under them.',
       lede:
-        "I'm Roee, an Electrical Engineering student at Afeka College and the developer behind <strong>ROCIs Apps</strong>. I ship cross-platform apps in Flutter & Dart, run a 24/7 self-hosted homelab, and design AI-assisted developer workflows.",
+        "I'm Roee, an Electrical Engineering student at Afeka College. In the IDF I led an IT and infrastructure department of about 10 technicians. Today I build <strong>ROCIs Apps</strong>: Flutter apps with a web version and over-the-air releases, running on backend and self-hosted infrastructure I set up and maintain myself.",
       cta_projects: 'View projects',
       cta_contact: 'Contact me',
       metrics: {
-        services: 'Self-hosted services',
-        apps: 'Apps & web platforms',
-        availability: 'Uptime target',
+        tests: 'Automated tests',
+        languages: 'App languages',
+        led: 'Technicians led (IDF)',
         degree: 'Electrical Engineering'
       },
       featured_heading: 'Featured work',
@@ -82,6 +83,13 @@ export const translations = {
       svc_ai_title: 'AI-assisted developer tooling',
       svc_ai_desc:
         'Developer workflows built on the Model Context Protocol (MCP), autonomous agent tools, and Google Antigravity IDE.'
+    },
+    notes: {
+      eyebrow: 'Engineering notes',
+      title: 'How it actually works',
+      lede: 'Write-ups of real problems from building ROCIs Apps: what broke, why, and how I fixed it.',
+      min: 'min read',
+      english_only: ''
     },
     projects: {
       eyebrow: 'Projects',
@@ -171,6 +179,7 @@ export const translations = {
     nav: {
       about: 'אודות',
       projects: 'פרויקטים',
+      notes: 'רשימות',
       experience: 'ניסיון',
       homelab: 'Homelab',
       contact: 'צור קשר'
@@ -192,15 +201,15 @@ export const translations = {
     },
     about: {
       eyebrow: 'אודות',
-      title: 'אני בונה אפליקציות מובייל אמינות ואת התשתיות שמאחוריהן.',
+      title: 'סטודנט להנדסת חשמל. אני משחרר אפליקציות לפרודקשן ומתחזק את התשתית שמתחתן.',
       lede:
-        'אני רועי, סטודנט להנדסת חשמל במכללת אפקה והמפתח מאחורי <strong>ROCIs Apps</strong>. אני מפתח אפליקציות חוצות-פלטפורמות ב-Flutter & Dart, מתחזק מעבדה ביתית שפועלת 24/7 ומתכנן תהליכי פיתוח מבוססי AI.',
+        'אני רועי, סטודנט להנדסת חשמל במכללת אפקה. בצה״ל פיקדתי על מחלקת מחשוב ותשתיות של כ-10 טכנאים. היום אני בונה את <strong>ROCIs Apps</strong>: אפליקציות Flutter עם גרסת ווב ועדכונים באוויר, שרצות על תשתית ענן ושרת ביתי שהקמתי ואני מתחזק בעצמי.',
       cta_projects: 'לפרויקטים',
       cta_contact: 'צור קשר',
       metrics: {
-        services: 'שירותים בהרצה עצמית',
-        apps: 'אפליקציות ופלטפורמות',
-        availability: 'יעד זמינות',
+        tests: 'בדיקות אוטומטיות',
+        languages: 'שפות באפליקציה',
+        led: 'טכנאים בפיקודי (צה״ל)',
         degree: 'הנדסת חשמל'
       },
       featured_heading: 'עבודות נבחרות',
@@ -241,6 +250,13 @@ export const translations = {
       svc_ai_title: 'כלי פיתוח מבוססי AI',
       svc_ai_desc:
         'תהליכי פיתוח המבוססים על Model Context Protocol ‏(MCP), כלי סוכנים אוטונומיים וסביבת Google Antigravity IDE.'
+    },
+    notes: {
+      eyebrow: 'רשימות הנדסיות',
+      title: 'איך זה עובד באמת',
+      lede: 'תיעוד של בעיות אמיתיות מבניית ROCIs Apps: מה נשבר, למה, ואיך תיקנתי.',
+      min: 'דק׳ קריאה',
+      english_only: 'באנגלית'
     },
     projects: {
       eyebrow: 'פרויקטים',

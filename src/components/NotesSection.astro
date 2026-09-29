@@ -1,0 +1,33 @@
+---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+import { notes } from '../data/notes';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = translations[lang].notes;
+---
+
+<section id="notes" class="section" aria-labelledby="notes-title">
+  <SectionHeader id="notes-title" eyebrow={t.eyebrow} title={t.title} lede={t.lede} lang={lang} />
+  <div class="note-list">
+    {notes.map((n) => (
+      <a class="card note-card" href={`/notes/${n.slug}/`} hreflang="en">
+        <span class="icon-tile" aria-hidden="true"><i class={n.icon}></i></span>
+        <div class="note-card-body">
+          <h3 class="card-title">{n.title[lang]}</h3>
+          <p class="card-text">{n.summary[lang]}</p>
+          <p class="note-card-meta">
+            {n.minutes} {t.min}
+            {t.english_only && <span> · {t.english_only}</span>}
+          </p>
+        </div>
+        <i class="fa-solid fa-arrow-right flip-rtl note-card-arrow" aria-hidden="true"></i>
+      </a>
+    ))}
+  </div>
+</section>

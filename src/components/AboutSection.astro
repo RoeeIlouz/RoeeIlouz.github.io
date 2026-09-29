@@ -18,10 +18,11 @@ interface Props {
 const { lang } = Astro.props;
 const t = translations[lang].about;
 
+// Verifiable facts only: test counts come from the two app repositories.
 const metrics = [
-  { value: '30+', label: t.metrics.services },
-  { value: '4+', label: t.metrics.apps },
-  { value: '99.9%', label: t.metrics.availability },
+  { value: '600+', label: t.metrics.tests },
+  { value: '8', label: t.metrics.languages },
+  { value: '~10', label: t.metrics.led },
   { value: 'B.Sc.', label: t.metrics.degree }
 ];
 

@@ -57,7 +57,7 @@ export const projectsData: Project[] = [
       en: 'Production cross-platform task manager built with Flutter & Dart on Clean Architecture. Offline-first sync, natural-language input, Google Calendar integration, and RevenueCat subscriptions.',
       he: 'אפליקציית ניהול משימות חוצת-פלטפורמות ב-Flutter & Dart בארכיטקטורת Clean Architecture. סנכרון Offline-first, הזנה בשפה טבעית, אינטגרציה עם Google Calendar ומנויים מבוססי RevenueCat.'
     },
-    tech: ['Flutter', 'Dart', 'Clean Architecture', 'SQLite', 'Google Calendar API', 'RevenueCat'],
+    tech: ['Flutter', 'Dart', 'Hive', 'Firestore', 'Shorebird OTA', 'Google Calendar API', 'RevenueCat'],
     links: [
       { label: 'Google Play', url: ROCIS_TASKS_PLAY_URL, icon: 'fa-brands fa-google-play', primary: true, external: true },
       { label: 'tasks.rocisapps.com', url: 'https://tasks.rocisapps.com', icon: 'fa-solid fa-globe', external: true },
