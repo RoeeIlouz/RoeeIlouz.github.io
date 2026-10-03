@@ -13,6 +13,21 @@ export interface Note {
 // The write-ups themselves are English-only pages under src/pages/notes/.
 export const notes: Note[] = [
   {
+    slug: 'context-menu-editor',
+    date: '2026-10-03',
+    minutes: 6,
+    icon: 'fa-solid fa-bars',
+    tags: ['PowerShell', 'WPF', 'Windows registry', 'Performance'],
+    title: {
+      en: 'A Windows context menu editor in one PowerShell file',
+      he: 'עורך תפריט קליק ימני ל-Windows בקובץ PowerShell אחד'
+    },
+    summary: {
+      en: 'Three kinds of menu entries, Windows 11 items with no command line, a C# bridge for Send to, and how startup went from 2 seconds to under one.',
+      he: 'שלושה סוגי פריטים בתפריט, פריטי Windows 11 בלי שורת פקודה, גשר C# ל-Send to, ואיך זמן ההפעלה ירד מ-2 שניות לפחות משנייה.'
+    }
+  },
+  {
     slug: 'offline-first-sync',
     date: '2026-09-29',
     minutes: 7,
