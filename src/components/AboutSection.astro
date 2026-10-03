@@ -4,6 +4,7 @@ import { translations } from '../i18n/translations';
 import {
   ROCIS_SCHEDULE_REPO,
   ROCIS_SCHEDULE_REPO_URL,
+  ROCIS_SCHEDULE_BETA_MAIL,
   ROCIS_TASKS_REPO,
   ROCIS_TASKS_PLAY_URL
 } from '../data/projects';
@@ -107,7 +108,10 @@ const services = [
       </ul>
       <GithubStatus repo={ROCIS_SCHEDULE_REPO} lang={lang} defaultStars={1} defaultLanguage="Dart" />
       <div class="feature-actions">
-        <a href="https://rocisapps.com/#schedule" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm">
+        <a href={ROCIS_SCHEDULE_BETA_MAIL} class="btn btn--primary btn--sm">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i> {t.schedule.btn_beta}
+        </a>
+        <a href="https://rocisapps.com/#schedule" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
           <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> {t.schedule.btn_page}
         </a>
         <a href={ROCIS_SCHEDULE_REPO_URL} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">

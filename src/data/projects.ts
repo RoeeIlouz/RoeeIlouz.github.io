@@ -1,7 +1,7 @@
 import type { Lang } from '../i18n/translations';
 
 export interface ProjectLink {
-  labelKey?: 'btn_repo' | 'btn_play' | 'btn_homelab_repo' | 'btn_arch' | 'btn_live' | 'btn_code';
+  labelKey?: 'btn_repo' | 'btn_play' | 'btn_homelab_repo' | 'btn_arch' | 'btn_live' | 'btn_code' | 'btn_beta';
   label?: string;
   url: string;
   icon: string;
@@ -32,6 +32,7 @@ export interface Project {
 export const ROCIS_SCHEDULE_REPO = 'RoeeIlouz/ROCIs-Schedule';
 export const ROCIS_SCHEDULE_REPO_URL = `https://github.com/${ROCIS_SCHEDULE_REPO}`;
 export const ROCIS_TASKS_REPO = 'RoeeIlouz/ROCIsTasks-Public';
+export const ROCIS_SCHEDULE_BETA_MAIL = 'mailto:support@rocisapps.com?subject=ROCIs%20Schedule%20beta';
 export const ROCIS_TASKS_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.rocisapps.tasks';
 
 export const projectsData: Project[] = [
@@ -75,20 +76,21 @@ export const projectsData: Project[] = [
     defaultForks: 0,
     defaultLanguage: 'Dart',
     tag: {
-      en: 'In development',
-      he: 'בפיתוח'
+      en: 'Open beta',
+      he: 'בטא פתוחה'
     },
     title: {
       en: 'ROCIs Schedule',
       he: 'ROCIs Schedule'
     },
     description: {
-      en: 'Offline-first academic companion built with Flutter & Dart. Weekly timetable, live exam countdowns, a weighted 4.0 GPA tracker, one-tap .ics imports from Canvas and Moodle, and a bridge to ROCIs Tasks.',
-      he: 'אפליקציית ניהול אקדמי offline-first ב-Flutter & Dart. מערכת שעות שבועית, ספירה לאחור לבחינות, מחשבון GPA משוקלל (סולם 4.0), ייבוא יומני ‎.ics מ-Canvas ו-Moodle וחיבור ל-ROCIs Tasks.'
+      en: 'Offline-first academic companion built with Flutter & Dart. Weekly timetable, live exam countdowns, a weighted 4.0 GPA tracker, one-tap .ics imports from Canvas and Moodle, and a bridge to ROCIs Tasks. Now in open beta on Android, looking for testers.',
+      he: 'אפליקציית ניהול אקדמי offline-first ב-Flutter & Dart. מערכת שעות שבועית, ספירה לאחור לבחינות, מחשבון GPA משוקלל (סולם 4.0), ייבוא יומני ‎.ics מ-Canvas ו-Moodle וחיבור ל-ROCIs Tasks. עכשיו בבטא פתוחה ל-Android ומחפשת בודקים.'
     },
     tech: ['Flutter', 'Dart', 'SQLite', 'Firebase', '.ics Import', 'GPA Engine'],
     links: [
-      { labelKey: 'btn_repo', url: ROCIS_SCHEDULE_REPO_URL, icon: 'fa-brands fa-github', primary: true, external: true },
+      { labelKey: 'btn_beta', url: ROCIS_SCHEDULE_BETA_MAIL, icon: 'fa-solid fa-envelope', primary: true },
+      { labelKey: 'btn_repo', url: ROCIS_SCHEDULE_REPO_URL, icon: 'fa-brands fa-github', external: true },
       { label: 'rocisapps.com', url: 'https://rocisapps.com/#schedule', icon: 'fa-solid fa-arrow-up-right-from-square', external: true }
     ]
   },

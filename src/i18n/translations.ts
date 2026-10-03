@@ -29,7 +29,7 @@ export const translations = {
       val_languages: 'Hebrew, English',
       ecosystem: 'ROCIs Apps',
       status_live: 'Live',
-      status_wip: 'In dev',
+      status_wip: 'Beta',
       cta: 'Get in touch'
     },
     about: {
@@ -58,15 +58,16 @@ export const translations = {
         btn_web: 'Web app'
       },
       schedule: {
-        sub: 'Education · Android & iOS',
-        status: 'In development',
+        sub: 'Education · Android',
+        status: 'Open beta',
         desc: 'Academic companion that brings your timetable, exams, assignments, and GPA into one offline-first app.',
         points: [
           'Weekly timetable with live exam countdowns',
           'Weighted 4.0 GPA tracker',
           '.ics import from Canvas & Moodle, bridge to ROCIs Tasks'
         ],
-        btn_page: 'Product page'
+        btn_page: 'Product page',
+        btn_beta: 'Join the beta'
       },
       btn_source: 'Source',
       doing_heading: 'What I do',
@@ -109,14 +110,15 @@ export const translations = {
       forks: 'Forks',
       updated: 'Last push',
       status_live: 'Live',
-      status_wip: 'In development',
+      status_wip: 'Open beta',
       status_active: 'Active',
       btn_repo: 'Repository',
       btn_play: 'Play Store',
       btn_homelab_repo: 'Homelab repo',
       btn_arch: 'Architecture',
       btn_live: 'Live site',
-      btn_code: 'Source'
+      btn_code: 'Source',
+      btn_beta: 'Join the beta'
     },
     experience: {
       eyebrow: 'Experience',
@@ -196,7 +198,7 @@ export const translations = {
       val_languages: 'עברית, אנגלית',
       ecosystem: 'ROCIs Apps',
       status_live: 'פעיל',
-      status_wip: 'בפיתוח',
+      status_wip: 'בטא',
       cta: 'צור קשר'
     },
     about: {
@@ -225,15 +227,16 @@ export const translations = {
         btn_web: 'אפליקציית ווב'
       },
       schedule: {
-        sub: 'חינוך · Android & iOS',
-        status: 'בפיתוח',
+        sub: 'חינוך · Android',
+        status: 'בטא פתוחה',
         desc: 'עוזר אקדמי שמרכז מערכת שעות, בחינות, מטלות וממוצע ציונים באפליקציה אחת שעובדת גם ללא חיבור.',
         points: [
           'מערכת שעות שבועית עם ספירה לאחור לבחינות',
           'מחשבון GPA משוקלל בסולם 4.0',
           'ייבוא ‎.ics מ-Canvas ו-Moodle וחיבור ל-ROCIs Tasks'
         ],
-        btn_page: 'דף המוצר'
+        btn_page: 'דף המוצר',
+        btn_beta: 'הצטרפות לבטא'
       },
       btn_source: 'קוד מקור',
       doing_heading: 'מה אני עושה',
@@ -276,14 +279,15 @@ export const translations = {
       forks: 'פיצולים',
       updated: 'עדכון אחרון',
       status_live: 'פעיל',
-      status_wip: 'בפיתוח',
+      status_wip: 'בטא פתוחה',
       status_active: 'פעיל',
       btn_repo: 'מאגר קוד',
       btn_play: 'חנות Play',
       btn_homelab_repo: 'מאגר Homelab',
       btn_arch: 'ארכיטקטורה',
       btn_live: 'אתר חי',
-      btn_code: 'קוד מקור'
+      btn_code: 'קוד מקור',
+      btn_beta: 'הצטרפות לבטא'
     },
     experience: {
       eyebrow: 'ניסיון',
