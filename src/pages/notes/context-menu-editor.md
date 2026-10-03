@@ -5,6 +5,10 @@ slug: context-menu-editor
 
 The Windows right-click menu is built from several different places, and Windows 11 hides half of it behind "Show more options". Most tools I found each cover one part. I wanted one list for all of it, so I built [Context Menu Editor](https://github.com/RoeeIlouz/ROCIsContextMenu-Editor) as a single PowerShell script with a WPF window. You can run it with `irm https://rocisapps.com/cme | iex`, and there is a page for it under [side projects](https://rocisapps.com/side-projects.html#context-menu-editor).
 
+![Windows 11 shows a short right-click menu with "Show more options", and the full menu after one switch in Context Menu Editor. An illustration, not a screenshot.](/images/cme-article-before-after.png)
+
+![Context Menu Editor's Tweaks page: a checklist of menu clean-ups with Minimal and Standard presets and a Run tweaks button.](/images/cme-tweaks.png)
+
 ## Three kinds of entries
 
 Windows builds the menu from three different places, and each one is turned off differently:
@@ -15,6 +19,8 @@ Windows builds the menu from three different places, and each one is turned off 
 
 Reading all three into one list, with the right "off" mechanism behind each switch, is most of the work.
 
+![Diagram: three sources of right-click entries (shell verbs, shell extensions, Windows 11 packaged items), each turned off differently, feeding one list in Context Menu Editor.](/images/cme-article-three-sources.png)
+
 ## Registry access without the provider
 
 All registry access goes through `Microsoft.Win32.Registry`. The PowerShell registry provider treats the `*` in `HKCU\Software\Classes\*\shell` as a wildcard, so a path that means "all files" silently matches other keys. The .NET API takes the path literally.
@@ -24,6 +30,8 @@ All registry access goes through `Microsoft.Win32.Registry`. The PowerShell regi
 Send to is a folder of shortcuts, so adding an app is easy. Windows 11 packaged items are not: Blip, for example, has a submenu of devices and no executable to point a shortcut at. The shortcut targets a small C# helper instead, which finds the item by its CLSID and calls it on the selected files the way Explorer does. Submenu entries are matched by title first and by position only as a fallback, so pairing a new device does not change where an existing shortcut sends.
 
 The helper is compiled at runtime with `Add-Type` and cached outside the script folder, so shortcuts keep working if the editor moves.
+
+![Diagram: a Send to shortcut calls a small C# helper, which calls the Explorer command by CLSID, which runs the app's menu item.](/images/cme-article-sendto-bridge.png)
 
 ## One script, built from many files
 
@@ -39,6 +47,8 @@ The source is split into small files: core functions, UI, XAML, JSON config for 
 The first version took about 2 seconds before any window appeared, and most of that was reading the registry. Two changes helped:
 
 - **Window first.** It now opens straight away with a "reading" state, and the scan runs once the first frame is on screen. The window appears in 0.6 to 0.8 seconds, and the full list is ready at about the same total time as before.
+
+![Bar chart: time until the window appears dropped from 1.9 to 0.6 seconds on Windows PowerShell 5.1 and from 2.4 to 0.8 seconds on PowerShell 7.](/images/cme-article-startup.png)
 - **Cached helper types.** Compiling the C# types cost 0.1 to 0.3 seconds on every start. They are now compiled once and loaded from a cache file in about 15 milliseconds. An elevated run never loads that cache, because an administrator process should not load code from a folder a standard user can write to.
 
 ## PowerShell traps I hit
