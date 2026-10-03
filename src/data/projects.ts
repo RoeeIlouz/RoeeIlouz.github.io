@@ -150,6 +150,34 @@ export const projectsData: Project[] = [
     ]
   },
   {
+    id: 'context-menu-editor',
+    icon: 'fa-brands fa-windows',
+    image: '/images/context-menu-editor-icon.png',
+    category: 'systems',
+    status: 'live',
+    githubRepo: 'RoeeIlouz/ROCIsContextMenu-Editor',
+    defaultStars: 0,
+    defaultForks: 0,
+    defaultLanguage: 'PowerShell',
+    tag: {
+      en: 'Side project',
+      he: 'פרויקט צד'
+    },
+    title: {
+      en: 'Context Menu Editor',
+      he: 'Context Menu Editor'
+    },
+    description: {
+      en: 'A free, open-source Windows tool for cleaning up the right-click menu. Commands, shell extensions and Windows 11 menu items in one list: turn them off without deleting, add your own commands and Send to items, and undo any change. Runs with one PowerShell command.',
+      he: 'כלי קוד פתוח וחינמי ל-Windows לניקוי תפריט הקליק הימני. פקודות, הרחבות מעטפת ופריטי התפריט של Windows 11 ברשימה אחת: אפשר לכבות אותם בלי למחוק, להוסיף פקודות ופריטי Send to משלך ולבטל כל שינוי. רץ בפקודת PowerShell אחת.'
+    },
+    tech: ['PowerShell', 'WPF', 'Win32 API', 'Windows Registry', 'COM'],
+    links: [
+      { label: 'rocisapps.com', url: 'https://rocisapps.com/side-projects.html#context-menu-editor', icon: 'fa-solid fa-arrow-up-right-from-square', primary: true, external: true },
+      { labelKey: 'btn_repo', url: 'https://github.com/RoeeIlouz/ROCIsContextMenu-Editor', icon: 'fa-brands fa-github', external: true }
+    ]
+  },
+  {
     id: 'roee-portfolio-hub',
     icon: 'fa-solid fa-code',
     category: 'web',
