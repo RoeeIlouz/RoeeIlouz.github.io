@@ -34,7 +34,14 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Audit dependencies
-        run: npm audit --omit=dev --audit-level=high
+        # Fails on any high or critical advisory except the IDs in AUDIT_ALLOW (see .github/audit-check.mjs).
+        # GHSA-ch52-4w7c-c8xp: http-cache-semantics <= 4.2.0, pulled in by astro. No patched release yet,
+        # and it only runs at build time for this static site. Remove it once a fix ships.
+        env:
+          AUDIT_ALLOW: GHSA-ch52-4w7c-c8xp
+        run: |
+          npm audit --omit=dev --json > "$RUNNER_TEMP/audit.json" || true
+          node .github/audit-check.mjs "$RUNNER_TEMP/audit.json"
 
       - name: Build site
         run: npm run build
