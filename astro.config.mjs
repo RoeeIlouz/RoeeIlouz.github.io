@@ -16,13 +16,17 @@ export default defineConfig({
   security: {
     // GitHub Pages can't send response headers, so Astro emits the policy as a
     // <meta http-equiv="content-security-policy"> tag and hashes every script
-    // and style it renders. Everything is self-hosted except the GitHub API.
+    // and style it renders. Everything is self-hosted except the GitHub API and
+    // the Cloudflare Web Analytics beacon, which Cloudflare injects at the edge.
     csp: {
+      scriptDirective: {
+        resources: ["'self'", 'https://static.cloudflareinsights.com']
+      },
       directives: [
         "default-src 'self'",
         "img-src 'self' data:",
         "font-src 'self'",
-        "connect-src 'self' https://api.github.com",
+        "connect-src 'self' https://api.github.com https://cloudflareinsights.com",
         "object-src 'none'",
         "base-uri 'self'",
         "form-action 'self'",
