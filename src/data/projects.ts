@@ -180,6 +180,33 @@ export const projectsData: Project[] = [
     ]
   },
   {
+    id: 'shalom-home',
+    icon: 'fa-solid fa-microphone',
+    category: 'mobile',
+    status: 'live',
+    githubRepo: 'RoeeIlouz/shalom-home',
+    defaultStars: 0,
+    defaultForks: 0,
+    defaultLanguage: 'Kotlin',
+    tag: {
+      en: 'Hacktoberfest',
+      he: 'Hacktoberfest'
+    },
+    title: {
+      en: 'Shalom Home',
+      he: 'Shalom Home'
+    },
+    description: {
+      en: 'A locked, voice-driven Android home screen I built for my grandfather. He presses "talk to me", says what he wants in Hebrew or French, and the phone does it. Whisper and Gemma 3 run fully on the device, so his voice and contacts never leave the phone. Open for Hacktoberfest contributions.',
+      he: 'מסך בית נעול ומבוסס קול ל-Android שבניתי לסבא שלי. הוא לוחץ על "דבר איתי", אומר מה הוא רוצה בעברית או בצרפתית, והטלפון עושה את זה. Whisper ו-Gemma 3 רצים כולם על המכשיר, כך שהקול ואנשי הקשר שלו לא יוצאים מהטלפון. פתוח לתרומות במסגרת Hacktoberfest.'
+    },
+    tech: ['Kotlin', 'whisper.cpp', 'llama.cpp', 'Gemma 3', 'Android NDK'],
+    links: [
+      { labelKey: 'btn_repo', url: 'https://github.com/RoeeIlouz/shalom-home', icon: 'fa-brands fa-github', primary: true, external: true },
+      { label: 'Download v1.0', url: 'https://github.com/RoeeIlouz/shalom-home/releases/tag/v1.0', icon: 'fa-solid fa-download', external: true }
+    ]
+  },
+  {
     id: 'roee-portfolio-hub',
     icon: 'fa-solid fa-code',
     category: 'web',
