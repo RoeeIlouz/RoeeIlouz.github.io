@@ -13,6 +13,21 @@ export interface Note {
 // The write-ups themselves are English-only pages under src/pages/notes/.
 export const notes: Note[] = [
   {
+    slug: 'rocis-pulse',
+    date: '2026-10-07',
+    minutes: 3,
+    icon: 'fa-solid fa-chart-line',
+    tags: ['Cloudflare Workers', 'D1', 'Zero Trust', 'Analytics'],
+    title: {
+      en: 'ROCIs Pulse: five dashboards in one private page',
+      he: 'ROCIs Pulse: חמישה דשבורדים בדף פרטי אחד'
+    },
+    summary: {
+      en: 'A Cloudflare Worker that snapshots Cloudflare, GitHub, RevenueCat and Google Analytics every day, fails closed behind Access, and feeds the same JSON to a Telegram bot.',
+      he: 'Worker של Cloudflare ששומר כל יום תמונת מצב מ-Cloudflare, GitHub, RevenueCat ו-Google Analytics, נעול מאחורי Access, ומזין את אותו JSON לבוט טלגרם.'
+    }
+  },
+  {
     slug: 'context-menu-editor',
     date: '2026-10-03',
     minutes: 6,
