@@ -13,6 +13,21 @@ export interface Note {
 // The write-ups themselves are English-only pages under src/pages/notes/.
 export const notes: Note[] = [
   {
+    slug: 'rocis-cad',
+    date: '2026-10-10',
+    minutes: 5,
+    icon: 'fa-solid fa-cube',
+    tags: ['Tauri', 'OpenCascade', 'WebAssembly', 'Local LLM', 'KiCad'],
+    title: {
+      en: 'ROCIs CAD: a WebAssembly kernel, a local AI, and KiCad as the judge',
+      he: 'ROCIs CAD: קרנל WebAssembly, בינה מלאכותית מקומית, ו-KiCad כשופט'
+    },
+    summary: {
+      en: 'A parametric 3D modeler that grew a schematic and PCB editor: feature replay on an OpenCascade worker, a grammar-constrained local model that only describes, and exports verified against KiCad 10.',
+      he: 'מודלר תלת-ממד פרמטרי שגדל לעורך סכמות ו-PCB: הרצה חוזרת של פיצ׳רים על Worker של OpenCascade, מודל מקומי עם דקדוק מחייב שרק מתאר, וייצוא שנבדק מול KiCad 10.'
+    }
+  },
+  {
     slug: 'rocis-pulse',
     date: '2026-10-07',
     minutes: 3,
