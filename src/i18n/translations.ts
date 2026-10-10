@@ -53,7 +53,8 @@ export const translations = {
         points: [
           'Offline-first sync with local persistence',
           'Natural-language task entry',
-          'Google Calendar sync & RevenueCat subscriptions'
+          'Google Calendar sync & RevenueCat subscriptions',
+          'iOS version: work in progress'
         ],
         btn_web: 'Web app'
       },
@@ -222,7 +223,8 @@ export const translations = {
         points: [
           'סנכרון Offline-first עם שמירה מקומית',
           'הזנת משימות בשפה טבעית',
-          'סנכרון Google Calendar ומנויי RevenueCat'
+          'סנכרון Google Calendar ומנויי RevenueCat',
+          'גרסת iOS: בעבודה'
         ],
         btn_web: 'אפליקציית ווב'
       },
